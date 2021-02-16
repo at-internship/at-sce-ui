@@ -1,14 +1,21 @@
 <div class="jumbotron mt-1">
      <div class="container" style="text-align: center;">
 
-          <!-- CALCULATOR -->
+          <!-- Software Cost Calculator -->
           <section class="card">
+
+               <!-- Section: Calc Form -->
                <div class="card-body">
                     <table style="width: 100%" cellspacing="5" cellpadding="15">
                          <tr style="vertical-align: top;">
                               <td style="text-align: left; width 30%">
-                                   <!-- Fixed Cost -->
-                                   <h3 class="title_section">Fixed Cost</h3>
+                                   <!-- Section: Fixed Cost -->
+                                   <h3 class="title_section">
+                                        Fixed Cost
+                                        <img src="/img/icons/help-icon.png" title="Info" data-toggle="tooltipFixedCost"
+                                             data-placement="right" class="icons">
+                                   </h3>
+
                                    <div class="mb-3 row">
                                         <div class="col">
                                              <label for="rent" class="form-label">Rent</label>
@@ -49,11 +56,16 @@
                                              <input type="text" class="form-control" id="transport" value="0.00">
                                         </div>
                                    </div>
-                                   <!-- Fixed Cost -->
+                                   <!-- Section: Fixed Cost -->
                               </td>
                               <td style="text-align: left; width 30%">
-                                   <!-- About Project -->
-                                   <h3 class="title_section">About Project</h3>
+                                   <!-- Section: About Project -->
+                                   <h3 class="title_section">
+                                        About Project
+                                        <img src="/img/icons/help-icon.png" title="Info"
+                                             data-toggle="tooltipAboutProject" data-placement="right" class="icons">
+                                   </h3>
+
                                    <div class="mb-3 row">
                                         <div class="col">
                                              <label for="transport" class="form-label">
@@ -64,7 +76,6 @@
                                              <input type="text" class="form-control" id="transport" value="0.00">
                                         </div>
                                    </div>
-
                                    <div class="mb-3 row">
                                         <div class="col">
                                              <label for="transport" class="form-label">
@@ -75,7 +86,6 @@
                                              <input type="text" class="form-control" id="transport" value="0.00">
                                         </div>
                                    </div>
-
                                    <div class="mb-3 row">
                                         <div class="col">
                                              <label for="type" class="form-label">* Proyect Type</label>
@@ -100,15 +110,23 @@
                                              <input type="text" class="form-control" id="proyectCost" value="0.00">
                                         </div>
                                    </div>
-                                   <!-- About Project -->
+                                   <!-- Section: About Project -->
                               </td>
                               <td style="text-align: left;">
+                                   <!-- Section Calc Cost day/hr -->
+                                   <h3 class="title_section">&nbsp;</h3>
+
                                    <table style="width: 100%" cellspacing="5" cellpadding="5">
                                         <tr>
                                              <td style="text-align: center;">
                                                   <section class="card">
                                                        <div class="card-body">
-                                                            <h5>Cost per day</h5>
+                                                            <h5>
+                                                                 Cost per day
+                                                                 <img src="/img/icons/help-icon.png" title="Info"
+                                                                      data-toggle="tooltipCostPerDay"
+                                                                      data-placement="right" class="icons">
+                                                            </h5>
                                                             383.33
                                                        </div>
                                                   </section>
@@ -118,36 +136,49 @@
                                              <td style="text-align: center; width: 30%">
                                                   <section class="card">
                                                        <div class="card-body">
-                                                            <h5>Cost per hour</h5>
+                                                            <h5>
+                                                                 Cost per hour
+                                                                 <img src="/img/icons/help-icon.png" title="Info"
+                                                                      data-toggle="tooltipCostPerHr"
+                                                                      data-placement="right" class="icons">
+                                                            </h5>
                                                             47.91
                                                        </div>
                                                   </section>
                                              </td>
                                         </tr>
                                    </table>
+                                   <!-- Section Calc Cost day/hr -->
                               </td>
                          </tr>
                          <tr>
                               <td style="text-align: center;" colspan="3">
+                                   <!-- Section Calc Operations -->
                                    <div class="container">
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="collapse"
-                                             data-bs-target="#collapseHistory" aria-expanded="false"
-                                             aria-controls="collapseHistory">Calculate</button> &nbsp;
+                                        <button type="button" class="btn btn-primary">Calculate</button> &nbsp;
                                         <button type="button" class="btn btn-secondary">Clean</button> &nbsp;
-                                        <button type="button" class="btn btn-success">Save</button> &nbsp;
+                                        <button type="button" class="btn btn-success" data-toggle="collapse"
+                                             data-target="#collapseHistory">Save</button>
                                    </div>
+                                   <!-- Section Calc Operations -->
                               </td>
                          </tr>
                     </table>
                </div>
+               <!-- Section: Calc Form -->
 
+               <!-- Section: Calc Results -->
                <div class="card-body">
                     <table style="width: 100%" cellspacing="5" cellpadding="5">
                          <tr>
                               <td style="text-align: center; width: 30%">
                                    <section class="card">
                                         <div class="card-body">
-                                             <h5>What the project will cost you</h5>
+                                             <h6>
+                                                  What the project will cost you
+                                                  <img src="/img/icons/help-icon.png" title="Info"
+                                                       data-toggle="tooltipCost" data-placement="right" class="icons">
+                                             </h6>
                                              20,500.00
                                         </div>
                                    </section>
@@ -155,7 +186,11 @@
                               <td style="text-align: center; width: 20%">
                                    <section class="card">
                                         <div class="card-body">
-                                             <h5>Taxes IVA + ISR</h5>
+                                             <h6>
+                                                  Taxes IVA + ISR
+                                                  <img src="/img/icons/help-icon.png" title="Info"
+                                                       data-toggle="tooltipTax" data-placement="right" class="icons">
+                                             </h6>
                                              2,500.00
                                         </div>
                                    </section>
@@ -163,7 +198,11 @@
                               <td style="text-align: center; width: 25%">
                                    <section class="card">
                                         <div class="card-body">
-                                             <h5>What you should charge</h5>
+                                             <h6>
+                                                  What you should charge
+                                                  <img src="/img/icons/help-icon.png" title="Info"
+                                                       data-toggle="tooltipCharge" data-placement="right" class="icons">
+                                             </h6>
                                              23,000.00
                                         </div>
                                    </section>
@@ -171,7 +210,12 @@
                               <td style="text-align: center; width: 25%">
                                    <section class="card">
                                         <div class="card-body">
-                                             <h5>Revenue</h5>
+                                             <h6>
+                                                  Revenue
+                                                  <img src="/img/icons/help-icon.png" title="Info"
+                                                       data-toggle="tooltipRevenue" data-placement="right"
+                                                       class="icons">
+                                             </h6>
                                              1,031.25
                                         </div>
                                    </section>
@@ -179,8 +223,22 @@
                          </tr>
                     </table>
                </div>
+               <!-- Section: Calc Results -->
 
-               <div class="collaps" id="collapseHistory">
+               <!-- Section: Show History Button -->
+               <div id="historyButton">
+                    <img src="/img/icons/help-icon.png" title="Info" data-toggle="tooltipShowHistory"
+                         data-placement="right" class="icons">
+                    Show History
+                    <label class="switch">
+                         <input type="checkbox" data-toggle="collapse" data-target="#collapseHistory">
+                         <span class="slider round"></span>
+                    </label>
+               </div>
+               <!-- Section: Show History Button -->
+
+               <!-- Section: History table -->
+               <div class="collapse" id="collapseHistory">
                     <div class="card card-body">
                          <table id="historyTable" class="table table-striped table-bordered display responsive nowrap"
                               style="width:100%">
@@ -217,21 +275,11 @@
                                    </tr>
                               </tbody>
                          </table>
-                         <script type="text/javascript">
-                              $(document).ready(function () {
-                                   $('#historyTable').DataTable();
-
-                                   /*var collapseElementList = [].slice.call(document.querySelectorAll('.collapse'))
-                                   var collapseList = collapseElementList.map(function (collapseEl) {
-                                        return new bootstrap.Collapse(collapseEl)
-                                   });*/
-                              });
-                         </script>
                     </div>
                </div>
+               <!-- Section: History table -->
           </section>
+          <!-- Software Cost Calculator -->
 
-
-          <!-- CALCULATOR -->
      </div>
 </div>
