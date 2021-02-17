@@ -6,153 +6,195 @@
 
                <!-- Section: Calc Form -->
                <div class="card-body">
-                    <table style="width: 100%" cellspacing="5" cellpadding="15">
-                         <tr style="vertical-align: top;">
-                              <td style="text-align: left; width 30%">
-                                   <!-- Section: Fixed Cost -->
-                                   <h3 class="title_section">
-                                        Fixed Cost
-                                        <img src="/img/icons/help-icon.png" title="Info" data-toggle="tooltipFixedCost"
-                                             data-placement="right" class="icons">
-                                   </h3>
 
-                                   <div class="mb-3 row">
-                                        <div class="col">
-                                             <label for="rent" class="form-label">Rent</label>
-                                        </div>
-                                        <div class="col">
-                                             <input type="text" class="form-control" id="rent" value="0.00">
-                                        </div>
-                                   </div>
-                                   <div class="mb-3 row">
-                                        <div class="col">
-                                             <label for="transport" class="form-label">Transport</label>
-                                        </div>
-                                        <div class="col">
-                                             <input type="text" class="form-control" id="transport" value="0.00">
-                                        </div>
-                                   </div>
-                                   <div class="mb-3 row">
-                                        <div class="col">
-                                             <label for="transport" class="form-label">Telephone/Internet</label>
-                                        </div>
-                                        <div class="col">
-                                             <input type="text" class="form-control" id="transport" value="0.00">
-                                        </div>
-                                   </div>
-                                   <div class="mb-3 row">
-                                        <div class="col">
-                                             <label for="transport" class="form-label">Feeding</label>
-                                        </div>
-                                        <div class="col">
-                                             <input type="text" class="form-control" id="transport" value="0.00">
-                                        </div>
-                                   </div>
-                                   <div class="mb-3 row">
-                                        <div class="col">
-                                             <label for="transport" class="form-label">Others</label>
-                                        </div>
-                                        <div class="col">
-                                             <input type="text" class="form-control" id="transport" value="0.00">
-                                        </div>
-                                   </div>
-                                   <!-- Section: Fixed Cost -->
-                              </td>
-                              <td style="text-align: left; width 30%">
-                                   <!-- Section: About Project -->
-                                   <h3 class="title_section">
-                                        About Project
-                                        <img src="/img/icons/help-icon.png" title="Info"
-                                             data-toggle="tooltipAboutProject" data-placement="right" class="icons">
-                                   </h3>
-
-                                   <div class="mb-3 row">
-                                        <div class="col">
-                                             <label for="transport" class="form-label">
-                                                  * How many hours a day will you dedicate?
-                                             </label>
-                                        </div>
-                                        <div class="col">
-                                             <input type="text" class="form-control" id="transport" value="0.00">
-                                        </div>
-                                   </div>
-                                   <div class="mb-3 row">
-                                        <div class="col">
-                                             <label for="transport" class="form-label">
-                                                  * How many days will it take you to finish it?
-                                             </label>
-                                        </div>
-                                        <div class="col">
-                                             <input type="text" class="form-control" id="transport" value="0.00">
-                                        </div>
-                                   </div>
-                                   <div class="mb-3 row">
-                                        <div class="col">
-                                             <label for="type" class="form-label">* Proyect Type</label>
-                                        </div>
-                                        <div class="col">
-                                             <select id="proyectType" class="form-select"
-                                                  aria-label="Default select example">
-                                                  <option selected>- select - </option>
-                                                  <option value="1">Custom Web</option>
-                                                  <option value="2">e-commerce</option>
-                                                  <option value="3">Android app</option>
-                                                  <option value="3">IOS app</option>
-                                             </select>
-                                        </div>
-                                   </div>
-
-                                   <div class="mb-3 row">
-                                        <div class="col">
-                                             <label for="proyectCost" class="form-label">* Proyect Cost</label>
-                                        </div>
-                                        <div class="col">
-                                             <input type="text" class="form-control" id="proyectCost" value="0.00">
-                                        </div>
-                                   </div>
-                                   <!-- Section: About Project -->
-                              </td>
+                    <table style="width: 100%">
+                         <tr>
                               <td style="text-align: left;">
-                                   <!-- Section Calc Cost day/hr -->
-                                   <h3 class="title_section">&nbsp;</h3>
+                                   <div class="container">
+                                        <div class="row my-2">
 
-                                   <table style="width: 100%" cellspacing="5" cellpadding="5">
-                                        <tr>
-                                             <td style="text-align: center;">
-                                                  <section class="card">
-                                                       <div class="card-body">
-                                                            <h5>
-                                                                 Cost per day
+                                             <!-- Section: Fixed Cost -->
+                                             <div class="col-md-4 py-1">
+                                                  <div class="card">
+                                                       <div id="costSectionCard" class="card-body">
+                                                            <h3 class="title_section">
+                                                                 Fixed Cost
                                                                  <img src="/img/icons/help-icon.png" title="Info"
-                                                                      data-toggle="tooltipCostPerDay"
+                                                                      data-toggle="tooltipFixedCost"
                                                                       data-placement="right" class="icons">
-                                                            </h5>
-                                                            383.33
+                                                            </h3>
+
+                                                            <div class="mb-3 row">
+                                                                 <div class="col">
+                                                                      <label for="rent" class="form-label">Rent</label>
+                                                                 </div>
+                                                                 <div class="col">
+                                                                      <input type="text" class="form-control" id="rent"
+                                                                           value="0.00">
+                                                                 </div>
+                                                            </div>
+                                                            <div class="mb-3 row">
+                                                                 <div class="col">
+                                                                      <label for="transport"
+                                                                           class="form-label">Transport</label>
+                                                                 </div>
+                                                                 <div class="col">
+                                                                      <input type="text" class="form-control"
+                                                                           id="transport" value="0.00">
+                                                                 </div>
+                                                            </div>
+                                                            <div class="mb-3 row">
+                                                                 <div class="col">
+                                                                      <label for="telephone"
+                                                                           class="form-label">Telephone/Internet</label>
+                                                                 </div>
+                                                                 <div class="col">
+                                                                      <input type="text" class="form-control"
+                                                                           id="telephone" value="0.00">
+                                                                 </div>
+                                                            </div>
+                                                            <div class="mb-3 row">
+                                                                 <div class="col">
+                                                                      <label for="feeding"
+                                                                           class="form-label">Feeding</label>
+                                                                 </div>
+                                                                 <div class="col">
+                                                                      <input type="text" class="form-control"
+                                                                           id="feeding" value="0.00">
+                                                                 </div>
+                                                            </div>
+                                                            <div class="mb-3 row">
+                                                                 <div class="col">
+                                                                      <label for="others"
+                                                                           class="form-label">Others</label>
+                                                                 </div>
+                                                                 <div class="col">
+                                                                      <input type="text" class="form-control"
+                                                                           id="others" value="0.00">
+                                                                 </div>
+                                                            </div>
                                                        </div>
-                                                  </section>
-                                             </td>
-                                        </tr>
-                                        <tr>
-                                             <td style="text-align: center; width: 30%">
-                                                  <section class="card">
-                                                       <div class="card-body">
-                                                            <h5>
-                                                                 Cost per hour
+                                                  </div>
+                                             </div>
+                                             <!-- Section: Fixed Cost -->
+
+                                             <!-- Section: About Project -->
+                                             <div class="col-md-4 py-1">
+                                                  <div class="card">
+                                                       <div id="costSectionCard" class="card-body">
+                                                            <h3 class="title_section">
+                                                                 About Project
                                                                  <img src="/img/icons/help-icon.png" title="Info"
-                                                                      data-toggle="tooltipCostPerHr"
+                                                                      data-toggle="tooltipAboutProject"
                                                                       data-placement="right" class="icons">
-                                                            </h5>
-                                                            47.91
+                                                            </h3>
+
+                                                            <div class="mb-3 row">
+                                                                 <div class="col">
+                                                                      <label for="hrsPerDay" class="form-label">
+                                                                           * How many hours a day will you dedicate?
+                                                                      </label>
+                                                                 </div>
+                                                                 <div class="col">
+                                                                      <input type="text" class="form-control"
+                                                                           id="hrsPerDay" value="0.00">
+                                                                 </div>
+                                                            </div>
+                                                            <div class="mb-3 row">
+                                                                 <div class="col">
+                                                                      <label for="daysPerDay" class="form-label">
+                                                                           * How many days will it take you to finish
+                                                                           it?
+                                                                      </label>
+                                                                 </div>
+                                                                 <div class="col">
+                                                                      <input type="text" class="form-control"
+                                                                           id="daysPerDay" value="0.00">
+                                                                 </div>
+                                                            </div>
+                                                            <div class="mb-3 row">
+                                                                 <div class="col">
+                                                                      <label for="proyectType" class="form-label">*
+                                                                           Proyect Type</label>
+                                                                 </div>
+                                                                 <div class="col">
+                                                                      <select id="proyectType" class="form-select">
+                                                                           <option value="">- select -</option>
+                                                                           <option value="1">Custom Web</option>
+                                                                           <option value="2">e-commerce</option>
+                                                                           <option value="3">Android app</option>
+                                                                           <option value="4">IOS app</option>
+                                                                      </select>
+                                                                 </div>
+                                                            </div>
+
+                                                            <div class="mb-3 row">
+                                                                 <div class="col">
+                                                                      <label for="proyectCost" class="form-label">*
+                                                                           Proyect Cost</label>
+                                                                 </div>
+                                                                 <div class="col">
+                                                                      <input type="text" class="form-control"
+                                                                           id="proyectCost" value="0.00">
+                                                                 </div>
+                                                            </div>
                                                        </div>
-                                                  </section>
-                                             </td>
-                                        </tr>
-                                   </table>
-                                   <!-- Section Calc Cost day/hr -->
+                                                  </div>
+                                             </div>
+                                             <!-- Section: About Project -->
+
+                                             <!-- Section Calc Cost day/hr -->
+                                             <div class="col-md-4 py-1">
+                                                  <div class="card">
+                                                       <div id="costSectionCard" class="card-body">
+                                                            <h3 class="title_section">&nbsp;</h3>
+
+                                                            <table style="width: 100%" cellspacing="5" cellpadding="5">
+                                                                 <tr>
+                                                                      <td style="text-align: center;">
+                                                                           <section class="card">
+                                                                                <div class="card-body">
+                                                                                     <h5>
+                                                                                          Cost per day
+                                                                                          <img src="/img/icons/help-icon.png"
+                                                                                               title="Info"
+                                                                                               data-toggle="tooltipCostPerDay"
+                                                                                               data-placement="right"
+                                                                                               class="icons">
+                                                                                     </h5>
+                                                                                     383.33
+                                                                                </div>
+                                                                           </section>
+                                                                      </td>
+                                                                 </tr>
+                                                                 <tr>
+                                                                      <td style="text-align: center; width: 30%">
+                                                                           <section class="card">
+                                                                                <div class="card-body">
+                                                                                     <h5>
+                                                                                          Cost per hour
+                                                                                          <img src="/img/icons/help-icon.png"
+                                                                                               title="Info"
+                                                                                               data-toggle="tooltipCostPerHr"
+                                                                                               data-placement="right"
+                                                                                               class="icons">
+                                                                                     </h5>
+                                                                                     47.91
+                                                                                </div>
+                                                                           </section>
+                                                                      </td>
+                                                                 </tr>
+                                                            </table>
+                                                       </div>
+                                                  </div>
+                                             </div>
+                                             <!-- Section Calc Cost day/hr -->
+                                        </div>
+                                   </div>
                               </td>
                          </tr>
                          <tr>
-                              <td style="text-align: center;" colspan="3">
+                              <td style="text-align: center;">
                                    <!-- Section Calc Operations -->
                                    <div class="container">
                                         <button type="button" class="btn btn-primary">Calculate</button> &nbsp;
