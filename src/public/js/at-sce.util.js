@@ -1,3 +1,5 @@
+/* Section: Calc Form */
+
 // Section: Fixed Cost
 $(function () {
   $('[data-toggle="tooltipFixedCost"]').tooltip();
@@ -39,14 +41,9 @@ $(function () {
   $('[data-toggle="tooltipShowHistory"]').tooltip();
 });
 
-// Calculator
+/* Calculator Functions */
 
-// Section: History DataTable
+/* Section: History DataTable */
 $(document).ready(function () {
   $("#historyTable").DataTable();
-
-  /*var collapseElementList = [].slice.call(document.querySelectorAll('.collapse'))
-    var collapseList = collapseElementList.map(function (collapseEl) {
-        return new bootstrap.Collapse(collapseEl)
-    });*/
 });
