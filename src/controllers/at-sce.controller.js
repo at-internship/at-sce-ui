@@ -1,3 +1,5 @@
+const atSCEController = {};
+
 atSCEController.renderSigninForm = async () => {
 };
 
