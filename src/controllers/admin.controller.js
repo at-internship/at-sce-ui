@@ -1,19 +1,20 @@
-adminCtrl.renderIndex = async () => {
+const adminCtrl = {};
+adminCtrl.renderIndex ={
 };
 
-adminCtrl.renderUserList = async () => {
+adminCtrl.renderUserList = {
 }; 
 
-adminCtrl.renderAddUserForm = async () => {
+adminCtrl.renderAddUserForm ={
 };
 
-adminCtrl.addUser = async () => {
+adminCtrl.addUser ={
 };
 
-adminCtrl.renderEditUserForm = async () => {
+adminCtrl.renderEditUserForm ={
 };
 
-adminCtrl.updateUser = async ( ) => {
+adminCtrl.updateUser ={
 };
 
 adminCtrl.deleteUser = async () =>{
