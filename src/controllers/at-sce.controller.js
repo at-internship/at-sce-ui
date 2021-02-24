@@ -1,18 +1,18 @@
 const atSCEController = {};
 
 
-atSCEController.renderSigninForm = async () => {
+atSCEController.renderSigninForm = async (req, res) => {
 };
 
-atSCEController.signin = async () => {
+atSCEController.signin = async (req, res) => {
     
 };
 
-atSCEController.signout = async () => {
+atSCEController.signout = async (req, res) => {
     
 };
   
-atSCEController.calculator = async () => {
+atSCEController.calculator = async (req, res) => {
 };
 
 module.exports = atSCEController;

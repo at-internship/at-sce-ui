@@ -1,24 +1,24 @@
 const adminCtrl = {};
 
-adminCtrl.renderIndex ={
+adminCtrl.renderIndex = async(req, res) =>{
 };
 
-adminCtrl.renderUserList = {
+adminCtrl.renderUserList = async(req, res) =>{
 }; 
 
-adminCtrl.renderAddUserForm ={
+adminCtrl.renderAddUserForm =async(req, res) =>{
 };
 
-adminCtrl.addUser ={
+adminCtrl.addUser =async(req, res) =>{
 };
 
-adminCtrl.renderEditUserForm ={
+adminCtrl.renderEditUserForm =async(req, res) =>{
 };
 
-adminCtrl.updateUser ={
+adminCtrl.updateUser =async(req, res) =>{
 };
 
-adminCtrl.deleteUser = async () =>{
+adminCtrl.deleteUser = async () =>async(req, res) =>{
 };
 
 module.exports = adminCtrl;
