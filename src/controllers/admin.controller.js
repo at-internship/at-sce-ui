@@ -1,4 +1,5 @@
 const adminCtrl = {};
+
 adminCtrl.renderIndex ={
 };
 
