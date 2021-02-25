@@ -12,7 +12,7 @@ const app = express();
 
 // Settings
 app.set("port", process.env.PORT || 4000);
-app.set("views", path.join(__dirname, "views"));
+/*app.set("views", path.join(__dirname, "views"));
 app.engine(
   ".hbs",
   exphbs({
@@ -75,6 +75,6 @@ app.use("/", require("./routes/at-sce.routes"));
 app.use("/admin", require("./routes/admin.routes"));
 
 // Static files
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public")));*/
 
 module.exports = app;
