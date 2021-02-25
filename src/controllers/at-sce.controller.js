@@ -4,11 +4,7 @@
  *
  * General functions for at-sce-controller.
  *
-<<<<<<< HEAD
- *
-=======
  * @author @at-internship
->>>>>>> feature/AT-SCE_POC
  * @version 1.0
  */
 
