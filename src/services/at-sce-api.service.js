@@ -4,7 +4,7 @@
  *
  * Functions for at-sce-api.service endpoint.
  *
- * 
+ *
  * @version 1.0
  */
 

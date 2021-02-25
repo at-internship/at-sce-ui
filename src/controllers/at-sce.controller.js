@@ -4,42 +4,42 @@
  *
  * General functions for at-sce-controller.
  *
- * 
+ *
  * @version 1.0
  */
 
- // AT SCE Controller
+// AT SCE Controller
 const atSCEController = {};
 
 // AT-SCE - Index/Login
 atSCEController.renderSigninForm = async (req, res) => {
-    console.log("--> atSCEController.renderSigninForm");
-  
-    // Render
-    res.render("signin");
-  };
-  
-  atSCEController.signin = async (req, res) => {
-    console.log("--> atSCEController.signin");
-  
-    // Redirect
-    req.flash("success_msg", "User signin Successfully");
-    res.redirect("/calculator");
-  };
-  
-  // AT-SCE - Logout
-  atSCEController.signout = async (req, res) => {
-    console.log("--> atSCEController.signout");
-  
-    // Redirect
-    req.flash("success_msg", "User signout Successfully");
-    res.redirect("/signin");
-  };
-  
-  // AT-SCE - Calculator
-  atSCEController.calculator = async (req, res) => {
-    console.log("--> atSCEController.calculator");
-    res.render("calculator");
-  };
-  
-  module.exports = atSCEController;
+  console.log("--> atSCEController.renderSigninForm");
+
+  // Render
+  res.render("signin");
+};
+
+atSCEController.signin = async (req, res) => {
+  console.log("--> atSCEController.signin");
+
+  // Redirect
+  req.flash("success_msg", "User signin Successfully");
+  res.redirect("/calculator");
+};
+
+// AT-SCE - Logout
+atSCEController.signout = async (req, res) => {
+  console.log("--> atSCEController.signout");
+
+  // Redirect
+  req.flash("success_msg", "User signout Successfully");
+  res.redirect("/signin");
+};
+
+// AT-SCE - Calculator
+atSCEController.calculator = async (req, res) => {
+  console.log("--> atSCEController.calculator");
+  res.render("calculator");
+};
+
+module.exports = atSCEController;
