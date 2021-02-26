@@ -71,7 +71,7 @@ app.use((req, res, next) => {
 // AT-SCE Routes - General
 app.use("/", require("./routes/at-sce.routes"));
 
-// AT-RESOURCES Routes - Admin
+// AT-SCE Routes - Admin
 app.use("/admin", require("./routes/admin.routes"));
 
 // Static files

@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/at-internship/at-sce-ui#readme",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.20.0",
     "bcryptjs": "^2.4.3",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
@@ -41,7 +41,7 @@
   "devDependencies": {
     "dotenv": "^8.2.0",
     "handlebars": "^4.7.6",
-    "nodemon": "^2.0.7",
+    "nodemon": "^2.0.6",
     "npm-check-updates": "^9.2.4"
   },
   "engines": {
