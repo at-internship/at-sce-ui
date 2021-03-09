@@ -17,7 +17,7 @@
                <!-- Section: Notifications -->
 
                <!-- Section: Calc Form -->
-               <form>
+               <form action="/history/add" method="POST">
                     <div class="d-flex flex-row flex-wrap p-4">
 
                          <!-- Section: Fixed Cost -->
@@ -91,10 +91,11 @@
                                    </label>
                                    <div class="col-sm-4">
                                         <select class="form-control form-control-sm mb-3 text-center">
-                                             <option selected disabled>Select Option</option>
-                                             <option value="1">One</option>
-                                             <option value="2">Two</option>
-                                             <option value="3">Three</option>
+                                             <option selected disabled>Select type</option>
+                                             <option value="1">Custom Web</option>
+                                             <option value="2">e-commerce</option>
+                                             <option value="3">Android app</option>
+                                             <option value="4">IOS app</option>
                                         </select>
                                    </div>
                               </div>
@@ -150,10 +151,10 @@
                     <!-- Section: Loader -->
 
                     <!-- Section: Calc Operations -->
-                    <div class="d-flex justify-content-around " style="margin: 0% 25% 5% 25%">
-                         <button type="submit" class="btn btn-primary btn-lg  mx-2 px-4">Calculate</button>
-                         <button type="button" class="btn btn-outline-danger btn-lg  mx-2 px-5">Clean</button>
-                         <button type="button" class="btn btn-success btn-lg  mx-2 px-5" data-toggle="modal"
+                    <div class="d-flex justify-content-around" style="margin: 0% 25% 5% 25%">
+                         <button type="button" class="btn btn-primary btn-lg mx-2 px-4">Calculate</button>
+                         <button type="reset" class="btn btn-outline-danger btn-lg mx-2 px-5">Clean</button>
+                         <button type="button" class="btn btn-success btn-lg mx-2 px-5" data-toggle="modal"
                               data-target="#modal_save">Save</button>
                     </div>
                     <!-- Section: Calc Operations -->
@@ -278,17 +279,17 @@
                     <div class="modal-dialog" role="document">
                          <div class="modal-content">
                               <div class="modal-header">
-                                   <h5 class="modal-title">Popup </h5>
+                                   <h5 class="modal-title">Alert</h5>
                                    <button type="button" class="close" data-dismiss="modal" aria-label="close">
                                         <span aria-hidden="true">&times;</span>
                                    </button>
                               </div>
                               <div class="modal-body">
-                                   <h6 style="font-weight: lighter;">Do you want to load the estimated cost select from
-                                        the history? </h6>
+                                   <h6 style="font-weight: lighter;">Do you want to save the estimated cost calculation
+                                        in the history?</h6>
                               </div>
                               <div class="modal-footer">
-                                   <a type="button" href="/calculator" class="btn btn-secondary text-center">OK</a>
+                                   <button type="button" class="btn btn-primary btn-sm mx-2 px-4">OK</button>
                               </div>
                          </div>
                     </div>

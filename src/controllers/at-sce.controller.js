@@ -43,4 +43,12 @@ atSCEController.calculator = async (req, res) => {
   res.render("calculator");
 };
 
+// AT-SCE - Add History
+atSCEController.addHistory = async (req, res) => {
+  console.log("--> atSCEController.addHistory");
+  // Redirect
+  req.flash("success_msg", "Calculation was saved successfully");
+  res.redirect("/calculator");
+};
+
 module.exports = atSCEController;

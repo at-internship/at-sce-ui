@@ -37,26 +37,30 @@
                     <div class="form-group">
                         <label for="user_firstName">* First Name:</label>
                         <input type="text" name="user_firstName" id="user_firstName" class="form-control"
-                            placeholder="Type the First Name" />
+                            placeholder="Type the First Name" required />
                     </div>
                     <div class="form-group">
                         <label for="user_lastName">* Last Name:</label>
                         <input type="text" name="user_lastName" id="user_lastName" class="form-control"
-                            placeholder="Type the Last Name" />
+                            placeholder="Type the Last Name" required />
                     </div>
                     <div class="form-group">
                         <label for="user_email">* Email:</label>
                         <input type="text" name="user_email" id="user_email" class="form-control"
-                            placeholder="Type an Email" />
+                            placeholder="Type an Email" required />
                     </div>
                     <div class="form-group">
                         <label for="user_password">* Password:</label>
                         <input type="password" name="user_password" id="user_password" class="form-control"
-                            placeholder="Type a Password" />
+                            placeholder="Type a Password" min="8" max="20" required />
+                        <small id="passwordHelpBlock" class="form-text text-muted">
+                            Your password must be 8-20 characters long, contain letters and numbers, and must not
+                            contain spaces, special characters.
+                        </small>
                     </div>
                     <div class="form-group">
                         <label for="user_status">* Status:</label>
-                        <select name="user_status" id="user_status" class="form-control">
+                        <select name="user_status" id="user_status" class="form-control" required>
                             <option value="">- select - </option>
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
