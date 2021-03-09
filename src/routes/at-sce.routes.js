@@ -19,6 +19,7 @@ const {
   signin,
   signout,
   calculator,
+  addHistory,
 } = require("../controllers/at-sce.controller");
 
 // ============= Sub Routes =============
@@ -35,5 +36,8 @@ router.get("/signout", signout);
 
 // AT-SCE - Calculator
 router.get("/calculator", calculator);
+
+// AT-SCE - Add History
+router.post("/history/add", addHistory);
 
 module.exports = router;

@@ -34,7 +34,7 @@
                     <input type="hidden" name="_method" value="PUT">
                     <div class="form-group">
                         <label for="user_type">* Type:</label>
-                        <select name="user_type" id="user_type" class="form-control">
+                        <select name="user_type" id="user_type" class="form-control" required>
                             <option value="">- select - </option>
                             <option value="1">Admin</option>
                             <option value="2">User</option>
@@ -43,21 +43,21 @@
                     <div class="form-group">
                         <label for="user_firstName">* First Name:</label>
                         <input type="text" name="user_firstName" id="user_firstName" class="form-control"
-                            placeholder="Type the First Name" />
+                            placeholder="Type the First Name" required />
                     </div>
                     <div class="form-group">
                         <label for="user_lastName">* Last Name:</label>
                         <input type="text" name="user_lastName" id="user_lastName" class="form-control"
-                            placeholder="Type the Last Name" />
+                            placeholder="Type the Last Name" required />
                     </div>
                     <div class="form-group">
                         <label for="user_email">* Email:</label>
                         <input type="text" name="user_email" id="user_email" class="form-control"
-                            placeholder="Type an Email" />
+                            placeholder="Type an Email" required />
                     </div>
                     <div class="form-group">
                         <label for="user_status">* Status:</label>
-                        <select name="user_status" id="user_status" class="form-control">
+                        <select name="user_status" id="user_status" class="form-control" required>
                             <option value="">- select - </option>
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
