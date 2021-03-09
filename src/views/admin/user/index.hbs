@@ -1,0 +1,94 @@
+<div class="mx-8 container" style="text-align: justify; font-weight:600;padding:2%">
+
+    <div class="d-flex flex-row flex-wrap p-4" style="text-align: left;">
+        <a href="/admin">&raquo; Admin</a>
+    </div>
+
+    <!-- Section: Add New User -->
+    <section class="card">
+        <div class="card-body">
+            <table style="width: 100%">
+                <tr>
+                    <td style="text-align: left;">
+                        <h4 class="title_section">Users Administration</h4>
+                    </td>
+                    <td style="text-align: right;">
+                        <a class="btn btn-primary" href="/admin/user/add">&raquo; Add New User</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+    <!-- Section: Add New User -->
+
+    <!-- Section: Users Table -->
+    <section class="card">
+        <div class="card-body">
+            <table id="usersTable" class="table table-striped table-bordered display responsive nowrap"
+                style="width:100%">
+                <thead class="thead-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Type</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- TODO: Remove it -->
+                    <tr>
+                        <td>5fc7063b559e031d88e97063</td>
+                        <td>1 - Admin</td>
+                        <td>Jon </td>
+                        <td>Snow</td>
+                        <td>jon.snow@got.com</td>
+                        <td>1 - Active</td>
+                        <td>
+                            <a href="/admin/user/edit/5fc7063b559e031d88e97063"><i class="fas fa-edit"></i></a>
+                            <a href="/admin/user/delete/5fc7063b559e031d88e97063"><i class="fas fa-trash"
+                                    style="color:red"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5fc7063b559e031d88e97064</td>
+                        <td>2 - User</td>
+                        <td>Sansa </td>
+                        <td>Stark</td>
+                        <td>sansa.stark@got.com</td>
+                        <td>1 - Active</td>
+                        <td>
+                            <a href="/admin/user/edit/5fc7063b559e031d88e97062"><i class="fas fa-edit"></i></a>
+                            <a href="/admin/user/delete/5fc7063b559e031d88e97062"><i class="fas fa-trash"
+                                    style="color:red"></i></a>
+                        </td>
+                    </tr>
+                    <!-- TODO: Remove it -->
+
+                    {{#each users}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{firstName}}</td>
+                        <td>{{lastName}}</td>
+                        <td>{{email}}</td>
+                        <td>{{status}}</td>
+                        <td>
+                            <a href="/admin/user/edit/{{id}}"><i class="fas fa-edit"></i></a>
+                            <a href="/admin/user/delete/{{id}}"><i class="fas fa-trash" style="color:red"></i></a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#usersTable').DataTable();
+                });
+            </script>
+        </div>
+    </section>
+    <!-- Section: Users Table -->
+
+</div>

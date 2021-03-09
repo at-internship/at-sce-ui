@@ -6,6 +6,7 @@
  *
  * @author @at-internship
  * @version 1.0
+ *
  */
 
 // AT SCE Controller
@@ -36,7 +37,7 @@ atSCEController.signout = async (req, res) => {
   res.redirect("/signin");
 };
 
-// AT-SCE - Calculator
+// AT-SCE - Calculator Form
 atSCEController.calculator = async (req, res) => {
   console.log("--> atSCEController.calculator");
   res.render("calculator");
