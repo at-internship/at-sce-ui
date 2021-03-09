@@ -13,7 +13,7 @@
 const adminCtrl = {};
 
 // MICROSERVICE - HEROKU - SCE API
-//const sceServiceAPI = require("../services/at-sce-api.service");
+const sceServiceAPI = require("../services/at-sce-api.service");
 
 // AT-SCE - Admin - Index
 adminCtrl.renderIndex = async (req, res) => {
@@ -26,6 +26,9 @@ adminCtrl.renderUserList = async (req, res) => {
   console.log("--> adminCtrl.renderUserList");
 
   let users = [];
+  const responseUserList = await sceServiceAPI.getAllUsers();
+  users = responseUserList.data;
+
   res.render("admin/user/index", { users });
 };
 
