@@ -2,17 +2,16 @@
  * AT SCE UI - AT Admin Controller.
  * Copyright 2021 AgileThought, Inc.
  *
- * General functions for at-admin-controller.
+ * General functions for admin-controller.
  *
  * @author @at-internship
  * @version 1.0
  *
  */
-
 // AT Admin Controller
 const adminCtrl = {};
 
-// MICROSERVICE - HEROKU - SCE API
+// MICROSERVICE - HEROKU - AT SCE API
 const sceServiceAPI = require("../services/at-sce-api.service");
 
 // AT-SCE - Admin - Index
@@ -24,12 +23,20 @@ adminCtrl.renderIndex = async (req, res) => {
 // AT-SCE - Admin - Users - Render User List
 adminCtrl.renderUserList = async (req, res) => {
   console.log("--> adminCtrl.renderUserList");
-
   let users = [];
-  const responseUserList = await sceServiceAPI.getAllUsers();
-  users = responseUserList.data;
 
-  res.render("admin/user/index", { users });
+  try {
+    const responseUserList = await sceServiceAPI.getAllUsers();
+    if (responseUserList === null || responseUserList === undefined) {
+      req.flash("error_msg", "Service unavailable");
+    } else {
+      users = responseUserList.data;
+    }
+  } catch (err) {
+    console.error(err.message);
+  } finally {
+    res.render("admin/user/index", { users });
+  }
 };
 
 // AT-SCE - Admin - Users - Render Add User Form
