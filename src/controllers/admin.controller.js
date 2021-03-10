@@ -48,10 +48,50 @@ adminCtrl.renderAddUserForm = async (req, res) => {
 // AT-SCE - Admin - Users - Add User
 adminCtrl.addUser = async (req, res) => {
   console.log("--> adminCtrl.addUser");
-  // Redirect
-  req.flash("success_msg", "User Added Successfully");
-  res.redirect("/admin/user");
+ 
+  try {
+    const {
+        user_type,
+        user_firstName,
+        user_lastName,
+        user_email,
+        user_password,
+        user_status,
+    } = req.body;
+    
+   //const userErrors = [];
+
+   let users;
+
+   let request = {
+    type: parseInt(user_type),
+    firstName: user_firstName,
+    lastName: user_lastName,
+    email: user_email,
+    password: user_password,
+    status: parseInt(user_status)
 };
+    
+        // Send data to microservice
+        await sceServiceAPI.createuser(request).then(result => {
+            //Mensaje
+            console.log(result);
+        });
+        // Redirect
+            req.flash("success_msg", "User Added Successfully");
+            res.redirect("/admin/user");
+       }
+
+    catch (err) {
+        console.log(err.response);
+        if (err.response && err.response.data) {
+            let errorMsg = err.response.data.message;
+            req.flash("error_msg", errorMsg);
+        }
+        res.redirect("/admin/user/add");
+    }          
+
+};     
 
 // AT-SCE - Admin - Users - Render Edit User Form
 adminCtrl.renderEditUserForm = async (req, res) => {

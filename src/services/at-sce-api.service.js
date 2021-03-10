@@ -42,7 +42,18 @@ AT_SCE_SERVICE.getUsersById = () => {
 };
 
 // Operation; Create USER - POST /api/v1/users
-
+AT_SCE_SERVICE.createuser = (data) =>{
+  return axios({
+    method: "POST",
+    url: `${AT_SCE_SERVICE_URI}/v1/users`,
+    data: data,
+    headers: {
+      "content-type": "application/json",
+    },
+  }).catch(function (error) {
+    console.log("Error: " + error.message);
+  });
+}
 // Operation: Update USER - PUT /api/v1/users
 
 // Operation: Delete USER - DELETE /api/v1/users/{id}
