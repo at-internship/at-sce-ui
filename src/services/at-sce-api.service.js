@@ -19,9 +19,12 @@ const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI || `https://at-sce-api
 // PROD
 //const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
 
-console.log("AT_SCE_SERVICE_URI:" + AT_SCE_SERVICE_URI);
+console.log(`AT_SCE_SERVICE_URI: ${AT_SCE_SERVICE_URI}`);
 
 // Operation: Login - POST /api/v1/login
+AT_SCE_SERVICE.login = () => {
+  return {};
+};
 
 // Operation: Get ALL USERS - GET/api/v1/users
 AT_SCE_SERVICE.getAllUsers = () => {
@@ -32,12 +35,12 @@ AT_SCE_SERVICE.getAllUsers = () => {
       "content-type": "application/json",
     },
   }).catch(function (error) {
-    console.log("Error: " + error.message);
+    console.log(`Error: ${error.message}`);
   });
 };
 
-// Operation: Get USERS by ID - GET/api/v1/users/{id}
-AT_SCE_SERVICE.getUsersById = () => {
+// Operation: Get USER by ID - GET/api/v1/users/{id}
+AT_SCE_SERVICE.getUserById = () => {
   return {};
 };
 
