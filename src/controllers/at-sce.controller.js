@@ -9,6 +9,9 @@
  *
  */
 
+//Passport
+const passport = require('passport');
+
 // AT SCE Controller
 const atSCEController = {};
 
@@ -20,13 +23,10 @@ atSCEController.renderSigninForm = async (req, res) => {
   res.render("signin");
 };
 
-atSCEController.signin = async (req, res) => {
-  console.log("--> atSCEController.signin");
-
-  // Redirect
-  req.flash("success_msg", "User signin Successfully");
-  res.redirect("/calculator");
-};
+atSCEController.signin = passport.authenticate("local", {
+    successRedirect: "/calculator",
+    failureRedirect: "/signin"
+});
 
 // AT-SCE - Logout
 atSCEController.signout = async (req, res) => {

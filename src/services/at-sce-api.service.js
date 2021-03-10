@@ -12,6 +12,9 @@
 const axios = require("axios");
 const AT_SCE_SERVICE = {};
 
+//Auth
+const passport = require("passport");
+
 // LOCAL
 require("dotenv").config();
 const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI || `https://at-sce-api.herokuapp.com/api`;
@@ -42,9 +45,17 @@ AT_SCE_SERVICE.getUsersById = () => {
 };
 
 // Operation; Create USER - POST /api/v1/users
-
+AT_SCE_SERVICE.createUser = () => {
+  return {};
+};
+ 
 // Operation: Update USER - PUT /api/v1/users
-
+AT_SCE_SERVICE.updateUser = () => {
+  return {};
+};
+ 
 // Operation: Delete USER - DELETE /api/v1/users/{id}
-
+AT_SCE_SERVICE.deleteUser = () => {
+  return {};
+};
 module.exports = AT_SCE_SERVICE;
