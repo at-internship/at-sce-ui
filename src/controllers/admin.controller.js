@@ -8,7 +8,7 @@
  * @version 1.0
  *
  */
-// AT Admin Controller
+// Admin Controller
 const adminCtrl = {};
 
 // MICROSERVICE - HEROKU - AT SCE API
