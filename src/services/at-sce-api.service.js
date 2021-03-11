@@ -40,12 +40,13 @@ AT_SCE_SERVICE.getAllUsers = () => {
 };
 
 // Operation: Get USERS by ID - GET/api/v1/users/{id}
-AT_SCE_SERVICE.getUsersById = () => {
+AT_SCE_SERVICE.getUsersById = (id) => {
   return axios({
-    method: "GET",
+    method: "POST",
     url: `${AT_SCE_SERVICE_URI}/v1/users/`,
-    data: {
-      email: "email",
+    data: id,
+    headers: {
+      "content-type": "application/json",
     },
   }).catch(function (error) {
     console.log("Error: " + error.message);
