@@ -1,3 +1,4 @@
+
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../services/at-sce-api.service');
@@ -5,8 +6,8 @@ const User = require('../services/at-sce-api.service');
 passport.use(new LocalStrategy({
     usernameField: 'email'
 }, async (email, password, done) => {
-    const user = await User.findOne({email:email});
-    if(!userEmail){
+    const user = await User.getUsersById({email});
+    if(!user){
         return done(null, false, { message: 'Not user found' });
     } else {
         const match = await user.matchPassword(password);

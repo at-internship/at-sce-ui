@@ -40,9 +40,22 @@ AT_SCE_SERVICE.getAllUsers = () => {
 };
 
 // Operation: Get USERS by ID - GET/api/v1/users/{id}
-AT_SCE_SERVICE.getUsersById = () => {
-  return {};
+AT_SCE_SERVICE.getUsersById = (id) => {
+  return axios({
+    method: "GET",
+    url: `${AT_SCE_SERVICE_URI}/v1/users/{id}`,
+    headers: {
+      "content-type": "application/json",
+    },
+  }).catch(function (error) {
+    console.log("Error: " + error.message);
+  });
 };
+
+/*//Match password
+AT_SCE_SERVICE.matchPassword = async function(password) {
+  return await bcrypt.compare(password, this.password);
+};*/
 
 // Operation; Create USER - POST /api/v1/users
 AT_SCE_SERVICE.createUser = () => {
