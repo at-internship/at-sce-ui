@@ -9,8 +9,9 @@
  *
  */
 
-//Passport
+//Models
 const passport = require('passport');
+const User = require('../services/at-sce-api.service');
 
 // AT SCE Controller
 const atSCEController = {};
@@ -23,9 +24,11 @@ atSCEController.renderSigninForm = async (req, res) => {
   res.render("signin");
 };
 
+// AT-SCE - Signin 
 atSCEController.signin = passport.authenticate("local", {
     successRedirect: "/calculator",
-    failureRedirect: "/signin"
+    failureRedirect: "signin",
+    failureFlash: true
 });
 
 // AT-SCE - Logout

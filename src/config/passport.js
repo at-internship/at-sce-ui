@@ -10,12 +10,13 @@ passport.use(new LocalStrategy({
     if(!user){
         return done(null, false, { message: 'Not user found' });
     } else {
-        const match = await user.matchPassword(password);
+        console.log(user)
+        /*const match = await user.matchPassword(password);
         if (match) {
             return done(null, user);
         } else {
             return done(null, false, { message: "Incorrect Password." });
-        }
+        }*/
     }
 }));
 
