@@ -54,7 +54,7 @@ AT_SCE_SERVICE.createuser = (data) =>{
       "content-type": "application/json",
     },
   }).catch(function (error) {
-    console.log("Error: " + error.message);
+    console.log(`Error: ${error.message}`);
   });
 }
 // Operation: Update USER - PUT /api/v1/users

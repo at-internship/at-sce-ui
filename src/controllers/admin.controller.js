@@ -8,7 +8,7 @@
  * @version 1.0
  *
  */
-// Admin Controller
+// AT Admin Controller
 const adminCtrl = {};
 
 // MICROSERVICE - HEROKU - AT SCE API
@@ -59,9 +59,43 @@ adminCtrl.addUser = async (req, res) => {
         user_status,
     } = req.body;
     
-   //const userErrors = [];
+    const userErrors = [];
 
-   let users;
+    if (!user_type) {
+     userErrors.push({ text: "Please Enter a type." });
+ }
+ 
+    if (!user_firstName) {
+     userErrors.push({ text: "Please Type a First Name." });
+ }
+ 
+     if (!user_lastName) {
+     userErrors.push({ text: "Please Type a Last Name." });
+ }
+ 
+     if (!user_email) {
+     userErrors.push({ text: "Please Type an Email." });
+ }
+ 
+     if (!user_password) {
+     userErrors.push({ text: "Please Type a Last Name." });
+ }
+ 
+     if (!user_status) {
+     userErrors.push({ text: "Please Enter a Status." });
+ }
+ 
+ if (userErrors.length > 0) {
+   res.render("admin/user/add-user", {
+       userErrors,
+       user_firstName,
+       user_lastName,
+       user_password,
+       user_email,
+       user_status,
+   });
+ } 
+
 
    let request = {
     type: parseInt(user_type),
@@ -72,13 +106,12 @@ adminCtrl.addUser = async (req, res) => {
     status: parseInt(user_status)
 };
     
-        // Send data to microservice
+        // AY-SCE-UI Messeger
         await sceServiceAPI.createuser(request).then(result => {
             //Mensaje
             console.log(result);
         });
         // Redirect
-            req.flash("success_msg", "User Added Successfully");
             res.redirect("/admin/user");
        }
 
@@ -88,7 +121,6 @@ adminCtrl.addUser = async (req, res) => {
             let errorMsg = err.response.data.message;
             req.flash("error_msg", errorMsg);
         }
-        res.redirect("/admin/user/add");
     }          
 
 };     
