@@ -6,6 +6,7 @@
  *
  * @author @at-internship
  * @version 1.0
+ *
  */
 
 // AT SCE Controller
@@ -36,10 +37,18 @@ atSCEController.signout = async (req, res) => {
   res.redirect("/signin");
 };
 
-// AT-SCE - Calculator
+// AT-SCE - Calculator Form
 atSCEController.calculator = async (req, res) => {
   console.log("--> atSCEController.calculator");
   res.render("calculator");
+};
+
+// AT-SCE - Add History
+atSCEController.addHistory = async (req, res) => {
+  console.log("--> atSCEController.addHistory");
+  // Redirect
+  req.flash("success_msg", "Calculation was saved successfully");
+  res.redirect("/calculator");
 };
 
 module.exports = atSCEController;

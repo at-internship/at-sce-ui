@@ -2,17 +2,20 @@
  * AT SCE UI - AT Admin Controller.
  * Copyright 2021 AgileThought, Inc.
  *
- * General functions for at-admin-controller.
+ * General functions for admin-controller.
  *
  * @author @at-internship
  * @version 1.0
+ *
  */
-
 // AT Admin Controller
 const adminCtrl = {};
 
-// MICROSERVICE - HEROKU - SCE API
+// MICROSERVICE - HEROKU - AT SCE API
 const sceServiceAPI = require("../services/at-sce-api.service");
+
+// Helpers
+const { hashPassword } = require("../helpers/auth.helper");
 
 // AT-SCE - Admin - Index
 adminCtrl.renderIndex = async (req, res) => {
@@ -50,35 +53,62 @@ adminCtrl.addUser = async (req, res) => {
   console.log("--> adminCtrl.addUser");
 
   try {
-    const {
-      user_name,
-      user_firstName,
-      user_lastName,
-      user_email,
-      user_password,
-      user_status,
-    } = req.body;
+    const { user_type, user_firstName, user_lastName, user_email, user_password, user_status } = req.body;
+    const userErrors = [];
 
-    //const userErrors = [];
+    // Validations
+    if (!user_type) {
+      userErrors.push({ text: "Please Enter a Type." });
+    }
 
-    let users;
+    if (!user_firstName) {
+      userErrors.push({ text: "Please Type a First Name." });
+    }
 
+    if (!user_lastName) {
+      userErrors.push({ text: "Please Type a Last Name." });
+    }
+
+    if (!user_email) {
+      userErrors.push({ text: "Please Type an Email." });
+    }
+
+    if (!user_password) {
+      userErrors.push({ text: "Please Type a Password." });
+    }
+
+    if (!user_status) {
+      userErrors.push({ text: "Please Enter a Status." });
+    }
+
+    if (userErrors.length > 0) {
+      res.render("admin/user/add-user", {
+        userErrors,
+        user_firstName,
+        user_lastName,
+        user_password,
+        user_email,
+        user_status,
+      });
+    }
+
+    // Request
     let request = {
-      name: user_name,
+      type: parseInt(user_type),
       firstName: user_firstName,
       lastName: user_lastName,
       email: user_email,
-      password: user_password,
+      password: (await hashPassword(user_password)).hashedPassword,
       status: parseInt(user_status),
     };
+    //console.log(request);
 
-    // Send data to microservice
-    await sceServiceAPI.addUser(request).then((result) => {
-      //Mensaje
-      console.log(result);
+    // Call Create USER - POST /api/v1/users endpoint
+    await sceServiceAPI.createUser(request).then((result) => {
+      //console.log(result);
     });
+
     // Redirect
-    req.flash("success_msg", "User Added Successfully");
     res.redirect("/admin/user");
   } catch (err) {
     console.log(err.response);
@@ -86,7 +116,6 @@ adminCtrl.addUser = async (req, res) => {
       let errorMsg = err.response.data.message;
       req.flash("error_msg", errorMsg);
     }
-    res.redirect("/admin/user/add");
   }
 };
 
@@ -99,56 +128,8 @@ adminCtrl.renderEditUserForm = async (req, res) => {
 // AT-SCE - Admin - Users - Edit User
 adminCtrl.updateUser = async (req, res) => {
   console.log("--> adminCtrl.updateUser");
-
   const user_id = req.params.id;
   console.log("--> user id:" + user_id);
-  if (!user_id) {
-    req.flash("error_msg", "Not Authorized");
-    return res.redirect("/admin/user");
-  }
-
-  const {
-    user_name,
-    user_firstName,
-    user_lastName,
-    user_email,
-    user_status,
-  } = req.body;
-  const userErrors = [];
-
-  // Validations
-  if (!user_name) {
-    userErrors.push({ text: "Please Type a Name." });
-  }
-
-  if (!user_firstName) {
-    userErrors.push({ text: "Please Type a First Name." });
-  }
-
-  if (!user_lastName) {
-    userErrors.push({ text: "Please Type a Last Name." });
-  }
-
-  if (!user_email) {
-    userErrors.push({ text: "Please Type an Email." });
-  }
-
-  if (!user_status) {
-    userErrors.push({ text: "Please Type a Status." });
-  }
-
-  if (userErrors.length > 0) {
-    res.render("admin/user/edit-user", {
-      userErrors,
-      user_id,
-      user_name,
-      user_firstName,
-      user_lastName,
-      user_email,
-      user_status,
-    });
-  }
-  // Send data to microservice
 
   // Redirect
   req.flash("success_msg", "User Updated Successfully");
@@ -158,22 +139,9 @@ adminCtrl.updateUser = async (req, res) => {
 // AT-SCE - Admin - Users - Delete User
 adminCtrl.deleteUser = async (req, res) => {
   console.log("--> adminCtrl.deleteUser");
-
-  try {
-    const errors = [];
-
-    let user_id = req.params.id;
-
-    // Redirect
-    req.flash("success_msg", "User Deleted Successfully");
-  } catch (err) {
-    console.log(err.response);
-    if (err.response && err.response.data) {
-      let errorMsg = err.response.data.message;
-      req.flash("error_msg", errorMsg);
-    }
-    res.redirect("/admin/user");
-  }
+  // Redirect
+  req.flash("success_msg", "User Deleted Successfully");
+  res.redirect("/admin/user");
 };
 
 module.exports = adminCtrl;

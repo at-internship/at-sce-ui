@@ -46,7 +46,7 @@ app.set("view engine", ".hbs");
 
 // Middlewares
 app.use(morgan("dev"));
-app.use(express.urlencoded({ extended: true })); // Tratar datos de formulario como json
+app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(
   session({
