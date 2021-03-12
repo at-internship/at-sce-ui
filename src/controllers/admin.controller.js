@@ -53,7 +53,14 @@ adminCtrl.addUser = async (req, res) => {
   console.log("--> adminCtrl.addUser");
 
   try {
-    const { user_type, user_firstName, user_lastName, user_email, user_password, user_status } = req.body;
+    const {
+      user_type,
+      user_firstName,
+      user_lastName,
+      user_email,
+      user_password,
+      user_status,
+    } = req.body;
     const userErrors = [];
 
     // Validations
@@ -139,9 +146,21 @@ adminCtrl.updateUser = async (req, res) => {
 // AT-SCE - Admin - Users - Delete User
 adminCtrl.deleteUser = async (req, res) => {
   console.log("--> adminCtrl.deleteUser");
-  // Redirect
-  req.flash("success_msg", "User Deleted Successfully");
-  res.redirect("/admin/user");
+  const user_id = req.params.id;
+  console.log(user_id);
+
+  try {
+    const response = await sceServiceAPI.deleteUser(user_id);
+    if (!response) {
+      req.flash("error_msg", "Service unavailable");
+    }
+  } catch (err) {
+    console.error(err.message);
+  } finally {
+    // Redirect
+    req.flash("success_msg", "User Deleted Successfully");
+    res.redirect("/admin/user");
+  }
 };
 
 module.exports = adminCtrl;
