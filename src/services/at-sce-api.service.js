@@ -24,6 +24,18 @@ const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI || `https://at-sce-api
 console.log("AT_SCE_SERVICE_URI:" + AT_SCE_SERVICE_URI);
 
 // Operation: Login - POST /api/v1/login
+AT_SCE_SERVICE.login = (data) => {
+  return axios({
+      method: "POST",
+      url: `${AT_SCE_SERVICE_URI}/v1/login`,
+      data: data,
+      headers: {
+        "content-type": "application/json",
+      },
+    }).catch(function (error) {
+      console.log("Error: " + error.message);
+  });
+};
 
 // Operation: Get ALL USERS - GET/api/v1/users
 AT_SCE_SERVICE.getAllUsers = () => {

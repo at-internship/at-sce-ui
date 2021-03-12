@@ -8,7 +8,7 @@ passport.use(new LocalStrategy({
     usernameField: 'password'
 }, async (email, password, done) => {
     const data = {email:email, password:password};
-    const user = await User.getUsersById({data});
+    const user = await User.login({data});
     if(!user){
         console.log('Not user found');
         return done(null, false, { message: 'Not user found' });
