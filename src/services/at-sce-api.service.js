@@ -54,7 +54,7 @@ AT_SCE_SERVICE.getAllUsers = () => {
 AT_SCE_SERVICE.getUsersById = (id) => {
   return axios({
     method: "GET",
-    url: `${AT_SCE_SERVICE_URI}/v1/users/`+id,
+    url: `${AT_SCE_SERVICE_URI}/v1/users/` + id,
     headers: {
       "content-type": "application/json",
     },

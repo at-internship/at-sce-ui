@@ -12,6 +12,7 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
+const helper = require('../helpers/auth.helper')
 
 // SCE Controller
 const {
@@ -35,18 +36,9 @@ router.post("/signin", signin);
 router.get("/signout", signout);
 
 // AT-SCE - Calculator
-router.get("/calculator", isAuthenticated, calculator);
+router.get("/calculator", helper.isAuthenticated, calculator);
 
 // AT-SCE - Add History
-router.post("/history/add", isAuthenticated, addHistory);
-
-// Function Restric Access when the user is logged
-function isAuthenticated(req, res, next){
-  if(req.isAuthenticated()){
-    return next();
-  } else{
-    res.redirect('/');
-  }
-}
+router.post("/history/add", helper.isAuthenticated, addHistory);
 
 module.exports = router;
