@@ -42,7 +42,6 @@ atSCEController.signout = async (req, res) => {
 
 // AT-SCE - Calculator Form
 atSCEController.calculator = async (req, res) => {
-  console.log("--> atSCEController.calculator");
   res.render("calculator");
 };
 
