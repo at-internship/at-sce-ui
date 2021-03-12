@@ -161,7 +161,6 @@ adminCtrl.updateUser = async (req, res) => {
 // AT-SCE - Admin - Users - Delete User
 adminCtrl.deleteUser = async (req, res) => {
   console.log("--> adminCtrl.deleteUser");
-<<<<<<< HEAD
   const user_id = req.params.id;
   console.log(user_id);
 
@@ -177,12 +176,6 @@ adminCtrl.deleteUser = async (req, res) => {
     req.flash("success_msg", "User Deleted Successfully");
     res.redirect("/admin/user");
   }
-=======
-
-  // Redirect
-  req.flash("success_msg", "User Deleted Successfully");
-  res.redirect("/admin/user");
->>>>>>> develop
 };
 
 module.exports = adminCtrl;

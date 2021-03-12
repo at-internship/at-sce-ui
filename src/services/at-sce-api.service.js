@@ -13,11 +13,11 @@ const axios = require("axios");
 const AT_SCE_SERVICE = {};
 
 // LOCAL
-require("dotenv").config();
-const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI || `https://at-sce-api.herokuapp.com/api`;
+//require("dotenv").config();
+//const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI || `https://at-sce-api.herokuapp.com/api`;
 
 // PROD
-//const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
+const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
 
 console.log(`AT_SCE_SERVICE_URI: ${AT_SCE_SERVICE_URI}`);
 
