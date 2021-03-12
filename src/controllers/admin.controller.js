@@ -53,14 +53,7 @@ adminCtrl.addUser = async (req, res) => {
   console.log("--> adminCtrl.addUser");
 
   try {
-    const {
-      user_type,
-      user_firstName,
-      user_lastName,
-      user_email,
-      user_password,
-      user_status,
-    } = req.body;
+    const { user_type, user_firstName, user_lastName, user_email, user_password, user_status } = req.body;
     const userErrors = [];
 
     // Validations
@@ -130,6 +123,7 @@ adminCtrl.addUser = async (req, res) => {
 adminCtrl.renderEditUserForm = async (req, res) => {
   console.log("--> adminCtrl.renderEditUserForm", req.params.id);
   let user = [];
+
   try {
     const responseUserbyId = await sceServiceAPI.getUserById(req.params.id);
     if (!responseUserbyId) {
@@ -148,6 +142,7 @@ adminCtrl.renderEditUserForm = async (req, res) => {
 // AT-SCE - Admin - Users - Edit User
 adminCtrl.updateUser = async (req, res) => {
   console.log("--> adminCtrl.updateUser");
+
   const user_id = req.params.id;
   console.log("--> user id:" + user_id);
 
@@ -159,6 +154,7 @@ adminCtrl.updateUser = async (req, res) => {
 // AT-SCE - Admin - Users - Delete User
 adminCtrl.deleteUser = async (req, res) => {
   console.log("--> adminCtrl.deleteUser");
+
   // Redirect
   req.flash("success_msg", "User Deleted Successfully");
   res.redirect("/admin/user");
