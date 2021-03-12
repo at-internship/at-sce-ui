@@ -13,11 +13,12 @@ const axios = require("axios");
 const AT_SCE_SERVICE = {};
 
 // LOCAL
-//require("dotenv").config();
-//const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI || `https://at-sce-api.herokuapp.com/api`;
+require("dotenv").config();
+const AT_SCE_SERVICE_URI =
+  process.env.AT_SCE_SERVICE_URI || `https://at-sce-api.herokuapp.com/api`;
 
 // PROD
-const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
+//const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
 
 console.log(`AT_SCE_SERVICE_URI: ${AT_SCE_SERVICE_URI}`);
 
@@ -40,8 +41,16 @@ AT_SCE_SERVICE.getAllUsers = () => {
 };
 
 // Operation: Get USER by ID - GET/api/v1/users/{id}
-AT_SCE_SERVICE.getUserById = () => {
-  return {};
+AT_SCE_SERVICE.getUserById = (id) => {
+  return axios({
+    method: "GET",
+    url: `${AT_SCE_SERVICE_URI}/v1/users/${id}`,
+    headers: {
+      "content-type": "application/json",
+    },
+  }).catch(function (error) {
+    console.log(`Error: ${error.message}`);
+  });
 };
 
 // Operation; Create USER - POST /api/v1/users

@@ -53,7 +53,14 @@ adminCtrl.addUser = async (req, res) => {
   console.log("--> adminCtrl.addUser");
 
   try {
-    const { user_type, user_firstName, user_lastName, user_email, user_password, user_status } = req.body;
+    const {
+      user_type,
+      user_firstName,
+      user_lastName,
+      user_email,
+      user_password,
+      user_status,
+    } = req.body;
     const userErrors = [];
 
     // Validations
@@ -121,8 +128,21 @@ adminCtrl.addUser = async (req, res) => {
 
 // AT-SCE - Admin - Users - Render Edit User Form
 adminCtrl.renderEditUserForm = async (req, res) => {
-  console.log("--> adminCtrl.renderEditUserForm");
-  res.render("admin/user/edit-user");
+  console.log("--> adminCtrl.renderEditUserForm", req.params.id);
+  let user = [];
+  try {
+    const responseUserbyId = await sceServiceAPI.getUserById(req.params.id);
+    if (!responseUserbyId) {
+      req.flash("error_msg", "Service unavaible");
+    } else {
+      user = responseUserbyId.data;
+      console.log(JSON.stringify(responseUserbyId.data));
+    }
+  } catch (err) {
+    console.err(err.message);
+  } finally {
+    res.render("admin/user/edit-user", { user });
+  }
 };
 
 // AT-SCE - Admin - Users - Edit User
