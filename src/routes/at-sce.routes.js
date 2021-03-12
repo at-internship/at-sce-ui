@@ -9,10 +9,13 @@
  *
  */
 
+//Constants
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-const helper = require('../helpers/auth.helper')
+
+//Helpers
+const { isAuthenticated } = require("../helpers/auth.helper");
 
 // SCE Controller
 const {
@@ -36,9 +39,9 @@ router.post("/signin", signin);
 router.get("/signout", signout);
 
 // AT-SCE - Calculator
-router.get("/calculator", helper.isAuthenticated, calculator);
+router.get("/calculator", isAuthenticated, calculator);
 
 // AT-SCE - Add History
-router.post("/history/add", helper.isAuthenticated, addHistory);
+router.post("/history/add", isAuthenticated, addHistory);
 
 module.exports = router;

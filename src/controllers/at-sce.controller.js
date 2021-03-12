@@ -9,9 +9,8 @@
  *
  */
 
-//Models
+//Constants 
 const passport = require('passport');
-const User = require('../services/at-sce-api.service');
 
 // AT SCE Controller
 const atSCEController = {};

@@ -13,13 +13,11 @@ passport.use(
                 email : email,
                 password : password
             };
-            const user = await sceServiceAPI.login(request);
-            
-            if (!user) {
+            const userAuth = await sceServiceAPI.login(request);
+            if (!userAuth) {
                 return done(null, false, { message: "Not User found." });
             } else {
-                console.log(user);
-                return done(null, user.data);
+                return done(null, userAuth.data);
             }
         }
     )

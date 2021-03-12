@@ -11,7 +11,6 @@
 // Constants
 const axios = require("axios");
 const AT_SCE_SERVICE = {};
-const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
 // LOCAL
@@ -33,7 +32,7 @@ AT_SCE_SERVICE.login = (data) => {
         "content-type": "application/json",
       },
     }).catch(function (error) {
-      console.log("Error: " + error.message);
+      console.log(`Error: ${error.message}`);
   });
 }
 
@@ -54,12 +53,12 @@ AT_SCE_SERVICE.getAllUsers = () => {
 AT_SCE_SERVICE.getUsersById = (id) => {
   return axios({
     method: "GET",
-    url: `${AT_SCE_SERVICE_URI}/v1/users/` + id,
+    url: `${AT_SCE_SERVICE_URI}/v1/users/${id}`,
     headers: {
       "content-type": "application/json",
     },
   }).catch(function (error) {
-    console.log("Error: " + error.message);
+    console.log(`Error: ${error.message}`);
   });
 };
 
@@ -75,11 +74,6 @@ AT_SCE_SERVICE.createUser = (data) => {
   }).catch(function (error) {
     console.log(`Error: ${error.message}`);
   });
-};
-
-// Operation; Create USER - POST /api/v1/users
-AT_SCE_SERVICE.createUser = () => {
-  return {};
 };
  
 // Operation: Update USER - PUT /api/v1/users
