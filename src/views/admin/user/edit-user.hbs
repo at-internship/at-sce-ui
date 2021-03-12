@@ -25,42 +25,38 @@
             <div class="card-body">
 
                 <!-- Section: Edit User Form -->
-                <!--form action="/admin/user/edit/{{user._id}}?_method=PUT" method="POST"-->
-
-                <!-- TODO: Remove it -->
-                <form action="/admin/user/edit/5f6c2652f8907b62c94e9fc1?_method=PUT" method="POST">
-                    <!-- TODO: Remove it -->
+                <form action="/admin/user/edit/{{user._id}}?_method=PUT" method="POST">
 
                     <input type="hidden" name="_method" value="PUT">
                     <div class="form-group">
                         <label for="user_type">* Type:</label>
                         <select name="user_type" id="user_type" class="form-control" required>
                             <option value="">- select - </option>
-                            <option value="1">Admin</option>
-                            <option value="2">User</option>
+                            <option value="1" {{selected user.type "1" }}>Admin</option>
+                            <option value="2" {{selected user.type "2" }}>User</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="user_firstName">* First Name:</label>
                         <input type="text" name="user_firstName" id="user_firstName" class="form-control"
-                            placeholder="Type the First Name" required />
+                            value="{{user.firstName}}" placeholder="Type the First Name" required />
                     </div>
                     <div class="form-group">
                         <label for="user_lastName">* Last Name:</label>
                         <input type="text" name="user_lastName" id="user_lastName" class="form-control"
-                            placeholder="Type the Last Name" required />
+                            value="{{user.lastName}}" placeholder="Type the Last Name" required />
                     </div>
                     <div class="form-group">
                         <label for="user_email">* Email:</label>
-                        <input type="text" name="user_email" id="user_email" class="form-control"
+                        <input type="text" name="user_email" id="user_email" class="form-control" value="{{user.email}}"
                             placeholder="Type an Email" required />
                     </div>
                     <div class="form-group">
                         <label for="user_status">* Status:</label>
                         <select name="user_status" id="user_status" class="form-control" required>
                             <option value="">- select - </option>
-                            <option value="1">Active</option>
-                            <option value="0">Inactive</option>
+                            <option value="1" {{selected user.status "1" }}>Active</option>
+                            <option value="0" {{selected user.status "0" }}>Inactive</option>
                         </select>
                     </div>
                     <div class="form-group">
