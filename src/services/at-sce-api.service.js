@@ -15,13 +15,13 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
 // LOCAL
-require("dotenv").config();
-const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI || `https://at-sce-api.herokuapp.com/api`;
+//require("dotenv").config();
+//const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI || `https://at-sce-api.herokuapp.com/api`;
 
 // PROD
-//const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
+const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
 
-console.log("AT_SCE_SERVICE_URI:" + AT_SCE_SERVICE_URI);
+console.log(`AT_SCE_SERVICE_URI: ${AT_SCE_SERVICE_URI}`);
 
 // Operation: Login - POST /api/v1/login
 AT_SCE_SERVICE.login = (data) => {
@@ -35,7 +35,7 @@ AT_SCE_SERVICE.login = (data) => {
     }).catch(function (error) {
       console.log("Error: " + error.message);
   });
-};
+}
 
 // Operation: Get ALL USERS - GET/api/v1/users
 AT_SCE_SERVICE.getAllUsers = () => {
@@ -46,7 +46,7 @@ AT_SCE_SERVICE.getAllUsers = () => {
       "content-type": "application/json",
     },
   }).catch(function (error) {
-    console.log("Error: " + error.message);
+    console.log(`Error: ${error.message}`);
   });
 };
 
@@ -63,10 +63,19 @@ AT_SCE_SERVICE.getUsersById = (id) => {
   });
 };
 
-//Match password
-/*AT_SCE_SERVICE.matchPassword = async function(password) {
-  return await bcrypt.compare(password, this.password);
-};*/
+// Operation; Create USER - POST /api/v1/users
+AT_SCE_SERVICE.createUser = (data) => {
+  return axios({
+    method: "POST",
+    url: `${AT_SCE_SERVICE_URI}/v1/users`,
+    data: data,
+    headers: {
+      "content-type": "application/json",
+    },
+  }).catch(function (error) {
+    console.log(`Error: ${error.message}`);
+  });
+};
 
 // Operation; Create USER - POST /api/v1/users
 AT_SCE_SERVICE.createUser = () => {
