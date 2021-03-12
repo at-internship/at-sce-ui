@@ -11,8 +11,7 @@
 // Constants
 const axios = require("axios");
 const AT_SCE_SERVICE = {};
-
-//Auth
+const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
 // LOCAL
@@ -42,7 +41,7 @@ AT_SCE_SERVICE.getAllUsers = () => {
 // Operation: Get USERS by ID - GET/api/v1/users/{id}
 AT_SCE_SERVICE.getUsersById = (id) => {
   return axios({
-    method: "POST",
+    method: "GET",
     url: `${AT_SCE_SERVICE_URI}/v1/users/`,
     data: id,
     headers: {
@@ -53,8 +52,8 @@ AT_SCE_SERVICE.getUsersById = (id) => {
   });
 };
 
-/*//Match password
-AT_SCE_SERVICE.matchPassword = async function(password) {
+//Match password
+/*AT_SCE_SERVICE.matchPassword = async function(password) {
   return await bcrypt.compare(password, this.password);
 };*/
 

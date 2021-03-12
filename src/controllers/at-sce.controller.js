@@ -27,7 +27,7 @@ atSCEController.renderSigninForm = async (req, res) => {
 // AT-SCE - Signin 
 atSCEController.signin = passport.authenticate("local", {
     successRedirect: "/calculator",
-    failureRedirect: "signin",
+    failureRedirect: "/signin",
     failureFlash: true
 });
 

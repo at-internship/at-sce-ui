@@ -4,19 +4,20 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('../services/at-sce-api.service');
 
 passport.use(new LocalStrategy({
-    usernameField: 'email'
+    usernameField: 'email',
+    usernameField: 'password'
 }, async (email, password, done) => {
-    const user = await User.getUsersById({email:email});
+    const data = {email:email, password:password};
+    const user = await User.getUsersById({data});
     if(!user){
+        console.log('Not user found');
         return done(null, false, { message: 'Not user found' });
     } else {
-        console.log(user)
-        /*const match = await user.matchPassword(password);
-        if (match) {
-            return done(null, user);
-        } else {
+        console.log('User found');
+        return done(null, user, {message: 'User found'});
+        if(!password){
             return done(null, false, { message: "Incorrect Password." });
-        }*/
+        }
     }
 }));
 
