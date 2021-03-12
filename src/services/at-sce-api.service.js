@@ -45,7 +45,7 @@ AT_SCE_SERVICE.getUserById = () => {
 };
 
 // Operation; Create USER - POST /api/v1/users
-AT_SCE_SERVICE.createuser = (data) =>{
+AT_SCE_SERVICE.createUser = (data) => {
   return axios({
     method: "POST",
     url: `${AT_SCE_SERVICE_URI}/v1/users`,
@@ -56,7 +56,8 @@ AT_SCE_SERVICE.createuser = (data) =>{
   }).catch(function (error) {
     console.log(`Error: ${error.message}`);
   });
-}
+};
+
 // Operation: Update USER - PUT /api/v1/users
 
 // Operation: Delete USER - DELETE /api/v1/users/{id}
