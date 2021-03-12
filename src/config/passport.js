@@ -1,32 +1,35 @@
-
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const User = require('../services/at-sce-api.service');
-
-passport.use(new LocalStrategy({
-    usernameField: 'email',
-    usernameField: 'password'
-}, async (email, password, done) => {
-    const data = {email:email, password:password};
-    const user = await User.login({data});
-    if(!user){
-        console.log('Not user found');
-        return done(null, false, { message: 'Not user found' });
-    } else {
-        console.log('User found');
-        return done(null, user, {message: 'User found'});
-        if(!password){
-            return done(null, false, { message: "Incorrect Password." });
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const sceServiceAPI = require("../services/at-sce-api.service");
+ 
+passport.use(
+    new LocalStrategy({
+            usernameField: "email",
+            passwordField: "password"
+        },
+        async(email, password, done) => {
+            // Match Email's User
+            const request = {
+                email : email,
+                password : password
+            };
+            const user = await sceServiceAPI.login(request);
+            
+            if (!user) {
+                return done(null, false, { message: "Not User found." });
+            } else {
+                console.log(user);
+                return done(null, user.data);
+            }
         }
-    }
-}));
+    )
+);
 
 passport.serializeUser((user, done) => {
     done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
-    User.findById(id, (err, user) => {
-        done(err, user);
-    });
+passport.deserializeUser( async(id, done) => {
+    const user = await sceServiceAPI.getUsersById(id);
+    done(null, user);
 });

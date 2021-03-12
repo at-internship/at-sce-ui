@@ -19,9 +19,10 @@
             </ul>
 
             <ul class="navbar-nav ml-auto">
+                {{#if user}}
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                        Welcome: New User {{user.name}}
+                        Welcome: {{user.data.firstName}}
                     </a>
                 </li>
                 <li class="nav-item">
@@ -37,6 +38,11 @@
                         <img src="/img/icons/menu-logout-icon.png" title="Logout" class="icons">
                     </a>
                 </li>
+                {{else}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/signin"><b>Login</b></a>
+                </li>
+                {{/if}}
             </ul>
         </div>
     </div>

@@ -33,7 +33,7 @@ atSCEController.signin = passport.authenticate("local", {
 
 // AT-SCE - Logout
 atSCEController.signout = async (req, res) => {
-  console.log("--> atSCEController.signout");
+  req.logout();
 
   // Redirect
   req.flash("success_msg", "User signout Successfully");
