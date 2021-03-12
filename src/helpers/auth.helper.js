@@ -14,7 +14,7 @@ const helpers = {};
 helpers.hashPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
-  console.log(`hash: ${hash}`);
+  console.log(`helper.hashPassword - hash: ${hash}`);
   return {
     salt: salt,
     hashedPassword: hash,
