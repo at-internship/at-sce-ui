@@ -40,13 +40,33 @@ AT_SCE_SERVICE.getAllUsers = () => {
 };
 
 // Operation: Get USER by ID - GET/api/v1/users/{id}
-AT_SCE_SERVICE.getUserById = () => {
-  return {};
+AT_SCE_SERVICE.getUserById = (id) => {
+  return axios({
+    method:"GET",
+    url:`${AT_SCE_SERVICE_URI}/v1/users/${id}`,
+    headers:{
+      "content-type":"application/json",
+    },
+  }).catch((error)=>{
+    console.log(`Error:${error.message}`);
+  });
 };
 
 // Operation: Create USER - POST /api/v1/users
 
 // Operation: Update USER - PUT /api/v1/users
+AT_SCE_SERVICE.updateUser= (data) => {
+  return axios({
+    method:"PUT",
+    url:`${AT_SCE_SERVICE_URI}/v1/users/${data}`,
+    data:data,
+    headers:{
+      "content-type":"application/json",
+    },
+  }).catch((error)=>{
+    console.log(`Error:${error.message}`);
+  });
+};
 
 // Operation: Delete USER - DELETE /api/v1/users/{id}
 
