@@ -13,8 +13,8 @@ const axios = require("axios");
 const AT_SCE_SERVICE = {};
 
 // LOCAL
-require("dotenv").config();
-const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI || `https://at-sce-api.herokuapp.com/api`;
+  require("dotenv").config();
+  const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI || `https://at-sce-api.herokuapp.com/api`;
 
 // PROD
 //const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
@@ -42,32 +42,56 @@ AT_SCE_SERVICE.getAllUsers = () => {
 // Operation: Get USER by ID - GET/api/v1/users/{id}
 AT_SCE_SERVICE.getUserById = (id) => {
   return axios({
-    method:"GET",
-    url:`${AT_SCE_SERVICE_URI}/v1/users/${id}`,
-    headers:{
-      "content-type":"application/json",
+    method: "GET",
+    url: `${AT_SCE_SERVICE_URI}/v1/users/${id}`,
+    headers: {
+      "content-type": "application/json",
     },
-  }).catch((error)=>{
-    console.log(`Error:${error.message}`);
+  }).catch(function (error) {
+    console.log(`Error: ${error.message}`);
   });
 };
 
-// Operation: Create USER - POST /api/v1/users
+// Operation; Create USER - POST /api/v1/users
+AT_SCE_SERVICE.createUser = (data) => {
+  return axios({
+    method: "POST",
+    url: `${AT_SCE_SERVICE_URI}/v1/users`,
+    data: data,
+    headers: {
+      "content-type": "application/json",
+    },
+  }).catch(function (error) {
+    console.log(`Error: ${error.message}`);
+  });
+};
 
 // Operation: Update USER - PUT /api/v1/users
 AT_SCE_SERVICE.updateUser= (data) => {
   return axios({
     method:"PUT",
-    url:`${AT_SCE_SERVICE_URI}/v1/users/${data}`,
+    url:`${AT_SCE_SERVICE_URI}/v1/users`,
     data:data,
     headers:{
       "content-type":"application/json",
     },
-  }).catch((error)=>{
+  }).catch(function(error){
     console.log(`Error:${error.message}`);
   });
 };
 
 // Operation: Delete USER - DELETE /api/v1/users/{id}
+AT_SCE_SERVICE.deleteUser = (id) => {
+    return axios({
+      method: "DELETE",
+      url: `${AT_SCE_SERVICE_URI}/v1/users/${id}`,
+       headers: {
+        "content-type": "application/json",
+      },
+    }).catch(function (error) {
+      console.log(`Error: ${error.message}`);
+    });
+  };
+
 
 module.exports = AT_SCE_SERVICE;
