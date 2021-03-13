@@ -196,6 +196,7 @@ adminCtrl.updateUser = async (req, res) => {
     }
     // Request
     let request = {
+      id: user_id,
       type: parseInt(user_type),
       firstName: user_firstName,
       lastName: user_lastName,
