@@ -11,7 +11,6 @@
 // Constants
 const axios = require("axios");
 const AT_SCE_SERVICE = {};
-const passport = require("passport");
 
 // LOCAL
 //require("dotenv").config();
@@ -31,8 +30,6 @@ AT_SCE_SERVICE.login = (data) => {
     headers: {
       "content-type": "application/json",
     },
-  }).catch(function (error) {
-    console.log(`Error: ${error.message}`);
   });
 };
 
@@ -85,4 +82,5 @@ AT_SCE_SERVICE.updateUser = () => {
 AT_SCE_SERVICE.deleteUser = () => {
   return {};
 };
+
 module.exports = AT_SCE_SERVICE;

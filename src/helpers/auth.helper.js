@@ -8,16 +8,19 @@
  * @version 1.0
  *
  */
-const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
+const algorithm = "aes-256-ctr";
+const secretKey = "vOVH6sdmpNWjRRIqCc7rdxs01lwHzfr3";
+const iv = crypto.randomBytes(16);
 const helpers = {};
 
-helpers.hashPassword = async (password) => {
-  const salt = await bcrypt.genSalt(10);
-  const hash = await bcrypt.hash(password, salt);
-  console.log(`helper.hashPassword - hash: ${hash}`);
+helpers.encrypt = (text) => {
+  const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
+  const encrypted = Buffer.concat([cipher.update(text), cipher.final()]);
+  console.log(`helper.encrypt - hash: ${encrypted}`);
   return {
-    salt: salt,
-    hashedPassword: hash,
+    iv: iv.toString("hex"),
+    content: encrypted.toString("hex"),
   };
 };
 

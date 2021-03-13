@@ -15,7 +15,7 @@ const adminCtrl = {};
 const sceServiceAPI = require("../services/at-sce-api.service");
 
 // Helpers
-const { hashPassword } = require("../helpers/auth.helper");
+const { encrypt } = require("../helpers/auth.helper");
 
 // AT-SCE - Admin - Index
 adminCtrl.renderIndex = async (req, res) => {
@@ -98,7 +98,7 @@ adminCtrl.addUser = async (req, res) => {
       firstName: user_firstName,
       lastName: user_lastName,
       email: user_email,
-      password: (await hashPassword(user_password)).hashedPassword,
+      password: (await encrypt(user_password)).content,
       status: parseInt(user_status),
     };
     //console.log(request);
