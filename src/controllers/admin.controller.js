@@ -101,11 +101,11 @@ adminCtrl.addUser = async (req, res) => {
       password: (await encrypt(user_password)).content,
       status: parseInt(user_status),
     };
-    //console.log(request);
+    console.debug(request);
 
     // Call Create USER - POST /api/v1/users endpoint
     await sceServiceAPI.createUser(request).then((result) => {
-      //console.log(result);
+      console.debug(result);
     });
 
     // Redirect
@@ -130,7 +130,7 @@ adminCtrl.renderEditUserForm = async (req, res) => {
       req.flash("error_msg", "Service unavaible");
     } else {
       user = responseUserbyId.data;
-      console.log(JSON.stringify(responseUserbyId.data));
+      console.debug(JSON.stringify(responseUserbyId.data));
     }
   } catch (err) {
     console.err(err.message);

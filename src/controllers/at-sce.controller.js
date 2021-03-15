@@ -8,9 +8,8 @@
  * @version 1.0
  *
  */
-
-//Constants 
-const passport = require('passport');
+// Constants
+const passport = require("passport");
 
 // AT SCE Controller
 const atSCEController = {};
@@ -23,15 +22,16 @@ atSCEController.renderSigninForm = async (req, res) => {
   res.render("signin");
 };
 
-// AT-SCE - Signin 
+// AT-SCE - Signin
 atSCEController.signin = passport.authenticate("local", {
-    successRedirect: "/calculator",
-    failureRedirect: "/signin",
-    failureFlash: true
+  successRedirect: "/calculator",
+  failureRedirect: "/signin",
+  failureFlash: true,
 });
 
 // AT-SCE - Logout
 atSCEController.signout = async (req, res) => {
+  console.log("--> atSCEController.signout");
   req.logout();
 
   // Redirect
@@ -41,6 +41,7 @@ atSCEController.signout = async (req, res) => {
 
 // AT-SCE - Calculator Form
 atSCEController.calculator = async (req, res) => {
+  console.log("--> atSCEController.calculator");
   res.render("calculator");
 };
 

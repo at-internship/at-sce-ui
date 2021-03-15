@@ -1,5 +1,18 @@
+/**
+ * AT SCE UI - AT Auth Passport.
+ * Copyright 2021 AgileThought, Inc.
+ *
+ * General functions for passport.
+ *
+ * @author @at-internship
+ * @version 1.0
+ *
+ */
+// Constants
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+
+// MICROSERVICE - HEROKU - AT SCE API
 const sceServiceAPI = require("../services/at-sce-api.service");
 
 // Helpers
@@ -17,17 +30,19 @@ passport.use(
         email: email,
         password: (await encrypt(password)).content,
       };
-      console.log(request);
+      console.debug(request);
 
       try {
+        // Validate user
         const userAuth = await sceServiceAPI.login(request);
-        //console.log(userAuth);
+        console.debug(userAuth);
 
         if (!userAuth && !userAuth.data.id) {
           return done(null, false, { message: "Not User found." });
         } else {
+          // Get User details
           const user = await sceServiceAPI.getUserById(userAuth.data.id);
-          //console.log(user);
+          console.debug(user);
           return done(null, user);
         }
       } catch (err) {
