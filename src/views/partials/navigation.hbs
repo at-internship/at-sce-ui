@@ -19,17 +19,10 @@
             </ul>
 
             <ul class="navbar-nav ml-auto">
+                {{#if user}}
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                        Welcome: New User {{user.name}}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <span id="notification-icon">
-                            <img src="/img/icons/menu-notification-icon.png" title="You have 1 message" class="icons">
-                            <span id="notification-number" title="You have 1 message">1</span>
-                        </span>
+                        Welcome: {{user.data.firstName}} {{user.data.lastName}}
                     </a>
                 </li>
                 <li class="nav-item">
@@ -37,6 +30,11 @@
                         <img src="/img/icons/menu-logout-icon.png" title="Logout" class="icons">
                     </a>
                 </li>
+                {{else}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/signin"><b>Login</b></a>
+                </li>
+                {{/if}}
             </ul>
         </div>
     </div>
