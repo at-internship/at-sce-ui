@@ -14,7 +14,7 @@ const router = express.Router();
 const path = require("path");
 
 // Helpers
-const { isAuthenticated, isAdmin } = require("../helpers/auth.helper");
+const { isAdmin } = require("../helpers/auth.helper");
 
 // Admin Controller
 const {
