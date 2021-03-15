@@ -52,7 +52,6 @@ helpers.isAuthenticated = (req, res, next) => {
 
 helpers.isAdmin = (req, res, next) => {
   if (req.isAuthenticated()) {
-    console.log("------------------------------->type: " + req.user.data.type);
     if (req.user.data.type === 1) return next();
     else {
       req.flash("error_msg", "You are not allowed to do this.");
