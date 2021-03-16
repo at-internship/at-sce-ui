@@ -38,6 +38,7 @@ passport.use(
         console.debug(userAuth);
 
         if (!userAuth && !userAuth.data.id) {
+          console.error("Not User found: ", email);
           return done(null, false, { message: "Not User found." });
         } else {
           // Get User details

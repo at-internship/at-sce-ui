@@ -31,6 +31,7 @@ adminCtrl.renderUserList = async (req, res) => {
   try {
     const responseUserList = await sceServiceAPI.getAllUsers();
     if (responseUserList === null || responseUserList === undefined) {
+      console.error("Service unavailable: sceServiceAPI.getAllUsers()");
       req.flash("error_msg", "Service unavailable");
     } else {
       users = responseUserList.data;
@@ -77,6 +78,7 @@ adminCtrl.addUser = async (req, res) => {
     }
 
     if (userErrors.length > 0) {
+      console.debug("--> adminCtrl.addUser - Validations error");
       res.render("admin/user/add-user", {
         userErrors,
         user_firstName,
@@ -96,10 +98,14 @@ adminCtrl.addUser = async (req, res) => {
       password: (await encrypt(user_password)).content,
       status: parseInt(user_status),
     };
-    console.debug(request);
+    console.debug("Request-->", request);
 
     // Call Create USER - POST /api/v1/users endpoint
     await sceServiceAPI.createUser(request).then((result) => {
+      if (!result) {
+        console.error("Service unavailable: sceServiceAPI.createUser()");
+        req.flash("error_msg", "Service unavailable");
+      }
       console.debug("Result-->", result);
     });
 
@@ -122,6 +128,7 @@ adminCtrl.renderEditUserForm = async (req, res) => {
   try {
     const responseUserbyId = await sceServiceAPI.getUserById(req.params.id);
     if (!responseUserbyId) {
+      console.error("Service unavailable: sceServiceAPI.getUserById()");
       req.flash("error_msg", "Service unavaible");
     } else {
       user = responseUserbyId.data;
@@ -166,6 +173,7 @@ adminCtrl.updateUser = async (req, res) => {
     }
 
     if (userErrors.length > 0) {
+      console.debug("--> adminCtrl.updateUser - Validations error");
       res.render("admin/user/edit-user", {
         userErrors,
         user_id,
@@ -186,10 +194,14 @@ adminCtrl.updateUser = async (req, res) => {
       email: user_email,
       status: parseInt(user_status),
     };
-    console.debug(request);
+    console.debug("Request-->", request);
 
     // Call Update USER - PUT /api/v1/users endpoint
     await sceServiceAPI.updateUser(request).then((result) => {
+      if (!result) {
+        console.error("Service unavailable: sceServiceAPI.updateUser()");
+        req.flash("error_msg", "Service unavailable");
+      }
       console.debug("Result-->", result);
     });
 
@@ -214,6 +226,7 @@ adminCtrl.deleteUser = async (req, res) => {
   try {
     const response = await sceServiceAPI.deleteUser(user_id);
     if (!response) {
+      console.error("Service unavailable: sceServiceAPI.deleteUser()");
       req.flash("error_msg", "Service unavailable");
     }
   } catch (err) {
