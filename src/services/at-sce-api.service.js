@@ -74,13 +74,30 @@ AT_SCE_SERVICE.createUser = (data) => {
 };
 
 // Operation: Update USER - PUT /api/v1/users
-AT_SCE_SERVICE.updateUser = () => {
-  return {};
+AT_SCE_SERVICE.updateUser = (data) => {
+  return axios({
+    method: "PUT",
+    url: `${AT_SCE_SERVICE_URI}/v1/users/${data.id}`,
+    data: data,
+    headers: {
+      "content-type": "application/json",
+    },
+  }).catch(function (error) {
+    console.log(`Error:${error.message}`);
+  });
 };
 
 // Operation: Delete USER - DELETE /api/v1/users/{id}
-AT_SCE_SERVICE.deleteUser = () => {
-  return {};
+AT_SCE_SERVICE.deleteUser = (id) => {
+  return axios({
+    method: "DELETE",
+    url: `${AT_SCE_SERVICE_URI}/v1/users/${id}`,
+    headers: {
+      "content-type": "application/json",
+    },
+  }).catch(function (error) {
+    console.log(`Error: ${error.message}`);
+  });
 };
 
 module.exports = AT_SCE_SERVICE;

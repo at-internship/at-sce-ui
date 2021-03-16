@@ -31,6 +31,7 @@ adminCtrl.renderUserList = async (req, res) => {
   try {
     const responseUserList = await sceServiceAPI.getAllUsers();
     if (responseUserList === null || responseUserList === undefined) {
+      console.error("Service unavailable: sceServiceAPI.getAllUsers()");
       req.flash("error_msg", "Service unavailable");
     } else {
       users = responseUserList.data;
@@ -60,28 +61,24 @@ adminCtrl.addUser = async (req, res) => {
     if (!user_type) {
       userErrors.push({ text: "Please Enter a Type." });
     }
-
     if (!user_firstName) {
       userErrors.push({ text: "Please Type a First Name." });
     }
-
     if (!user_lastName) {
       userErrors.push({ text: "Please Type a Last Name." });
     }
-
     if (!user_email) {
       userErrors.push({ text: "Please Type an Email." });
     }
-
     if (!user_password) {
       userErrors.push({ text: "Please Type a Password." });
     }
-
     if (!user_status) {
       userErrors.push({ text: "Please Enter a Status." });
     }
 
     if (userErrors.length > 0) {
+      console.debug("--> adminCtrl.addUser - Validations error");
       res.render("admin/user/add-user", {
         userErrors,
         user_firstName,
@@ -101,11 +98,15 @@ adminCtrl.addUser = async (req, res) => {
       password: (await encrypt(user_password)).content,
       status: parseInt(user_status),
     };
-    console.debug(request);
+    console.debug("Request-->", request);
 
     // Call Create USER - POST /api/v1/users endpoint
     await sceServiceAPI.createUser(request).then((result) => {
-      console.debug(result);
+      if (!result) {
+        console.error("Service unavailable: sceServiceAPI.createUser()");
+        req.flash("error_msg", "Service unavailable");
+      }
+      console.debug("Result-->", result);
     });
 
     // Redirect
@@ -127,6 +128,7 @@ adminCtrl.renderEditUserForm = async (req, res) => {
   try {
     const responseUserbyId = await sceServiceAPI.getUserById(req.params.id);
     if (!responseUserbyId) {
+      console.error("Service unavailable: sceServiceAPI.getUserById()");
       req.flash("error_msg", "Service unavaible");
     } else {
       user = responseUserbyId.data;
@@ -145,19 +147,95 @@ adminCtrl.updateUser = async (req, res) => {
 
   const user_id = req.params.id;
   console.log("--> user id:" + user_id);
+  if (!user_id) {
+    req.flash("error_msg", "User Not Authorized");
+    return res.redirect("/admin/user");
+  }
+  try {
+    const { user_type, user_firstName, user_lastName, user_email, user_status } = req.body;
+    const userErrors = [];
 
-  // Redirect
-  req.flash("success_msg", "User Updated Successfully");
-  res.redirect("/admin/user");
+    // Validations
+    if (!user_type) {
+      userErrors.push({ text: "Please type a Type." });
+    }
+    if (!user_firstName) {
+      userErrors.push({ text: "Please type a FirstName." });
+    }
+    if (!user_lastName) {
+      userErrors.push({ text: "Please type a LastName." });
+    }
+    if (!user_email) {
+      userErrors.push({ text: "Please type a Email." });
+    }
+    if (!user_status) {
+      userErrors.push({ text: "Please type a Status." });
+    }
+
+    if (userErrors.length > 0) {
+      console.debug("--> adminCtrl.updateUser - Validations error");
+      res.render("admin/user/edit-user", {
+        userErrors,
+        user_id,
+        user_type,
+        user_firstName,
+        user_lastName,
+        user_email,
+        user_status,
+      });
+    }
+
+    // Request
+    let request = {
+      id: user_id,
+      type: parseInt(user_type),
+      firstName: user_firstName,
+      lastName: user_lastName,
+      email: user_email,
+      status: parseInt(user_status),
+    };
+    console.debug("Request-->", request);
+
+    // Call Update USER - PUT /api/v1/users endpoint
+    await sceServiceAPI.updateUser(request).then((result) => {
+      if (!result) {
+        console.error("Service unavailable: sceServiceAPI.updateUser()");
+        req.flash("error_msg", "Service unavailable");
+      }
+      console.debug("Result-->", result);
+    });
+
+    // Redirect
+    req.flash("success_msg", "User Updated Successfully");
+    res.redirect("/admin/user");
+  } catch (err) {
+    console.log(err.response);
+    if (err.response && err.response.data) {
+      let errorMsg = err.response.data.message;
+      req.flash("error_msg", errorMsg);
+    }
+  }
 };
 
 // AT-SCE - Admin - Users - Delete User
 adminCtrl.deleteUser = async (req, res) => {
   console.log("--> adminCtrl.deleteUser");
+  const user_id = req.params.id;
+  console.debug(user_id);
 
-  // Redirect
-  req.flash("success_msg", "User Deleted Successfully");
-  res.redirect("/admin/user");
+  try {
+    const response = await sceServiceAPI.deleteUser(user_id);
+    if (!response) {
+      console.error("Service unavailable: sceServiceAPI.deleteUser()");
+      req.flash("error_msg", "Service unavailable");
+    }
+  } catch (err) {
+    console.error(err.message);
+  } finally {
+    // Redirect
+    req.flash("success_msg", "User Deleted Successfully");
+    res.redirect("/admin/user");
+  }
 };
 
 module.exports = adminCtrl;

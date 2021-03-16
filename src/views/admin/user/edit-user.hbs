@@ -25,12 +25,12 @@
             <div class="card-body">
 
                 <!-- Section: Edit User Form -->
-                <form action="/admin/user/edit/{{user._id}}?_method=PUT" method="POST">
+                <form action="/admin/user/edit/{{user.id}}?_method=PUT" method="POST">
 
                     <input type="hidden" name="_method" value="PUT">
                     <div class="form-group">
                         <label for="user_type">* Type:</label>
-                        <select name="user_type" id="user_type" class="form-control" required>
+                        <select name="user_type" value="" id="user_type" class="form-control" required>
                             <option value="">- select - </option>
                             <option value="1" {{selected user.type "1" }}>Admin</option>
                             <option value="2" {{selected user.type "2" }}>User</option>
