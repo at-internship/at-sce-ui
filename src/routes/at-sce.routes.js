@@ -8,19 +8,16 @@
  * @version 1.0
  *
  */
-
+// Constants
 const express = require("express");
 const router = express.Router();
 const path = require("path");
 
+// Helpers
+const { isAuthenticated } = require("../helpers/auth.helper");
+
 // SCE Controller
-const {
-  renderSigninForm,
-  signin,
-  signout,
-  calculator,
-  addHistory,
-} = require("../controllers/at-sce.controller");
+const { renderSigninForm, signin, signout, calculator, addHistory } = require("../controllers/at-sce.controller");
 
 // ============= Sub Routes =============
 
@@ -35,9 +32,9 @@ router.post("/signin", signin);
 router.get("/signout", signout);
 
 // AT-SCE - Calculator
-router.get("/calculator", calculator);
+router.get("/calculator", isAuthenticated, calculator);
 
 // AT-SCE - Add History
-router.post("/history/add", addHistory);
+router.post("/history/add", isAuthenticated, addHistory);
 
 module.exports = router;

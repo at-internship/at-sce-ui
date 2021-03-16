@@ -15,7 +15,7 @@ const adminCtrl = {};
 const sceServiceAPI = require("../services/at-sce-api.service");
 
 // Helpers
-const { hashPassword } = require("../helpers/auth.helper");
+const { encrypt } = require("../helpers/auth.helper");
 
 // AT-SCE - Admin - Index
 adminCtrl.renderIndex = async (req, res) => {
@@ -53,37 +53,25 @@ adminCtrl.addUser = async (req, res) => {
   console.log("--> adminCtrl.addUser");
 
   try {
-    const {
-      user_type,
-      user_firstName,
-      user_lastName,
-      user_email,
-      user_password,
-      user_status,
-    } = req.body;
+    const { user_type, user_firstName, user_lastName, user_email, user_password, user_status } = req.body;
     const userErrors = [];
 
     // Validations
     if (!user_type) {
       userErrors.push({ text: "Please Enter a Type." });
     }
-
     if (!user_firstName) {
       userErrors.push({ text: "Please Type a First Name." });
     }
-
     if (!user_lastName) {
       userErrors.push({ text: "Please Type a Last Name." });
     }
-
     if (!user_email) {
       userErrors.push({ text: "Please Type an Email." });
     }
-
     if (!user_password) {
       userErrors.push({ text: "Please Type a Password." });
     }
-
     if (!user_status) {
       userErrors.push({ text: "Please Enter a Status." });
     }
@@ -105,14 +93,14 @@ adminCtrl.addUser = async (req, res) => {
       firstName: user_firstName,
       lastName: user_lastName,
       email: user_email,
-      password: (await hashPassword(user_password)).hashedPassword,
+      password: (await encrypt(user_password)).content,
       status: parseInt(user_status),
     };
-    //console.log(request);
+    console.debug(request);
 
     // Call Create USER - POST /api/v1/users endpoint
     await sceServiceAPI.createUser(request).then((result) => {
-      //console.log(result);
+      console.debug("Result-->", result);
     });
 
     // Redirect
@@ -137,7 +125,7 @@ adminCtrl.renderEditUserForm = async (req, res) => {
       req.flash("error_msg", "Service unavaible");
     } else {
       user = responseUserbyId.data;
-      console.log(JSON.stringify(responseUserbyId.data));
+      console.debug(JSON.stringify(responseUserbyId.data));
     }
   } catch (err) {
     console.err(err.message);
@@ -157,14 +145,7 @@ adminCtrl.updateUser = async (req, res) => {
     return res.redirect("/admin/user");
   }
   try {
-    const {
-      user_type,
-      user_firstName,
-      user_lastName,
-      user_email,
-      user_status,
-    } = req.body;
-
+    const { user_type, user_firstName, user_lastName, user_email, user_status } = req.body;
     const userErrors = [];
 
     // Validations
@@ -183,6 +164,7 @@ adminCtrl.updateUser = async (req, res) => {
     if (!user_status) {
       userErrors.push({ text: "Please type a Status." });
     }
+
     if (userErrors.length > 0) {
       res.render("admin/user/edit-user", {
         userErrors,
@@ -194,6 +176,7 @@ adminCtrl.updateUser = async (req, res) => {
         user_status,
       });
     }
+
     // Request
     let request = {
       id: user_id,
@@ -203,11 +186,13 @@ adminCtrl.updateUser = async (req, res) => {
       email: user_email,
       status: parseInt(user_status),
     };
-    console.log(request);
+    console.debug(request);
+
     // Call Update USER - PUT /api/v1/users endpoint
     await sceServiceAPI.updateUser(request).then((result) => {
-      console.log("Resultado-->", result);
+      console.debug("Result-->", result);
     });
+
     // Redirect
     req.flash("success_msg", "User Updated Successfully");
     res.redirect("/admin/user");
@@ -224,7 +209,7 @@ adminCtrl.updateUser = async (req, res) => {
 adminCtrl.deleteUser = async (req, res) => {
   console.log("--> adminCtrl.deleteUser");
   const user_id = req.params.id;
-  console.log(user_id);
+  console.debug(user_id);
 
   try {
     const response = await sceServiceAPI.deleteUser(user_id);

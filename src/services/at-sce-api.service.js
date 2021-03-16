@@ -22,8 +22,15 @@ const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
 console.log(`AT_SCE_SERVICE_URI: ${AT_SCE_SERVICE_URI}`);
 
 // Operation: Login - POST /api/v1/login
-AT_SCE_SERVICE.login = () => {
-  return {};
+AT_SCE_SERVICE.login = (data) => {
+  return axios({
+    method: "POST",
+    url: `${AT_SCE_SERVICE_URI}/v1/login`,
+    data: data,
+    headers: {
+      "content-type": "application/json",
+    },
+  });
 };
 
 // Operation: Get ALL USERS - GET/api/v1/users
