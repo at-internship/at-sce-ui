@@ -34,11 +34,11 @@ const helpers = {};
 
 helpers.encrypt = (text) => {
   const md5sum = crypto.createHash("md5");
-  const encrypted = md5sum.update(text).digest("hex");
-  console.debug(`helper.encrypt - hash: ${encrypted}`);
+  //const encrypted = md5sum.update(text).digest("hex");
+  //console.debug(`helper.encrypt - hash: ${encrypted}`);
   return {
     iv: iv.toString("hex"),
-    content: encrypted,
+    content: text, // TODO: Bypass password
   };
 };
 
