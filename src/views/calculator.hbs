@@ -22,41 +22,47 @@
 
                          <!-- Section: Fixed Cost -->
                          <div class="flex-grow mt-2">
-                              <h2 class="font-weight-bold">Fixed Cost <img src="/img/icons/help-icon.png" title="Info"
-                                        data-toggle="tooltipFixedCost" data-placement="right" class="icons"></h2>
+                              <h2 class="font-weight-bold">Fixed Cost <img src="/img/icons/help-icon.png"
+                                        title="Variable costs during the project." data-toggle="tooltipFixedCost"
+                                        data-placement="right" class="icons"></h2>
                               <div class="row mt-3 ">
                                    <label for="rent" class="col-sm-5 col-form-label">Rent</label>
                                    <div class="col-sm-4">
                                         <input type="number" class="form-control text-center" id="rent"
-                                             placeholder="0.00" min="0" oninput="validity.valid||(value='');" required>
+                                             placeholder="0.00" min="0" oninput="validity.valid||(value='');" value=""
+                                             required>
                                    </div>
                               </div>
                               <div class="row mt-3">
                                    <label for="transport" class="col-sm-5 col-form-label">Transport</label>
                                    <div class="col-sm-4">
                                         <input type="number" class="form-control text-center" id="transport"
-                                             placeholder="0.00" min="0" oninput="validity.valid||(value='');" required>
+                                             placeholder="0.00" min="0" oninput="validity.valid||(value='');" value=""
+                                             required>
                                    </div>
                               </div>
                               <div class="row mt-3">
                                    <label for="telephone" class="col-sm-5 col-form-label">Telephone/Internet</label>
                                    <div class="col-sm-4">
                                         <input type="number" class="form-control text-center" id="telephone"
-                                             placeholder="0.00" min="0" oninput="validity.valid||(value='');" required>
+                                             placeholder="0.00" min="0" oninput="validity.valid||(value='');" value=""
+                                             required>
                                    </div>
                               </div>
                               <div class="row mt-3">
-                                   <label for="fedding" class="col-sm-5 col-form-label">Fedding</label>
+                                   <label for="feeding" class="col-sm-5 col-form-label">Fedding</label>
                                    <div class="col-sm-4">
                                         <input type="number" class="form-control text-center" id="feeding"
-                                             placeholder="0.00" min="0" oninput="validity.valid||(value='');" required>
+                                             placeholder="0.00" min="0" oninput="validity.valid||(value='');" value=""
+                                             required>
                                    </div>
                               </div>
                               <div class="row mt-3">
                                    <label for="others" class="col-sm-5 col-form-label">Others</label>
                                    <div class="col-sm-4">
                                         <input type="number" class="form-control text-center" id="others"
-                                             placeholder="0.00" min="0" oninput="validity.valid||(value='');" required>
+                                             placeholder="0.00" min="0" oninput="validity.valid||(value='');" value=""
+                                             required>
                                    </div>
                               </div>
                          </div>
@@ -64,16 +70,16 @@
 
                          <!-- Section: About Project -->
                          <div class="flex-grow mt-2">
-                              <h2 class="font-weight-bold">About Cost <img src="/img/icons/help-icon.png" title="Info"
-                                        data-toggle="tooltipProjectCost" data-placement="right" class="icons"></h2>
+                              <h2 class="font-weight-bold">About Cost <img src="/img/icons/help-icon.png"
+                                        title="Project estimate" data-toggle="tooltipAboutProject"
+                                        data-placement="right" class="icons"></h2>
                               <div class="row mt-2">
                                    <label for="question1" class="col-sm-8 col-form-label ">
                                         * How many hours a day will you dedicate?
                                    </label>
                                    <div class="col-sm-3">
-                                        <input type="number" class="form-control text-center" id="question1"
-                                             placeholder="0" min="0" max="24" oninput="validity.valid||(value='');"
-                                             required>
+                                        <input type="number" class="form-control text-center" id="hours" placeholder="0"
+                                             min="0" max="24" oninput="validity.valid||(value='');" required>
                                    </div>
                               </div>
                               <div class="row mt-2">
@@ -81,8 +87,8 @@
                                         * How many days will it take to finish it?
                                    </label>
                                    <div class="col-sm-3">
-                                        <input type="number" class="form-control text-center" id="question2"
-                                             placeholder="0" min="0" oninput="validity.valid||(value='');" required>
+                                        <input type="number" class="form-control text-center" id="days" placeholder="0"
+                                             min="0" oninput="validity.valid||(value='');" required>
                                    </div>
                               </div>
                               <div class="row mt-2">
@@ -117,11 +123,12 @@
                                    <div class="border border-secondary rounded py-2 mx-4  w-100 text-center;">
                                         <div class="text-center">
                                              <h5>Cost per Day
-                                                  <img src="/img/icons/help-icon.png" title="Info"
+                                                  <img src="/img/icons/help-icon.png"
+                                                       title="It refers to the amount an client is willing to pay, per day"
                                                        data-toggle="tooltipCostPerDay" data-placement="right"
                                                        class="icons">
                                              </h5>
-                                             <h3 class="font-weight-bold">0.00</h3>
+                                             <h3 id="CostPerDay" class="font-weight-bold">0.00</h3>
                                         </div>
                                    </div>
                               </div>
@@ -129,11 +136,12 @@
                                    <div class="border border-secondary rounded py-2 mx-4  w-100 text-center;">
                                         <div class="text-center">
                                              <h5>Cost per hour
-                                                  <img src="/img/icons/help-icon.png" title="Info"
-                                                       data-toggle="tooltipCostPerHour" data-placement="right"
+                                                  <img src="/img/icons/help-icon.png"
+                                                       title="It refers to the amount an client is willing to pay, per hour"
+                                                       data-toggle="tooltipCostPerHr" data-placement="right"
                                                        class="icons">
                                              </h5>
-                                             <h3 class="font-weight-bold">0.00</h3>
+                                             <h3 id="CostPerHour" class="font-weight-bold">0.00</h3>
                                         </div>
                                    </div>
                               </div>
@@ -152,7 +160,8 @@
 
                     <!-- Section: Calc Operations -->
                     <div class="d-flex justify-content-around" style="margin: 0% 25% 5% 25%">
-                         <button type="button" class="btn btn-primary btn-lg mx-2 px-4">Calculate</button>
+                         <button type="button" class="btn btn-primary btn-lg mx-2 px-4"
+                              onclick="Calculate();">Calculate</button>
                          <button type="reset" class="btn btn-outline-danger btn-lg mx-2 px-5">Clean</button>
                          <button type="button" class="btn btn-success btn-lg mx-2 px-5" data-toggle="modal"
                               data-target="#modal_save">Save</button>
@@ -171,10 +180,11 @@
                                         <div class="card-body">
                                              <h6>
                                                   What the project will cost you
-                                                  <img src="/img/icons/help-icon.png" title="Info"
+                                                  <img src="/img/icons/help-icon.png"
+                                                       title="Total Variable costs during the project."
                                                        data-toggle="tooltipCost" data-placement="right" class="icons">
                                              </h6>
-                                             <h3>0.00</h3>
+                                             <h3 id="ProjectWillCostYou">0.00</h3>
                                         </div>
                                    </section>
                               </td>
@@ -183,10 +193,11 @@
                                         <div class="card-body">
                                              <h6>
                                                   Taxes IVA + ISR
-                                                  <img src="/img/icons/help-icon.png" title="Info"
+                                                  <img src="/img/icons/help-icon.png"
+                                                       title="They are government charges on the income, activities, products or assets of companies and individuals."
                                                        data-toggle="tooltipTax" data-placement="right" class="icons">
                                              </h6>
-                                             <h3>0.00</h3>
+                                             <h3 id="TaxesIVAandISR">0.00</h3>
                                         </div>
                                    </section>
                               </td>
@@ -195,10 +206,10 @@
                                         <div class="card-body">
                                              <h6>
                                                   What you should charge
-                                                  <img src="/img/icons/help-icon.png" title="Info"
+                                                  <img src="/img/icons/help-icon.png" title="Total after taxes applied"
                                                        data-toggle="tooltipCharge" data-placement="right" class="icons">
                                              </h6>
-                                             <h3>0.00</h3>
+                                             <h3 id="Charge">0.00</h3>
                                         </div>
                                    </section>
                               </td>
@@ -207,11 +218,12 @@
                                         <div class="card-body">
                                              <h6>
                                                   Revenue
-                                                  <img src="/img/icons/help-icon.png" title="Info"
+                                                  <img src="/img/icons/help-icon.png" title="Revenue is the income generated from normal business operations and includes discounts and 
+                                                       deductions for returned merchandise"
                                                        data-toggle="tooltipRevenue" data-placement="right"
                                                        class="icons">
                                              </h6>
-                                             <h3>0.00</h3>
+                                             <h3 id="Revenue">0.00</h3>
                                         </div>
                                    </section>
                               </td>
