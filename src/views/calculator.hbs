@@ -8,7 +8,8 @@
                <div class="d-flex justify-content-between">
                     <div class="d-inline-block ">
                     </div>
-                    <div id="myAlert" class="alert alert-dismissible alert-success d-inline-block align-self-center mt-2">
+                    <div id="sceMessages"
+                         class="alert alert-dismissible alert-success d-inline-block align-self-center mt-2">
                          <button type="button" class="close" data-dismiss="alert">&times;</button>
                          <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important
                               alert message</a>.
@@ -69,7 +70,7 @@
                                         title="Project estimate" data-toggle="tooltipAboutProject"
                                         data-placement="right" class="icons"></h2>
                               <div class="row mt-2">
-                                   <label for="question1" class="col-sm-8 col-form-label ">
+                                   <label for="hours" class="col-sm-8 col-form-label ">
                                         * How many hours a day will you dedicate?
                                    </label>
                                    <div class="col-sm-3">
@@ -78,7 +79,7 @@
                                    </div>
                               </div>
                               <div class="row mt-2">
-                                   <label for="question2" class="col-sm-8 col-form-label ">
+                                   <label for="days" class="col-sm-8 col-form-label ">
                                         * How many days will it take to finish it?
                                    </label>
                                    <div class="col-sm-3">
@@ -87,11 +88,11 @@
                                    </div>
                               </div>
                               <div class="row mt-2">
-                                   <label for="projecttype" class="col-sm-3 col-form-label ">
+                                   <label for="projectType" class="col-sm-3 col-form-label ">
                                         * Project Type
                                    </label>
                                    <div class="col-sm-4">
-                                        <select class="form-control form-control-sm mb-3 text-center">
+                                        <select id="projectType" class="form-control form-control-sm mb-3 text-center">
                                              <option selected disabled>Select type</option>
                                              <option value="1">Custom Web</option>
                                              <option value="2">e-commerce</option>
@@ -101,11 +102,11 @@
                                    </div>
                               </div>
                               <div class="row mt-2">
-                                   <label for="projectcost" class="col-sm-3 col-form-label ">
+                                   <label for="projectCost" class="col-sm-3 col-form-label ">
                                         * Project Cost
                                    </label>
                                    <div class="col-sm-4">
-                                        <input type="number" class="form-control text-center" id="projectcost"
+                                        <input type="number" class="form-control text-center" id="projectCost"
                                              placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$" required>
                                    </div>
                               </div>
@@ -124,7 +125,7 @@
                                                        data-toggle="tooltipCostPerDay" data-placement="right"
                                                        class="icons">
                                              </h5>
-                                             <h3 id="CostPerDay" class="font-weight-bold">0.00</h3>
+                                             <h3 id="costPerDay" class="font-weight-bold">0.00</h3>
                                         </div>
                                    </div>
                               </div>
@@ -138,7 +139,7 @@
                                                        data-toggle="tooltipCostPerHr" data-placement="right"
                                                        class="icons">
                                              </h5>
-                                             <h3 id="CostPerHour" class="font-weight-bold">0.00</h3>
+                                             <h3 id="costPerHour" class="font-weight-bold">0.00</h3>
                                         </div>
                                    </div>
                               </div>
@@ -180,7 +181,7 @@
                                                        title="Total Variable costs during the project."
                                                        data-toggle="tooltipCost" data-placement="right" class="icons">
                                              </h6>
-                                             <h3 id="ProjectWillCostYou">0.00</h3>
+                                             <h3 id="projectWillCostYou">0.00</h3>
                                         </div>
                                    </section>
                               </td>
@@ -188,12 +189,12 @@
                                    <section class="card calcResultsSection">
                                         <div class="card-body">
                                              <h6>
-                                                  Taxes IVA + ISR
+                                                  Taxes IVA + IVA retention + ISR Retention
                                                   <img src="/img/icons/help-icon.png"
                                                        title="They are government charges on the income, activities, products or assets of companies and individuals."
                                                        data-toggle="tooltipTax" data-placement="right" class="icons">
                                              </h6>
-                                             <h3 id="TaxesIVAandISR">0.00</h3>
+                                             <h3 id="taxesIVAandISR">0.00</h3>
                                         </div>
                                    </section>
                               </td>
@@ -205,7 +206,7 @@
                                                   <img src="/img/icons/help-icon.png" title="Total after taxes applied"
                                                        data-toggle="tooltipCharge" data-placement="right" class="icons">
                                              </h6>
-                                             <h3 id="Charge">0.00</h3>
+                                             <h3 id="charge">0.00</h3>
                                         </div>
                                    </section>
                               </td>
@@ -219,7 +220,7 @@
                                                        data-toggle="tooltipRevenue" data-placement="right"
                                                        class="icons">
                                              </h6>
-                                             <h3 id="Revenue">0.00</h3>
+                                             <h3 id="revenue">0.00</h3>
                                         </div>
                                    </section>
                               </td>
