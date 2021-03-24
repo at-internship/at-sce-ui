@@ -8,7 +8,7 @@
                <div class="d-flex justify-content-between">
                     <div class="d-inline-block ">
                     </div>
-                    <div class="alert alert-dismissible alert-success d-inline-block align-self-center mt-2">
+                    <div id="myAlert" class="alert alert-dismissible alert-success d-inline-block align-self-center mt-2">
                          <button type="button" class="close" data-dismiss="alert">&times;</button>
                          <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important
                               alert message</a>.
@@ -29,40 +29,35 @@
                                    <label for="rent" class="col-sm-5 col-form-label">Rent</label>
                                    <div class="col-sm-4">
                                         <input type="number" class="form-control text-center" id="rent"
-                                             placeholder="0.00" min="0" oninput="validity.valid||(value='');" value=""
-                                             required>
+                                             placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$" value="" required>
                                    </div>
                               </div>
                               <div class="row mt-3">
                                    <label for="transport" class="col-sm-5 col-form-label">Transport</label>
                                    <div class="col-sm-4">
                                         <input type="number" class="form-control text-center" id="transport"
-                                             placeholder="0.00" min="0" oninput="validity.valid||(value='');" value=""
-                                             required>
+                                             placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$" value="" required>
                                    </div>
                               </div>
                               <div class="row mt-3">
                                    <label for="telephone" class="col-sm-5 col-form-label">Telephone/Internet</label>
                                    <div class="col-sm-4">
                                         <input type="number" class="form-control text-center" id="telephone"
-                                             placeholder="0.00" min="0" oninput="validity.valid||(value='');" value=""
-                                             required>
+                                             placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$" value="" required>
                                    </div>
                               </div>
                               <div class="row mt-3">
                                    <label for="feeding" class="col-sm-5 col-form-label">Fedding</label>
                                    <div class="col-sm-4">
                                         <input type="number" class="form-control text-center" id="feeding"
-                                             placeholder="0.00" min="0" oninput="validity.valid||(value='');" value=""
-                                             required>
+                                             placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$" value="" required>
                                    </div>
                               </div>
                               <div class="row mt-3">
                                    <label for="others" class="col-sm-5 col-form-label">Others</label>
                                    <div class="col-sm-4">
                                         <input type="number" class="form-control text-center" id="others"
-                                             placeholder="0.00" min="0" oninput="validity.valid||(value='');" value=""
-                                             required>
+                                             placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$" value="" required>
                                    </div>
                               </div>
                          </div>
@@ -111,7 +106,7 @@
                                    </label>
                                    <div class="col-sm-4">
                                         <input type="number" class="form-control text-center" id="projectcost"
-                                             placeholder="0.00" min="0" oninput="validity.valid||(value='');" required>
+                                             placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$" required>
                                    </div>
                               </div>
                          </div>
@@ -120,7 +115,8 @@
                          <!-- Section Calc Cost day/hr -->
                          <div class="flex-grow-1 mt-2 justify-content-center">
                               <div class="row mb-4">
-                                   <div class="border border-secondary rounded py-2 mx-4  w-100 text-center;">
+                                   <div
+                                        class="border border-secondary rounded py-2 mx-4  w-100 text-center calcResultsSection">
                                         <div class="text-center">
                                              <h5>Cost per Day
                                                   <img src="/img/icons/help-icon.png"
@@ -132,8 +128,9 @@
                                         </div>
                                    </div>
                               </div>
-                              <div class="row mb-4">
-                                   <div class="border border-secondary rounded py-2 mx-4  w-100 text-center;">
+                              <div class="row mb-4 ">
+                                   <div
+                                        class="border border-secondary rounded py-2 mx-4  w-100 text-center calcResultsSection">
                                         <div class="text-center">
                                              <h5>Cost per hour
                                                   <img src="/img/icons/help-icon.png"
@@ -161,22 +158,21 @@
                     <!-- Section: Calc Operations -->
                     <div class="d-flex justify-content-around" style="margin: 0% 25% 5% 25%">
                          <button type="button" class="btn btn-primary btn-lg mx-2 px-4"
-                              onclick="Calculate();">Calculate</button>
+                              onclick="calculateProjectCost();">Calculate</button>
                          <button type="reset" class="btn btn-outline-danger btn-lg mx-2 px-5">Clean</button>
-                         <button type="button" class="btn btn-success btn-lg mx-2 px-5" data-toggle="modal"
-                              data-target="#modal_save">Save</button>
+                         <button id="saveButton" type="button" class="btn btn-success btn-lg mx-2 px-5"
+                              data-toggle="modal" data-target="#modal_save" disabled>Save</button>
                     </div>
                     <!-- Section: Calc Operations -->
-
                </form>
                <!-- Section: Calc Form -->
 
                <!-- Section: Calc Results -->
-               <div class="d-flex flex-row flex-wrap justify-content-around">
+               <div class="d-flex flex-row flex-wrap justify-content-around ">
                     <table style="width: 100%" cellspacing="5" cellpadding="5">
                          <tr>
                               <td style="text-align: center; width: 25%">
-                                   <section class="card">
+                                   <section class="card calcResultsSection">
                                         <div class="card-body">
                                              <h6>
                                                   What the project will cost you
@@ -189,7 +185,7 @@
                                    </section>
                               </td>
                               <td style="text-align: center; width: 20%">
-                                   <section class="card">
+                                   <section class="card calcResultsSection">
                                         <div class="card-body">
                                              <h6>
                                                   Taxes IVA + ISR
@@ -202,7 +198,7 @@
                                    </section>
                               </td>
                               <td style="text-align: center; width: 25%">
-                                   <section class="card">
+                                   <section class="card calcResultsSection">
                                         <div class="card-body">
                                              <h6>
                                                   What you should charge
@@ -214,7 +210,7 @@
                                    </section>
                               </td>
                               <td style="text-align: center; width: 15%">
-                                   <section class="card">
+                                   <section class="card calcResultsSection">
                                         <div class="card-body">
                                              <h6>
                                                   Revenue
