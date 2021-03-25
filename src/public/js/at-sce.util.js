@@ -174,7 +174,7 @@ function calculateProjectCost() {
     document.getElementById("revenue").innerHTML = transformToDecimals(revenue);
 
     /* Highlight button */
-    $(".calcResultsSection").effect("highlight", {}, 3000);
+    $(".calcResultsSection").effect("highlight", { color: "#2ECC40" }, 3000);
 
     /* Enable Save Button */
     $("#saveButton").prop("disabled", false);
