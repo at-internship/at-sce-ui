@@ -53,4 +53,24 @@ atSCEController.addHistory = async (req, res) => {
   res.redirect("/calculator");
 };
 
+// AT-SCE - Show History
+atSCEController.showHistory = async (req, res) => {
+  console.log("-->atSCEController.showHistory ");
+  let history = [];
+
+  try{
+    const responseHistory = await sceServiceAPI.getHistory();
+    if (responseHistory === null || responseHistory === undefined) {
+      console.error("Service unavailable: sceServiceAPI.getHistory()");
+      req.flash("error_msg", "Service unavailable");
+    } else {
+      history = responseHistory.data
+    }
+  } catch(error){
+    console.error(error.message);
+  }finally {
+    res.render("calculator/histories", { history });
+  }
+};
+
 module.exports = atSCEController;

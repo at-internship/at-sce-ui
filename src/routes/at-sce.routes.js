@@ -17,7 +17,7 @@ const path = require("path");
 const { isAuthenticated } = require("../helpers/auth.helper");
 
 // SCE Controller
-const { renderSigninForm, signin, signout, calculator, addHistory } = require("../controllers/at-sce.controller");
+const { renderSigninForm, signin, signout, calculator, addHistory, showHistory } = require("../controllers/at-sce.controller");
 
 // ============= Sub Routes =============
 
@@ -36,5 +36,8 @@ router.get("/calculator", isAuthenticated, calculator);
 
 // AT-SCE - Add History
 router.post("/history/add", isAuthenticated, addHistory);
+
+// AT-SCE - Show History
+router.get("/histories", isAuthenticated, showHistory);
 
 module.exports = router;

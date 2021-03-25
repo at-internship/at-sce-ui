@@ -256,29 +256,22 @@
                                    </tr>
                               </thead>
                               <tbody>
+                                   {{#each history}}
                                    <tr>
-                                        <td>1</td>
-                                        <td>Custom Web</td>
-                                        <td>80</td>
-                                        <td>7,000.00</td>
-                                        <td>01/01/2021</td>
+                                        <td>{{id}}</td>
+                                        <td>{{type}}</td>
+                                        <td>{{totalHours}}</td>
+                                        <td>{{total}}</td>
+                                        <td>{{totalDays}}</td>
                                    </tr>
-                                   <tr>
-                                        <td>2</td>
-                                        <td>Android App</td>
-                                        <td>80</td>
-                                        <td>7,000.00</td>
-                                        <td>01/01/2021</td>
-                                   </tr>
-                                   <tr>
-                                        <td>3</td>
-                                        <td>IOS App</td>
-                                        <td>80</td>
-                                        <td>7,000.00</td>
-                                        <td>01/01/2021</td>
-                                   </tr>
+                                   {{/each}}
                               </tbody>
                          </table>
+                         <script type="text/javascript">
+                              $(document).ready(function () {
+                                   $('#historyTable').DataTable();
+                              });
+                         </script>
                     </div>
                </div>
                <!-- Section: History table -->
