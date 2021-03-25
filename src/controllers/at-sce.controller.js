@@ -42,23 +42,10 @@ atSCEController.signout = async (req, res) => {
 // AT-SCE - Calculator Form
 atSCEController.calculator = async (req, res) => {
   console.log("--> atSCEController.calculator");
-  res.render("calculator");
-};
-
-// AT-SCE - Add History
-atSCEController.addHistory = async (req, res) => {
-  console.log("--> atSCEController.addHistory");
-  // Redirect
-  req.flash("success_msg", "Calculation was saved successfully");
-  res.redirect("/calculator");
-};
-
-// AT-SCE - Show History
-atSCEController.showHistory = async (req, res) => {
-  console.log("-->atSCEController.showHistory ");
   let history = [];
 
   try{
+    //const user = await sceServiceAPI.getUserById(data.id);
     const responseHistory = await sceServiceAPI.getHistory();
     if (responseHistory === null || responseHistory === undefined) {
       console.error("Service unavailable: sceServiceAPI.getHistory()");
@@ -69,8 +56,16 @@ atSCEController.showHistory = async (req, res) => {
   } catch(error){
     console.error(error.message);
   }finally {
-    res.render("calculator/histories", { history });
+    res.render("calculator", { history });
   }
+};
+
+// AT-SCE - Add History
+atSCEController.addHistory = async (req, res) => {
+  console.log("--> atSCEController.addHistory");
+  // Redirect
+  req.flash("success_msg", "Calculation was saved successfully");
+  res.redirect("/calculator");
 };
 
 module.exports = atSCEController;
