@@ -13,26 +13,14 @@ $(function () {
 // Section Calc Cost day/hr
 $(function () {
   $('[data-toggle="tooltipCostPerDay"]').tooltip();
-});
-
-$(function () {
   $('[data-toggle="tooltipCostPerHr"]').tooltip();
 });
 
 // Section: Calc Results
 $(function () {
   $('[data-toggle="tooltipCost"]').tooltip();
-});
-
-$(function () {
   $('[data-toggle="tooltipTax"]').tooltip();
-});
-
-$(function () {
   $('[data-toggle="tooltipCharge"]').tooltip();
-});
-
-$(function () {
   $('[data-toggle="tooltipRevenue"]').tooltip();
 });
 
@@ -140,16 +128,17 @@ function calculateProjectCost() {
     hours == "" ||
     projectCost == ""
   ) {
-    document.getElementById("sceMessages").innerHTML =
-      "Please, enter value in all fields";
-    document.getElementById("sceMessages").className =
-      "alert alert-warning align-self-center mt-2";
+
+    document.getElementById("sceMessages").innerHTML = "Please, enter value in all fields";
+    document.getElementById("sceMessages").className = "alert alert-warning align-self-center mt-2";
 
     $("#sceMessages").fadeIn(1500);
     setTimeout(function () {
       $("#sceMessages").fadeOut();
     }, 5000);
+
   } else {
+
     /*Call the functions*/
     let totalFixedCost = calculateTotalFixedCost(
       rent,
@@ -177,25 +166,17 @@ function calculateProjectCost() {
     let revenue = calculateRevenue(charge, totalFixedCost);
 
     /* DOM handling */
-    document.getElementById(
-      "projectWillCostYou"
-    ).innerHTML = transformToDecimals(totalFixedCost);
-    document.getElementById("costPerDay").innerHTML = transformToDecimals(
-      costPerDay
-    );
-    document.getElementById("costPerHour").innerHTML = transformToDecimals(
-      costPerHour
-    );
-    document.getElementById("taxesIVAandISR").innerHTML = transformToDecimals(
-      totalTaxesIVAandISR
-    );
+    document.getElementById("projectWillCostYou").innerHTML = transformToDecimals(totalFixedCost);
+    document.getElementById("costPerDay").innerHTML = transformToDecimals(costPerDay);
+    document.getElementById("costPerHour").innerHTML = transformToDecimals(costPerHour);
+    document.getElementById("taxesIVAandISR").innerHTML = transformToDecimals(totalTaxesIVAandISR);
     document.getElementById("charge").innerHTML = transformToDecimals(charge);
     document.getElementById("revenue").innerHTML = transformToDecimals(revenue);
 
-    /*Highlight button*/
+    /* Highlight button */
     $(".calcResultsSection").effect("highlight", {}, 3000);
 
-    /*Enable Save Button */
+    /* Enable Save Button */
     $("#saveButton").prop("disabled", false);
   }
 }

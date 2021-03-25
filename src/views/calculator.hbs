@@ -8,12 +8,10 @@
                <div class="d-flex justify-content-between">
                     <div class="d-inline-block ">
                     </div>
-                    <div id="sceMessages"
-                         class="alert alert-dismissible alert-success d-inline-block align-self-center mt-2">
-                         <button type="button" class="close" data-dismiss="alert">&times;</button>
-                         <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important
-                              alert message</a>.
-                    </div>
+                    <div id="sceMessages"></div>
+                    <!--div class="alert alert-success d-inline-block align-self-center mt-2">
+                         <strong>A new calculation is coming...</strong>
+                    </div-->
                </div>
                <!-- Section: Notifications -->
 
@@ -23,9 +21,10 @@
 
                          <!-- Section: Fixed Cost -->
                          <div class="flex-grow mt-2">
-                              <h2 class="font-weight-bold">Fixed Cost <img src="/img/icons/help-icon.png"
-                                        title="Variable costs during the project." data-toggle="tooltipFixedCost"
-                                        data-placement="right" class="icons"></h2>
+                              <h2 class="font-weight-bold">Fixed Cost
+                                   <img src="/img/icons/help-icon.png" title="Variable costs during the project."
+                                        data-toggle="tooltipFixedCost" data-placement="right" class="icons">
+                              </h2>
                               <div class="row mt-3 ">
                                    <label for="rent" class="col-sm-5 col-form-label">Rent</label>
                                    <div class="col-sm-4">
@@ -66,9 +65,10 @@
 
                          <!-- Section: About Project -->
                          <div class="flex-grow mt-2">
-                              <h2 class="font-weight-bold">About Cost <img src="/img/icons/help-icon.png"
-                                        title="Project estimate" data-toggle="tooltipAboutProject"
-                                        data-placement="right" class="icons"></h2>
+                              <h2 class="font-weight-bold">About Cost
+                                   <img src="/img/icons/help-icon.png" title="Project estimate"
+                                        data-toggle="tooltipAboutProject" data-placement="right" class="icons">
+                              </h2>
                               <div class="row mt-2">
                                    <label for="hours" class="col-sm-8 col-form-label ">
                                         * How many hours a day will you dedicate?
@@ -93,7 +93,7 @@
                                    </label>
                                    <div class="col-sm-4">
                                         <select id="projectType" class="form-control form-control-sm mb-3 text-center">
-                                             <option selected disabled>Select type</option>
+                                             <option value="">- Select type -</option>
                                              <option value="1">Custom Web</option>
                                              <option value="2">e-commerce</option>
                                              <option value="3">Android app</option>
@@ -283,29 +283,29 @@
                </div>
                <!-- Section: History table -->
 
-               <!-- Section: Save Modal -->
-               <div class="modal d-fixed" style="position:fixed; top:30%" id="modal_save">
-                    <div class="modal-dialog" role="document">
-                         <div class="modal-content">
-                              <div class="modal-header">
-                                   <h5 class="modal-title">Alert</h5>
-                                   <button type="button" class="close" data-dismiss="modal" aria-label="close">
-                                        <span aria-hidden="true">&times;</span>
-                                   </button>
-                              </div>
-                              <div class="modal-body">
-                                   <h6 style="font-weight: lighter;">Do you want to save the estimated cost calculation
-                                        in the history?</h6>
-                              </div>
-                              <div class="modal-footer">
-                                   <button type="button" class="btn btn-primary btn-sm mx-2 px-4">OK</button>
-                              </div>
+          </section>
+          <!-- Software Cost Calculator -->
+
+          <!-- Section: Save Modal -->
+          <div class="modal d-fixed" style="position:fixed; top:30%" id="modal_save">
+               <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                         <div class="modal-header">
+                              <h5 class="modal-title">Alert</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                                   <span aria-hidden="true">&times;</span>
+                              </button>
+                         </div>
+                         <div class="modal-body">
+                              <h6 style="font-weight: lighter;">Do you want to save the estimated cost calculation
+                                   in the history?</h6>
+                         </div>
+                         <div class="modal-footer">
+                              <button type="button" class="btn btn-primary btn-sm mx-2 px-4">OK</button>
                          </div>
                     </div>
                </div>
-               <!-- Section: Save Modal -->
-
-          </section>
+          </div>
+          <!-- Section: Save Modal -->
      </div>
 </div>
-<!-- Software Cost Calculator -->
