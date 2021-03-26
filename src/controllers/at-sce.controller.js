@@ -8,8 +8,12 @@
  * @version 1.0
  *
  */
+// MICROSERVICE - HEROKU - AT SCE API
+const sceServiceAPI = require("../services/at-sce-api.service");
+
 // Constants
 const passport = require("passport");
+const { useFakeXMLHttpRequest } = require("sinon");
 
 // AT SCE Controller
 const atSCEController = {};
@@ -45,8 +49,10 @@ atSCEController.calculator = async (req, res) => {
   let history = [];
 
   try{
-    //const user = await sceServiceAPI.getUserById(data.id);
-    const responseHistory = await sceServiceAPI.getHistory();
+    const user = req.user.data.id;
+    console.log(user);
+    const responseHistory = await sceServiceAPI.getHistory(user);
+    console.log(responseHistory);
     if (responseHistory === null || responseHistory === undefined) {
       console.error("Service unavailable: sceServiceAPI.getHistory()");
       req.flash("error_msg", "Service unavailable");

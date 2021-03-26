@@ -104,7 +104,7 @@ AT_SCE_SERVICE.deleteUser = (id) => {
 AT_SCE_SERVICE.getHistory = (id) =>{
   return axios({
     method: "GET",
-    url: `${AT_SCE_SERVICE_URI}/api/v1/histories/${id}`,
+    url: `${AT_SCE_SERVICE_URI}/api/v1/histories?userid=${id}`,
     headers: {
       "content-type": "application/json",
     },
