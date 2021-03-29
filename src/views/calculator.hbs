@@ -17,6 +17,14 @@
 
                <!-- Section: Calc Form -->
                <form action="/history/add" method="POST">
+                <input type="hidden" id="total" name="total" value="0.00">
+                <input type="hidden" id="costDay" name="costDay" value="0.00">
+                <input type="hidden" id="costHour" name="costHour" value="0.00">
+                <input type="hidden" id="taxIva" name="taxIva" value="0.00">
+                <input type="hidden" id="taxIsr_r" name="taxIsr_r" value="0.00">
+                <input type="hidden" id="taxIva_r" name="taxIva_r" value="0.00">
+                <input type="hidden" id="totalTaxes" name="totalTaxes" value="0.00">
+                <input type="hidden" id="totalRevenue" name="totalRevenue" value="0.00">
                     <div class="d-flex flex-row flex-wrap p-4">
 
                          <!-- Section: Fixed Cost -->
@@ -96,7 +104,7 @@
                                         * Project Type
                                    </label>
                                    <div class="col-sm-4">
-                                        <select id="projectType" class="form-control form-control-sm mb-3 text-center">
+                                        <select id="projectType" name="projectType" class="form-control form-control-sm mb-3 text-center">
                                              <option value="">- Select type -</option>
                                              <option value="1">Custom Web</option>
                                              <option value="2">e-commerce</option>

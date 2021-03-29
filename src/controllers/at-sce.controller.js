@@ -14,6 +14,9 @@ const passport = require("passport");
 // AT SCE Controller
 const atSCEController = {};
 
+// MICROSERVICE - HEROKU - AT SCE API
+const sceServiceAPI = require("../services/at-sce-api.service");
+
 // AT-SCE - Index/Login
 atSCEController.renderSigninForm = async (req, res) => {
   console.log("--> atSCEController.renderSigninForm");
@@ -50,12 +53,9 @@ atSCEController.addHistory = async (req, res) => {
   console.log("--> atSCEController.addHistory");
 
   const user_id = req.user.data.id;
+  const status = req.user.data.status;
   console.log("--> user id:" + user_id);
-  console.log("---> Req Body: " + JSON.stringify(req.body));
-  /*let costPerHour = document.getElementById("costPerHour").value;
-    let costPerDay = document.getElementById("costPerDay").value;
-    let projectWillCostYou = document.getElementById("projectWillCostYou").value;
-    let taxesIVAandISR = document.getElementById("taxesIVAandISR").value;*/
+
   try {
     const {
       rent,
@@ -65,14 +65,19 @@ atSCEController.addHistory = async (req, res) => {
       others,
       hours,
       days,
+      projectType,
       projectCost,
-      costPerHour,
-      costPerDay,
-      projectWillCostYou,
-      taxesIVAandISR,
-      revenue,
+      total,
+      costDay,
+      costHour,
+      taxIva,
+      taxIsr_r,
+      taxIva_r,
+      totalTaxes,
+      totalRevenue,
     } = req.body;
     const userErrors = [];
+    console.log(req.body);
 
     // Validations
     if (!rent) {
@@ -99,15 +104,6 @@ atSCEController.addHistory = async (req, res) => {
     if (!projectCost) {
       userErrors.push({ text: "Empty Field. " });
     }
-    /*if (!projectWillCostYou) {
-      userErrors.push({ text: "Empty Field. " });
-    }
-    if (!taxesIVAandISR) {
-      userErrors.push({ text: "Empty Field. " });
-    }
-    if (!revenue) {
-      userErrors.push({ text: "Empty Field. " });
-    }*/
 
     if (userErrors.length > 0) {
       res.render("calculator", {
@@ -116,54 +112,59 @@ atSCEController.addHistory = async (req, res) => {
         telephone,
         feeding,
         others,
-        costPerHour,
-        costPerDay,
+        hours,
+        days,
         projectCost,
+        total,
+        costDay,
+        costHour,
+        taxIva,
+        taxIsr_r,
+        taxIva_r,
+        totalTaxes,
+        totalRevenue,
       });
     }
-    //console.log((days,calculateTotalFixedCost(rent, transport, telephone, feeding, others)));
     // Request
     let request = {
+      type: projectType,
       user_id: user_id,
-
       fixedExpenses: {
-        rent: rent,
-        transport: transport,
-        internet: telephone,
-        feeding: feeding,
-        others: others,
-        total: rent + transport + telephone + feeding + others,
+        rent: parseFloat(rent).toFixed(2),
+        transport: parseFloat(transport).toFixed(2),
+        internet: parseFloat(telephone).toFixed(2),
+        feed: parseFloat(feeding).toFixed(2),
+        others: parseFloat(others).toFixed(2),
+        total: total,
       },
 
-      totalHours: hours * days,
+      totalHours: hours,
       totalDays: days,
-      costPerDay: (rent + transport + telephone + feeding + others) / days,
-      costPerHour:
-        (rent + transport + telephone + feeding + others) / days / hours,
-      projectcost: projectCost,
-      taxIVA: projectCost * 0.16,
-      taxISR_r: projectCost * 0.1,
-      taxIVA_r: projectCost * 0.1067,
-      total: projectCost * 0.16 + projectCost * 0.1 + projectCost * 0.1067,
-      revenue:
-        projectCost * 0.16 -
-        projectCost * 0.1 -
-        projectCost * 0.1067 -
-        (rent + transport + telephone + feeding + others),
+      costDay: costDay,
+      costHour: costHour,
+      projectCost: projectCost,
+      taxIVA: taxIva,
+      taxISR_r: taxIsr_r,
+      taxIVA_r: taxIva_r,
+      total: totalTaxes,
+      revenue: totalRevenue,
+      status: status,
     };
     console.debug("Request-->", request);
 
     // Call Create History - POST /api/v1/histories?userid={id}
     await sceServiceAPI.createHistory(request).then((result) => {
       if (!result) {
+        console.log("error");
         console.error("Service unavailable: sceServiceAPI.createHistory()");
         req.flash("error_msg", "Service unavailable");
+      } else {
+        req.flash("success_msg", "Calculation was saved successfully");
       }
-      console.debug("Result-->", JSON.stringify(result.body));
+      console.debug("Result-->", result);
     });
     // Redirect
-    req.flash("success_msg", "Calculation was saved successfully");
-    return res.redirect("/calculator");
+    res.redirect("/calculator");
   } catch (err) {
     console.log(err.response);
     if (err.response && err.response.data) {
