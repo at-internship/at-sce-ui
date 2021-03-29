@@ -259,7 +259,7 @@
                                    {{#each history}}
                                    <tr>
                                         <td>{{id}}</td>
-                                        <td>{{type}}</td>
+                                        <td>{{ typeProject type }}</td>
                                         <td>{{totalHours}}</td>
                                         <td>{{total}}</td>
                                         <td>{{totalDays}}</td>
@@ -267,11 +267,6 @@
                                    {{/each}}
                               </tbody>
                          </table>
-                         <script type="text/javascript">
-                              $(document).ready(function () {
-                                   $('#historyTable').DataTable();
-                              });
-                         </script>
                     </div>
                </div>
                <!-- Section: History table -->

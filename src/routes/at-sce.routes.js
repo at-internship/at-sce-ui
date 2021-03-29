@@ -14,7 +14,7 @@ const router = express.Router();
 const path = require("path");
 
 // Helpers
-const { isAuthenticated } = require("../helpers/auth.helper");
+const { isAuthenticated} = require("../helpers/auth.helper");
 
 // SCE Controller
 const { renderSigninForm, signin, signout, calculator, addHistory} = require("../controllers/at-sce.controller");

@@ -50,13 +50,14 @@ atSCEController.calculator = async (req, res) => {
 
   try{
     const user = req.user.data.id;
-    console.log(user);
+    //console.log(user);
     const responseHistory = await sceServiceAPI.getHistory(user);
-    console.log(responseHistory);
+    //console.log(responseHistory);
     if (responseHistory === null || responseHistory === undefined) {
       console.error("Service unavailable: sceServiceAPI.getHistory()");
       req.flash("error_msg", "Service unavailable");
     } else {
+      
       history = responseHistory.data
     }
   } catch(error){
