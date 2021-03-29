@@ -81,28 +81,28 @@ atSCEController.addHistory = async (req, res) => {
 
     // Validations
     if (!rent) {
-      userErrors.push({ text: "Empty Field. " });
+      userErrors.push({ text: "Please Enter rent value." });
     }
     if (!transport) {
-      userErrors.push({ text: "Empty Field. " });
+      userErrors.push({ text: "Please Enter transport value." });
     }
     if (!telephone) {
-      userErrors.push({ text: "Empty Field. " });
+      userErrors.push({ text: "Please Enter Telephone/Internet value. " });
     }
     if (!feeding) {
-      userErrors.push({ text: "Empty Field. " });
+      userErrors.push({ text: "Please Enter feeding value. " });
     }
     if (!others) {
-      userErrors.push({ text: "Empty Field. " });
+      userErrors.push({ text: "Please Enter others value. " });
     }
     if (!hours) {
-      userErrors.push({ text: "Empty Field. " });
+      userErrors.push({ text: "Please Enter hours a day will you dedicate. " });
     }
     if (!days) {
-      userErrors.push({ text: "Empty Field. " });
+      userErrors.push({ text: "Please Enter days will it take to finish it. " });
     }
     if (!projectCost) {
-      userErrors.push({ text: "Empty Field. " });
+      userErrors.push({ text: "Please Enter Project Cost value . " });
     }
 
     if (userErrors.length > 0) {
@@ -135,19 +135,19 @@ atSCEController.addHistory = async (req, res) => {
         internet: parseFloat(telephone).toFixed(2),
         feed: parseFloat(feeding).toFixed(2),
         others: parseFloat(others).toFixed(2),
-        total: total,
+        total: parseFloat(total).toFixed(2),
       },
 
       totalHours: hours,
       totalDays: days,
-      costDay: costDay,
-      costHour: costHour,
-      projectCost: projectCost,
-      taxIVA: taxIva,
-      taxISR_r: taxIsr_r,
-      taxIVA_r: taxIva_r,
-      total: totalTaxes,
-      revenue: totalRevenue,
+      costDay: parseFloat(costDay).toFixed(2),
+      costHour: parseFloat(costHour).toFixed(2),
+      projectCost: parseFloat(projectCost).toFixed(2),
+      taxIVA: parseFloat(taxIva).toFixed(2),
+      taxISR_r: parseFloat(taxIsr_r).toFixed(2),
+      taxIVA_r: parseFloat(taxIva_r).toFixed(2),
+      total: parseFloat(totalTaxes).toFixed(2),
+      revenue:parseFloat(totalRevenue).toFixed(2),
       status: status,
     };
     console.debug("Request-->", request);
