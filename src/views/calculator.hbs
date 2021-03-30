@@ -263,19 +263,21 @@
                                    <tr>
                                         <th>#</th>
                                         <th>Project</th>
+                                        <th>Days</th>
                                         <th>Hrs</th>
-                                        <th>Cost</th>
-                                        <th>Date</th>
+                                        <th>Project Cost</th>
+                                        <th>Revenue</th>
                                    </tr>
                               </thead>
                               <tbody>
                                    {{#each history}}
                                    <tr>
-                                        <td>{{id}}</td>
+                                        <td>{{ id }}</td>
                                         <td>{{ typeProject type }}</td>
-                                        <td>{{totalHours}}</td>
-                                        <td>{{total}}</td>
-                                        <td>{{revenue}}</td>
+                                        <td>{{ totalDays }}</td>
+                                        <td>{{ totalHours }}</td>
+                                        <td>{{ formatCurrency total }}</td>
+                                        <td>{{ formatCurrency  revenue }}</td>
                                    </tr>
                                    {{/each}}
                               </tbody>
