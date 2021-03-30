@@ -217,7 +217,7 @@ $(document).ready(function () {
 const resetvalue = "0.00";
  
 /*Reset Value Function*/
-function CleanOperation()
+function CleanFields()
 {
     document.getElementById("projectWillCostYou").innerHTML = resetvalue;
     document.getElementById("costPerDay").innerHTML = resetvalue;
@@ -225,4 +225,5 @@ function CleanOperation()
     document.getElementById("taxesIVAandISR").innerHTML = resetvalue;
     document.getElementById("charge").innerHTML = resetvalue;
     document.getElementById("revenue").innerHTML = resetvalue;
+    $("#saveButton").prop("disabled", true);
 }
