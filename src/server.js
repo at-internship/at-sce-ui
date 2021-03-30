@@ -37,6 +37,13 @@ app.engine(
         if (a == undefined) return "";
         return a == 1 ? "Active" : "Inactive";
       },
+      typeProject: function (a) {
+        if ( a == undefined || a == 0 ) return ""
+        else if ( a == 1 ) return "Custome Web"
+        else if ( a == 2 ) return "e-commerce"
+        else if ( a == 3 ) return "Android app"
+        else if ( a == 4 ) return "IOS app";
+      },
       statusButtonHelper: function (a) {
         if (a == undefined) return "";
         return a == 1 ? "btn-success" : "btn-secondary";

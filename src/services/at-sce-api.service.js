@@ -100,6 +100,19 @@ AT_SCE_SERVICE.deleteUser = (id) => {
   });
 };
 
+//Operation: Get HISTORY by USER -  GET /api/v1/histories/{id}
+AT_SCE_SERVICE.getHistory = (id) =>{
+  return axios({
+    method: "GET",
+    url: `${AT_SCE_SERVICE_URI}/v1/histories?userid=${id}`,
+    headers: {
+      "content-type": "application/json",
+    },
+  }).catch(function (error) {
+    console.log(`Error: ${error.message}`);
+  });
+};
+    
 // Operation: Save button POST /api/v1/histories?userid={id}
 AT_SCE_SERVICE.createHistory = (data) => {
   return axios({

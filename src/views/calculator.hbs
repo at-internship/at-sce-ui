@@ -173,15 +173,22 @@
                     <div class="d-flex justify-content-around" style="margin: 0% 25% 5% 25%">                      
                          <button type="button" class="btn btn-primary btn-lg mx-2 px-4"
 <<<<<<< HEAD
+<<<<<<< HEAD
                               onclick="calculateProjectCost();">Calculate</button>    
                          <button type="reset" class="btn btn-outline-danger btn-lg mx-2 px-5" 
                               onclick="CleanOperation();">Clean</button>           
                          <button id="saveButton" type="button" class="btn btn-success btn-lg mx-2 px-5"
 =======
+=======
+>>>>>>> 7be74b039b726c025b35f1dc26610fef5320f5df
                               onclick="calculateProjectCost();">Calculate</button>
-                         <button type="reset" class="btn btn-outline-danger btn-lg mx-2 px-5">Clean</button>
+                         <button type="reset" class="btn btn-outline-danger btn-lg mx-2 px-5"
+                              onclick="CleanOperation();">Clean</button>
                          <button id="saveButton" type="submit" class="btn btn-success btn-lg mx-2 px-5"
+<<<<<<< HEAD
 >>>>>>> 8113055eb2fa10617e133b1359c083b4edff710e
+=======
+>>>>>>> 7be74b039b726c025b35f1dc26610fef5320f5df
                               data-toggle="modal" data-target="#modal_save" disabled>Save</button>
                     </div>
                     <!-- Section: Calc Operations -->
@@ -276,27 +283,15 @@
                                    </tr>
                               </thead>
                               <tbody>
+                                   {{#each history}}
                                    <tr>
-                                        <td>1</td>
-                                        <td>Custom Web</td>
-                                        <td>80</td>
-                                        <td>7,000.00</td>
-                                        <td>01/01/2021</td>
+                                        <td>{{id}}</td>
+                                        <td>{{ typeProject type }}</td>
+                                        <td>{{totalHours}}</td>
+                                        <td>{{total}}</td>
+                                        <td>{{totalDays}}</td>
                                    </tr>
-                                   <tr>
-                                        <td>2</td>
-                                        <td>Android App</td>
-                                        <td>80</td>
-                                        <td>7,000.00</td>
-                                        <td>01/01/2021</td>
-                                   </tr>
-                                   <tr>
-                                        <td>3</td>
-                                        <td>IOS App</td>
-                                        <td>80</td>
-                                        <td>7,000.00</td>
-                                        <td>01/01/2021</td>
-                                   </tr>
+                                   {{/each}}
                               </tbody>
                          </table>
                     </div>
