@@ -14,7 +14,7 @@ const AT_SCE_SERVICE = {};
 
 // LOCAL
 //require("dotenv").config();
-//const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI || `https://at-sce-api.herokuapp.com/api`;
+//const AT_SCE_SERVICE_URI =process.env.AT_SCE_SERVICE_URI || `https://at-sce-api.herokuapp.com/api`;
 
 // PROD
 const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
@@ -92,6 +92,20 @@ AT_SCE_SERVICE.deleteUser = (id) => {
   return axios({
     method: "DELETE",
     url: `${AT_SCE_SERVICE_URI}/v1/users/${id}`,
+    headers: {
+      "content-type": "application/json",
+    },
+  }).catch(function (error) {
+    console.log(`Error: ${error.message}`);
+  });
+};
+
+// Operation: Save button POST /api/v1/histories?userid={id}
+AT_SCE_SERVICE.createHistory = (data) => {
+  return axios({
+    method: "POST",
+    url: `${AT_SCE_SERVICE_URI}/v1/histories?userid=${data.id} `,
+    data: data,
     headers: {
       "content-type": "application/json",
     },
