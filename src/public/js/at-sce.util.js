@@ -29,7 +29,7 @@ $(function () {
   $('[data-toggle="tooltipShowHistory"]').tooltip();
 });
 
-/*Constants percent's IVA and percent's ISR*/
+/* Constants percent's IVA and percent's ISR */
 const percentIva = 0.16;
 const percentIsrRetention = 0.1;
 const percentIvaRetention = 0.1067;
@@ -107,7 +107,7 @@ function transformToDecimals(number) {
 }
 
 function calculateProjectCost() {
-  /*Initialization */
+  /* Initialization */
   const rent = getValueForDom("rent");
   const transport = getValueForDom("transport");
   const telephone = getValueForDom("telephone");
@@ -117,7 +117,7 @@ function calculateProjectCost() {
   const hours = getValueForDom("hours");
   const projectCost = getValueForDom("projectCost");
 
-  /*Validation*/
+  /* Validation */
   if (
     rent == "" ||
     transport == "" ||
@@ -128,17 +128,16 @@ function calculateProjectCost() {
     hours == "" ||
     projectCost == ""
   ) {
-    document.getElementById("sceMessages").innerHTML =
-      "Please, enter value in all fields";
-    document.getElementById("sceMessages").className =
-      "alert alert-warning align-self-center mt-2";
+    document.getElementById("sceMessages").innerHTML = "Please, enter value in all fields";
+    document.getElementById("sceMessages").className = "alert alert-warning align-self-center mt-2";
 
     $("#sceMessages").fadeIn(1500);
     setTimeout(function () {
       $("#sceMessages").fadeOut();
     }, 5000);
   } else {
-    /*Call the functions*/
+
+    /* Call the functions */
     let totalFixedCost = calculateTotalFixedCost(
       rent,
       transport,
@@ -165,41 +164,21 @@ function calculateProjectCost() {
     let revenue = calculateRevenue(charge, totalFixedCost);
 
     /* DOM handling */
-    document.getElementById(
-      "projectWillCostYou"
-    ).innerHTML = transformToDecimals(totalFixedCost);
-    document.getElementById("costPerDay").innerHTML = transformToDecimals(
-      costPerDay
-    );
-    document.getElementById("costPerHour").innerHTML = transformToDecimals(
-      costPerHour
-    );
-    document.getElementById("taxesIVAandISR").innerHTML = transformToDecimals(
-      totalTaxesIVAandISR
-    );
+    document.getElementById("projectWillCostYou").innerHTML = transformToDecimals(totalFixedCost);
+    document.getElementById("costPerDay").innerHTML = transformToDecimals(costPerDay);
+    document.getElementById("costPerHour").innerHTML = transformToDecimals(costPerHour);
+    document.getElementById("taxesIVAandISR").innerHTML = transformToDecimals(totalTaxesIVAandISR);
     document.getElementById("charge").innerHTML = transformToDecimals(charge);
     document.getElementById("revenue").innerHTML = transformToDecimals(revenue);
-
-    document.getElementById("total").value = transformToDecimals(
-      totalFixedCost
-    );
+    document.getElementById("total").value = transformToDecimals(totalFixedCost);
     document.getElementById("costDay").value = transformToDecimals(costPerDay);
-    document.getElementById("costHour").value = transformToDecimals(
-      costPerHour
-    );
+    document.getElementById("costHour").value = transformToDecimals(costPerHour);
     document.getElementById("taxIva").value = transformToDecimals(percentIva);
-    document.getElementById("taxIsr_r").value = transformToDecimals(
-      percentIsrRetention
-    );
-    document.getElementById("taxIva_r").value = transformToDecimals(
-      percentIvaRetention
-    );
-    document.getElementById("totalTaxes").value = transformToDecimals(
-      totalTaxesIVAandISR
-    );
-    document.getElementById("totalRevenue").value = transformToDecimals(
-      revenue
-    );
+    document.getElementById("taxIsr_r").value = transformToDecimals(percentIsrRetention);
+    document.getElementById("taxIva_r").value = transformToDecimals(percentIvaRetention);
+    document.getElementById("totalTaxes").value = transformToDecimals(totalTaxesIVAandISR);
+    document.getElementById("totalRevenue").value = transformToDecimals(revenue);
+
     /* Highlight button */
     $(".calcResultsSection").effect("highlight", {}, 3000);
 

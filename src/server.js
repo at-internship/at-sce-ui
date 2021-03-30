@@ -44,6 +44,9 @@ app.engine(
         else if ( a == 3 ) return "Android app"
         else if ( a == 4 ) return "IOS app";
       },
+      formatCurrency: function (a) {
+        return a.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+      },
       statusButtonHelper: function (a) {
         if (a == undefined) return "";
         return a == 1 ? "btn-success" : "btn-secondary";

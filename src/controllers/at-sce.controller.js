@@ -8,12 +8,9 @@
  * @version 1.0
  *
  */
-// MICROSERVICE - HEROKU - AT SCE API
-const sceServiceAPI = require("../services/at-sce-api.service");
 
 // Constants
 const passport = require("passport");
-const { useFakeXMLHttpRequest } = require("sinon");
 
 // AT SCE Controller
 const atSCEController = {};
@@ -49,34 +46,33 @@ atSCEController.signout = async (req, res) => {
 // AT-SCE - Calculator Form
 atSCEController.calculator = async (req, res) => {
   console.log("--> atSCEController.calculator");
-  let history = [];
+  let histories = [];
 
-  try{
+  try {
     const user = req.user.data.id;
-    //console.log(user);
+    console.debug("User-->", user);
     const responseHistory = await sceServiceAPI.getHistory(user);
-    //console.log(responseHistory);
+    console.debug("Response-->", responseHistory);
+
     if (responseHistory === null || responseHistory === undefined) {
       console.error("Service unavailable: sceServiceAPI.getHistory()");
       req.flash("error_msg", "Service unavailable");
     } else {
-      
-      history = responseHistory.data
+      histories = responseHistory.data;
     }
-  } catch(error){
+  } catch (error) {
     console.error(error.message);
-  }finally {
-    res.render("calculator", { history });
+  } finally {
+    res.render("calculator", { histories });
   }
 };
 
 // AT-SCE - Add History
 atSCEController.addHistory = async (req, res) => {
   console.log("--> atSCEController.addHistory");
-
   const user_id = req.user.data.id;
   const status = req.user.data.status;
-  console.log("--> user id:" + user_id);
+  console.debug("--> user id:" + user_id);
 
   try {
     const {
@@ -99,7 +95,7 @@ atSCEController.addHistory = async (req, res) => {
       totalRevenue,
     } = req.body;
     const userErrors = [];
-    console.log(req.body);
+    console.debug(req.body);
 
     // Validations
     if (!rent) {
@@ -147,6 +143,7 @@ atSCEController.addHistory = async (req, res) => {
         totalRevenue,
       });
     }
+
     // Request
     let request = {
       type: projectType,
@@ -159,7 +156,6 @@ atSCEController.addHistory = async (req, res) => {
         others: parseFloat(others).toFixed(2),
         total: parseFloat(total).toFixed(2),
       },
-
       totalHours: hours,
       totalDays: days,
       costDay: parseFloat(costDay).toFixed(2),
@@ -169,7 +165,7 @@ atSCEController.addHistory = async (req, res) => {
       taxISR_r: parseFloat(taxIsr_r).toFixed(2),
       taxIVA_r: parseFloat(taxIva_r).toFixed(2),
       total: parseFloat(totalTaxes).toFixed(2),
-      revenue:parseFloat(totalRevenue).toFixed(2),
+      revenue: parseFloat(totalRevenue).toFixed(2),
       status: status,
     };
     console.debug("Request-->", request);
@@ -185,6 +181,7 @@ atSCEController.addHistory = async (req, res) => {
       }
       console.debug("Result-->", result);
     });
+
     // Redirect
     res.redirect("/calculator");
   } catch (err) {
