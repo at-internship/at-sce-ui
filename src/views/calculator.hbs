@@ -17,6 +17,14 @@
 
                <!-- Section: Calc Form -->
                <form action="/history/add" method="POST">
+                <input type="hidden" id="total" name="total" value="0.00">
+                <input type="hidden" id="costDay" name="costDay" value="0.00">
+                <input type="hidden" id="costHour" name="costHour" value="0.00">
+                <input type="hidden" id="taxIva" name="taxIva" value="0.00">
+                <input type="hidden" id="taxIsr_r" name="taxIsr_r" value="0.00">
+                <input type="hidden" id="taxIva_r" name="taxIva_r" value="0.00">
+                <input type="hidden" id="totalTaxes" name="totalTaxes" value="0.00">
+                <input type="hidden" id="totalRevenue" name="totalRevenue" value="0.00">
                     <div class="d-flex flex-row flex-wrap p-4">
 
                          <!-- Section: Fixed Cost -->
@@ -28,7 +36,7 @@
                               <div class="row mt-3 ">
                                    <label for="rent" class="col-sm-5 col-form-label">Rent</label>
                                    <div class="col-sm-4">
-                                        <input type="number" class="form-control text-center" id="rent"
+                                        <input type="number" class="form-control text-center" id="rent" name="rent"
                                              placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$" value="" required>
                                    </div>
                               </div>
@@ -36,27 +44,30 @@
                                    <label for="transport" class="col-sm-5 col-form-label">Transport</label>
                                    <div class="col-sm-4">
                                         <input type="number" class="form-control text-center" id="transport"
-                                             placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$" value="" required>
+                                             name="transport" placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$"
+                                             value="" required>
                                    </div>
                               </div>
                               <div class="row mt-3">
                                    <label for="telephone" class="col-sm-5 col-form-label">Telephone/Internet</label>
                                    <div class="col-sm-4">
                                         <input type="number" class="form-control text-center" id="telephone"
-                                             placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$" value="" required>
+                                             name="telephone" placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$"
+                                             value="" required>
                                    </div>
                               </div>
                               <div class="row mt-3">
-                                   <label for="feeding" class="col-sm-5 col-form-label">Fedding</label>
+                                   <label for="feeding" class="col-sm-5 col-form-label">Feeding</label>
                                    <div class="col-sm-4">
                                         <input type="number" class="form-control text-center" id="feeding"
-                                             placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$" value="" required>
+                                             name="feeding" placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$"
+                                             value="" required>
                                    </div>
                               </div>
                               <div class="row mt-3">
                                    <label for="others" class="col-sm-5 col-form-label">Others</label>
                                    <div class="col-sm-4">
-                                        <input type="number" class="form-control text-center" id="others"
+                                        <input type="number" class="form-control text-center" id="others" name="others"
                                              placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$" value="" required>
                                    </div>
                               </div>
@@ -74,8 +85,9 @@
                                         * How many hours a day will you dedicate?
                                    </label>
                                    <div class="col-sm-3">
-                                        <input type="number" class="form-control text-center" id="hours" placeholder="0"
-                                             min="0" max="24" oninput="validity.valid||(value='');" required>
+                                        <input type="number" class="form-control text-center" id="hours" name="hours"
+                                             placeholder="0" min="0" max="24" oninput="validity.valid||(value='');"
+                                             required>
                                    </div>
                               </div>
                               <div class="row mt-2">
@@ -83,8 +95,8 @@
                                         * How many days will it take to finish it?
                                    </label>
                                    <div class="col-sm-3">
-                                        <input type="number" class="form-control text-center" id="days" placeholder="0"
-                                             min="0" oninput="validity.valid||(value='');" required>
+                                        <input type="number" class="form-control text-center" id="days" name="days"
+                                             placeholder="0" min="0" oninput="validity.valid||(value='');" required>
                                    </div>
                               </div>
                               <div class="row mt-2">
@@ -92,7 +104,7 @@
                                         * Project Type
                                    </label>
                                    <div class="col-sm-4">
-                                        <select id="projectType" class="form-control form-control-sm mb-3 text-center">
+                                        <select id="projectType" name="projectType" class="form-control form-control-sm mb-3 text-center">
                                              <option value="">- Select type -</option>
                                              <option value="1">Custom Web</option>
                                              <option value="2">e-commerce</option>
@@ -107,7 +119,8 @@
                                    </label>
                                    <div class="col-sm-4">
                                         <input type="number" class="form-control text-center" id="projectCost"
-                                             placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$" required>
+                                             name="projectCost" placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$"
+                                             required>
                                    </div>
                               </div>
                          </div>
@@ -125,7 +138,7 @@
                                                        data-toggle="tooltipCostPerDay" data-placement="right"
                                                        class="icons">
                                              </h5>
-                                             <h3 id="costPerDay" class="font-weight-bold">0.00</h3>
+                                             <h3 id="costPerDay" name="costPerDay" class="font-weight-bold">0.00</h3>
                                         </div>
                                    </div>
                               </div>
@@ -139,7 +152,7 @@
                                                        data-toggle="tooltipCostPerHr" data-placement="right"
                                                        class="icons">
                                              </h5>
-                                             <h3 id="costPerHour" class="font-weight-bold">0.00</h3>
+                                             <h3 id="costPerHour" name="costPerHour" class="font-weight-bold">0.00</h3>
                                         </div>
                                    </div>
                               </div>
@@ -159,10 +172,10 @@
                     <!-- Section: Calc Operations -->
                     <div class="d-flex justify-content-around" style="margin: 0% 25% 5% 25%">                      
                          <button type="button" class="btn btn-primary btn-lg mx-2 px-4"
-                              onclick="calculateProjectCost();">Calculate</button>    
-                         <button type="reset" class="btn btn-outline-danger btn-lg mx-2 px-5" 
-                              onclick="CleanOperation();">Clean</button>           
-                         <button id="saveButton" type="button" class="btn btn-success btn-lg mx-2 px-5"
+                              onclick="calculateProjectCost();">Calculate</button>
+                         <button type="reset" class="btn btn-outline-danger btn-lg mx-2 px-5"
+                              onclick="CleanOperation();">Clean</button>
+                         <button id="saveButton" type="submit" class="btn btn-success btn-lg mx-2 px-5"
                               data-toggle="modal" data-target="#modal_save" disabled>Save</button>
                     </div>
                     <!-- Section: Calc Operations -->
@@ -257,27 +270,15 @@
                                    </tr>
                               </thead>
                               <tbody>
+                                   {{#each history}}
                                    <tr>
-                                        <td>1</td>
-                                        <td>Custom Web</td>
-                                        <td>80</td>
-                                        <td>7,000.00</td>
-                                        <td>01/01/2021</td>
+                                        <td>{{id}}</td>
+                                        <td>{{ typeProject type }}</td>
+                                        <td>{{totalHours}}</td>
+                                        <td>{{total}}</td>
+                                        <td>{{totalDays}}</td>
                                    </tr>
-                                   <tr>
-                                        <td>2</td>
-                                        <td>Android App</td>
-                                        <td>80</td>
-                                        <td>7,000.00</td>
-                                        <td>01/01/2021</td>
-                                   </tr>
-                                   <tr>
-                                        <td>3</td>
-                                        <td>IOS App</td>
-                                        <td>80</td>
-                                        <td>7,000.00</td>
-                                        <td>01/01/2021</td>
-                                   </tr>
+                                   {{/each}}
                               </tbody>
                          </table>
                     </div>
