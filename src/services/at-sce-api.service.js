@@ -100,7 +100,7 @@ AT_SCE_SERVICE.deleteUser = (id) => {
   });
 };
 
-//Operation: Get HISTORY by USER -  GET /api/v1/histories/{id}
+//Operation: Get HISTORY by USER -  GET /api/v1/histories?userid={id}
 AT_SCE_SERVICE.getHistory = (id) =>{
   return axios({
     method: "GET",

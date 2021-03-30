@@ -8,8 +8,6 @@
  * @version 1.0
  *
  */
-// MICROSERVICE - HEROKU - AT SCE API
-const sceServiceAPI = require("../services/at-sce-api.service");
 
 // Constants
 const passport = require("passport");
