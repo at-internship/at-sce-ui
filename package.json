@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/at-internship/at-sce-ui#readme",
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "connect-flash": "^0.1.1",
