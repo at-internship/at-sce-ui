@@ -8,6 +8,7 @@
  * @version 1.0
  *
  */
+
 // AT Admin Controller
 const adminCtrl = {};
 
@@ -54,7 +55,14 @@ adminCtrl.addUser = async (req, res) => {
   console.log("--> adminCtrl.addUser");
 
   try {
-    const { user_type, user_firstName, user_lastName, user_email, user_password, user_status } = req.body;
+    const {
+      user_type,
+      user_firstName,
+      user_lastName,
+      user_email,
+      user_password,
+      user_status,
+    } = req.body;
     const userErrors = [];
 
     // Validations
@@ -152,7 +160,13 @@ adminCtrl.updateUser = async (req, res) => {
     return res.redirect("/admin/user");
   }
   try {
-    const { user_type, user_firstName, user_lastName, user_email, user_status } = req.body;
+    const {
+      user_type,
+      user_firstName,
+      user_lastName,
+      user_email,
+      user_status,
+    } = req.body;
     const userErrors = [];
 
     // Validations
