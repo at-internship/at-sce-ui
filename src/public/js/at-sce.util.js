@@ -196,7 +196,7 @@ $(document).ready(function () {
 const resetvalue = "0.00";
  
 /*Reset Value Function*/
-function CleanFields()
+function cleanCalculatorForm()
 {
     document.getElementById("projectWillCostYou").innerHTML = resetvalue;
     document.getElementById("costPerDay").innerHTML = resetvalue;
