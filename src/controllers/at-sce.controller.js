@@ -15,9 +15,6 @@ const passport = require("passport");
 // AT SCE Controller
 const atSCEController = {};
 
-// MICROSERVICE - HEROKU - AT SCE API
-const sceServiceAPI = require("../services/at-sce-api.service");
-
 // AT-SCE - Index/Login
 atSCEController.renderSigninForm = async (req, res) => {
   console.log("--> atSCEController.renderSigninForm");
