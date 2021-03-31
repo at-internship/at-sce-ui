@@ -8,6 +8,7 @@
  * @version 1.0
  *
  */
+
 // Constants
 const crypto = require("crypto");
 const algorithm = "aes-256-cbc";

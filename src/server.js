@@ -37,6 +37,16 @@ app.engine(
         if (a == undefined) return "";
         return a == 1 ? "Active" : "Inactive";
       },
+      typeProject: function (a) {
+        if ( a == undefined || a == 0 ) return ""
+        else if ( a == 1 ) return "Custome Web"
+        else if ( a == 2 ) return "e-commerce"
+        else if ( a == 3 ) return "Android app"
+        else if ( a == 4 ) return "IOS app";
+      },
+      formatCurrency: function (a) {
+        return a.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+      },
       statusButtonHelper: function (a) {
         if (a == undefined) return "";
         return a == 1 ? "btn-success" : "btn-secondary";

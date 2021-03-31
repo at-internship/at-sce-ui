@@ -8,17 +8,11 @@
  * @version 1.0
  *
  */
+
 // Constants
 const axios = require("axios");
 const AT_SCE_SERVICE = {};
-
-// LOCAL
-//require("dotenv").config();
-//const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI || `https://at-sce-api.herokuapp.com/api`;
-
-// PROD
 const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
-
 console.log(`AT_SCE_SERVICE_URI: ${AT_SCE_SERVICE_URI}`);
 
 // Operation: Login - POST /api/v1/login
@@ -92,6 +86,33 @@ AT_SCE_SERVICE.deleteUser = (id) => {
   return axios({
     method: "DELETE",
     url: `${AT_SCE_SERVICE_URI}/v1/users/${id}`,
+    headers: {
+      "content-type": "application/json",
+    },
+  }).catch(function (error) {
+    console.log(`Error: ${error.message}`);
+  });
+};
+
+// Operation: Get HISTORY by USER -  GET /api/v1/histories?userid={id}
+AT_SCE_SERVICE.getHistory = (id) => {
+  return axios({
+    method: "GET",
+    url: `${AT_SCE_SERVICE_URI}/v1/histories?userid=${id}`,
+    headers: {
+      "content-type": "application/json",
+    },
+  }).catch(function (error) {
+    console.log(`Error: ${error.message}`);
+  });
+};
+
+// Operation: Save button POST /api/v1/histories?userid={id}
+AT_SCE_SERVICE.createHistory = (data) => {
+  return axios({
+    method: "POST",
+    url: `${AT_SCE_SERVICE_URI}/v1/histories?userid=${data.id} `,
+    data: data,
     headers: {
       "content-type": "application/json",
     },
