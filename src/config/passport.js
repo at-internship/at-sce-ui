@@ -8,9 +8,11 @@
  * @version 1.0
  *
  */
+
 // Constants
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+
 // MICROSERVICE - HEROKU - AT SCE API
 const sceServiceAPI = require("../services/at-sce-api.service");
 
