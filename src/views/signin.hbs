@@ -1,4 +1,4 @@
-<div class="col-md-4 mx-auto" style="min-width: 250px;">
+<div class="col-md-3 mx-auto" style="min-width: 200px;">
 
     <!-- Section: Validation errors -->
     {{#each loginErrors}}
@@ -13,7 +13,7 @@
 
     <div class="card mt-4 text-center">
         <div class="card-header">
-            <img src="/img/at-logo-round.png" title="AT" width="150">
+            <img src="/img/at-logo-round.png" title="" width="150">
             <h1 class="h4">Login</h1>
         </div>
         <div class="card-body">
@@ -21,7 +21,8 @@
             <!-- Section: Login Form -->
             <form action="/signin" method="POST">
                 <div class="form-group">
-                    <input type="email" class="form-control" name="email" placeholder="Email" autofocus required>
+                    <input type="email" class="form-control" name="email" placeholder="Email"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" autofocus required>
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" name="password" placeholder="Password" required>

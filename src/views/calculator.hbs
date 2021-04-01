@@ -9,9 +9,6 @@
                     <div class="d-inline-block ">
                     </div>
                     <div id="sceMessages"></div>
-                    <!--div class="alert alert-success d-inline-block align-self-center mt-2">
-                         <strong>A new calculation is coming...</strong>
-                    </div-->
                </div>
                <!-- Section: Notifications -->
 
@@ -165,7 +162,7 @@
                                    <div
                                         class="border border-secondary rounded py-2 mx-4  w-100 text-center calcResultsSection">
                                         <div class="text-center">
-                                             <h5>Cost per Day
+                                             <h5>Cost per day
                                                   <img src="/img/icons/help-icon.png"
                                                        title="It refers to the amount an client is willing to pay, per day"
                                                        data-toggle="tooltipCostPerDay" data-placement="right"
@@ -204,8 +201,9 @@
                     <div class="d-flex justify-content-center" style="width: 100%;">
                          <button id="calculateButton" type="button" class="btn btn-primary btn-lg mx-2 px-4"
                               onclick="calculateProjectCost();">Calculate</button>
-                         <button type="reset" class="btn btn-outline-danger btn-lg mx-2 px-5">Clean</button>
-                         <button id="saveButton" type="button" class="btn btn-success btn-lg mx-2 px-5"
+                         <button type="reset" class="btn btn-outline-danger btn-lg mx-2 px-5"
+                              onclick="cleanCalculatorForm();">Clean</button>
+                         <button id="saveButton" type="submit" class="btn btn-success btn-lg mx-2 px-5"
                               data-toggle="modal" data-target="#modal_save" disabled>Save</button>
                     </div>
                     <!-- Section: Calc Operations -->
@@ -297,6 +295,7 @@
                                         <th>Days</th>
                                         <th>Hrs</th>
                                         <th>Project Cost</th>
+                                        <th>Total Invoice</th>
                                         <th>Revenue</th>
                                    </tr>
                               </thead>
@@ -307,6 +306,7 @@
                                         <td>{{ typeProject type }}</td>
                                         <td>{{ totalDays }}</td>
                                         <td>{{ totalHours }}</td>
+                                        <td>{{ formatCurrency projectCost }}</td>
                                         <td>{{ formatCurrency total }}</td>
                                         <td>{{ formatCurrency revenue }}</td>
                                    </tr>

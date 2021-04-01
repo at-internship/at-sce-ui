@@ -147,3 +147,12 @@ a.link-user:hover {
   padding: 0;
 }
 
+
+#principal {
+  height: 100%;
+  background-image: url(/img/at-sce-background.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center top;
+  background-attachment: fixed;
+}

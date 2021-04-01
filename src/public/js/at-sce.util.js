@@ -214,3 +214,17 @@ function calculateProjectCost() {
 $(document).ready(function () {
   $("#historyTable").DataTable();
 });
+
+/*Constant reset value*/
+const resetvalue = "0.00";
+ 
+/*Reset Value Function*/
+function cleanCalculatorForm() {
+  document.getElementById("projectWillCostYou").innerHTML = resetvalue;
+  document.getElementById("costPerDay").innerHTML = resetvalue;
+  document.getElementById("costPerHour").innerHTML = resetvalue;
+  document.getElementById("taxesIVAandISR").innerHTML = resetvalue;
+  document.getElementById("charge").innerHTML = resetvalue;
+  document.getElementById("revenue").innerHTML = resetvalue;
+  $("#saveButton").prop("disabled", true);
+}
