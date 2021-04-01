@@ -193,7 +193,7 @@ function calculateProjectCost() {
     document.getElementById("taxIva").value = transformToDecimals(percentIva);
     document.getElementById("taxIsr_r").value = transformToDecimals(percentIsrRetention);
     document.getElementById("taxIva_r").value = transformToDecimals(percentIvaRetention);
-    document.getElementById("totalTaxes").value = transformToDecimals(totalTaxesIVAandISR);
+    document.getElementById("finalProjectCost").value = transformToDecimals(charge);
     document.getElementById("totalRevenue").value = transformToDecimals(revenue);
 
     $(".spinner-border").css("display", "none");
