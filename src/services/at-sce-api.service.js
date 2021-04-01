@@ -111,7 +111,7 @@ AT_SCE_SERVICE.getHistory = (id) => {
 AT_SCE_SERVICE.createHistory = (data) => {
   return axios({
     method: "POST",
-    url: `${AT_SCE_SERVICE_URI}/v1/histories?userid=${data.id} `,
+    url: `${AT_SCE_SERVICE_URI}/v1/histories?userid=${data.id}`,
     data: data,
     headers: {
       "content-type": "application/json",

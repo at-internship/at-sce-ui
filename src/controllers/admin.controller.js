@@ -110,14 +110,11 @@ adminCtrl.addUser = async (req, res) => {
 
     // Call Create USER - POST /api/v1/users endpoint
     await sceServiceAPI.createUser(request).then((result) => {
-      if (!result) {
-        console.error("Service unavailable: sceServiceAPI.createUser()");
-        req.flash("error_msg", "Service unavailable");
-      }
       console.debug("Result-->", result);
     });
 
     // Redirect
+    req.flash("success_msg", "User Added Successfully");
     res.redirect("/admin/user");
   } catch (err) {
     console.log(err.response);
@@ -125,6 +122,7 @@ adminCtrl.addUser = async (req, res) => {
       let errorMsg = err.response.data.message;
       req.flash("error_msg", errorMsg);
     }
+    res.redirect("/admin/user/add");
   }
 };
 
