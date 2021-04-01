@@ -16,7 +16,9 @@
                <!-- Section: Notifications -->
 
                <!-- Section: Calc Form -->
-               <form action="/history/add" method="POST">
+               <form id="calcForm" action="/history/add" method="POST" class="form-group row g-3 needs-validation"
+                    novalidate>
+
                     <input type="hidden" id="total" name="total" value="0.00">
                     <input type="hidden" id="costDay" name="costDay" value="0.00">
                     <input type="hidden" id="costHour" name="costHour" value="0.00">
@@ -25,50 +27,67 @@
                     <input type="hidden" id="taxIva_r" name="taxIva_r" value="0.00">
                     <input type="hidden" id="totalTaxes" name="totalTaxes" value="0.00">
                     <input type="hidden" id="totalRevenue" name="totalRevenue" value="0.00">
-                    <div class="d-flex flex-row flex-wrap p-4">
+                    <div class="d-flex flex-row flex-wrap p-4 m-2" style="width: 100%;">
 
                          <!-- Section: Fixed Cost -->
-                         <div class="flex-grow mt-2">
+                         <div class="flex-grow mt-2 mx-2">
                               <h2 class="font-weight-bold">Fixed Cost
                                    <img src="/img/icons/help-icon.png" title="Variable costs during the project."
                                         data-toggle="tooltipFixedCost" data-placement="right" class="icons">
                               </h2>
                               <div class="row mt-3 ">
-                                   <label for="rent" class="col-sm-5 col-form-label">Rent</label>
-                                   <div class="col-sm-4">
+                                   <label for="rent" class="col-sm-5 col-form-label">* Rent</label>
+                                   <div class="col-sm-6">
                                         <input type="number" class="form-control text-center" id="rent" name="rent"
                                              placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$" value="" required>
+                                        <div id="validationServer01Feedback" class="invalid-feedback">
+                                             Please provide the cost of rent.
+                                        </div>
                                    </div>
                               </div>
                               <div class="row mt-3">
-                                   <label for="transport" class="col-sm-5 col-form-label">Transport</label>
-                                   <div class="col-sm-4">
+                                   <label for="transport" class="col-sm-5 col-form-label">* Transport</label>
+                                   <div class="col-sm-6">
                                         <input type="number" class="form-control text-center" id="transport"
                                              name="transport" placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$"
                                              value="" required>
+                                        <div id="validationServer02Feedback" class="invalid-feedback">
+                                             Please provide the cost of transport.
+                                        </div>
                                    </div>
                               </div>
                               <div class="row mt-3">
-                                   <label for="telephone" class="col-sm-5 col-form-label">Telephone/Internet</label>
-                                   <div class="col-sm-4">
+                                   <label for="telephone" class="col-sm-5 col-form-label">*
+                                        Telephone<br>/Internet</label>
+                                   <div class="col-sm-6">
                                         <input type="number" class="form-control text-center" id="telephone"
                                              name="telephone" placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$"
                                              value="" required>
+                                        <div id="validationServer03Feedback" class="invalid-feedback">
+                                             Please provide the cost of telephone.
+                                        </div>
                                    </div>
                               </div>
                               <div class="row mt-3">
-                                   <label for="feeding" class="col-sm-5 col-form-label">Feeding</label>
-                                   <div class="col-sm-4">
+                                   <label for="feeding" class="col-sm-5 col-form-label">* Feeding</label>
+                                   <div class="col-sm-6">
                                         <input type="number" class="form-control text-center" id="feeding"
                                              name="feeding" placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$"
                                              value="" required>
+                                        <div id="validationServer04Feedback" class="invalid-feedback">
+                                             Please provide the cost of feeding.
+                                        </div>
                                    </div>
                               </div>
                               <div class="row mt-3">
-                                   <label for="others" class="col-sm-5 col-form-label">Others</label>
-                                   <div class="col-sm-4">
+                                   <label for="others" class="col-sm-5 col-form-label"> Others</label>
+                                   <div class="col-sm-6">
                                         <input type="number" class="form-control text-center" id="others" name="others"
-                                             placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$" value="" required>
+                                             placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$" value="0.00" not
+                                             required>
+                                        <div id="validationServer05Feedback" class="invalid-feedback">
+                                             Please provide the cost of others.
+                                        </div>
                                    </div>
                               </div>
                          </div>
@@ -88,6 +107,9 @@
                                         <input type="number" class="form-control text-center" id="hours" name="hours"
                                              placeholder="0" min="0" max="24" oninput="validity.valid||(value='');"
                                              required>
+                                        <div id="validationServer06Feedback" class="invalid-feedback">
+                                             Please provide the hours.
+                                        </div>
                                    </div>
                               </div>
                               <div class="row mt-2">
@@ -97,31 +119,41 @@
                                    <div class="col-sm-3">
                                         <input type="number" class="form-control text-center" id="days" name="days"
                                              placeholder="0" min="0" oninput="validity.valid||(value='');" required>
+                                        <div id="validationServer07Feedback" class="invalid-feedback">
+                                             Please provide the days.
+                                        </div>
                                    </div>
                               </div>
                               <div class="row mt-2">
                                    <label for="projectType" class="col-sm-3 col-form-label ">
                                         * Project Type
                                    </label>
-                                   <div class="col-sm-4">
+                                   <div class="col-sm-5 ">
                                         <select id="projectType" name="projectType"
-                                             class="form-control form-control-sm mb-3 text-center">
-                                             <option value="">- Select type -</option>
+                                             class="form-control form-control-sm mb-3 text-center"
+                                             style="background-position: right calc(1.5em + .25rem) center;" required>
+                                             <option value="" disabled selected>Select Type</option>
                                              <option value="1">Custom Web</option>
                                              <option value="2">e-commerce</option>
                                              <option value="3">Android app</option>
                                              <option value="4">IOS app</option>
                                         </select>
+                                        <div id="validationServer08Feedback" class="invalid-feedback">
+                                             Please provide the project type.
+                                        </div>
                                    </div>
                               </div>
                               <div class="row mt-2">
                                    <label for="projectCost" class="col-sm-3 col-form-label ">
                                         * Project Cost
                                    </label>
-                                   <div class="col-sm-4">
+                                   <div class="col-sm-5">
                                         <input type="number" class="form-control text-center" id="projectCost"
                                              name="projectCost" placeholder="0.00" min="0" pattern="^\d*(\.\d{0,2})?$"
                                              required>
+                                        <div id="validationServer09Feedback" class="invalid-feedback">
+                                             Please provide the project cost.
+                                        </div>
                                    </div>
                               </div>
                          </div>
@@ -130,7 +162,8 @@
                          <!-- Section Calc Cost day/hr -->
                          <div class="flex-grow-1 mt-2 justify-content-center">
                               <div class="row mb-4">
-                                   <div class="border border-secondary rounded py-2 mx-4  w-100 text-center">
+                                   <div
+                                        class="border border-secondary rounded py-2 mx-4  w-100 text-center calcResultsSection">
                                         <div class="text-center">
                                              <h5>Cost per Day
                                                   <img src="/img/icons/help-icon.png"
@@ -138,12 +171,13 @@
                                                        data-toggle="tooltipCostPerDay" data-placement="right"
                                                        class="icons">
                                              </h5>
-                                             <h3 id="costPerDay" name="costPerDay" class="font-weight-bold">0.00</h3>
+                                             <h3 id="costPerDay" class="font-weight-bold">0.00</h3>
                                         </div>
                                    </div>
                               </div>
                               <div class="row mb-4">
-                                   <div class="border border-secondary rounded py-2 mx-4  w-100 text-center">
+                                   <div
+                                        class="border border-secondary rounded py-2 mx-4  w-100 text-center calcResultsSection">
                                         <div class="text-center">
                                              <h5>Cost per hour
                                                   <img src="/img/icons/help-icon.png"
@@ -151,29 +185,27 @@
                                                        data-toggle="tooltipCostPerHr" data-placement="right"
                                                        class="icons">
                                              </h5>
-                                             <h3 id="costPerHour" name="costPerHour" class="font-weight-bold">0.00</h3>
+                                             <h3 id="costPerHour" class="font-weight-bold">0.00</h3>
                                         </div>
                                    </div>
                               </div>
                          </div>
                          <!-- Section Calc Cost day/hr -->
-
                     </div>
-
                     <!-- Section: Loader -->
-                    <div class="d-flex justify-content-center top-50 mb-3">
-                         <div class="spinner-border" role="status">
+                    <div class=" d-flex justify-content-center top-50 mb-3" style="width: 100%;">
+                         <div class="spinner-border" role="status" hidden>
                               <span class="visually-hidden"></span>
                          </div>
                     </div>
                     <!-- Section: Loader -->
 
                     <!-- Section: Calc Operations -->
-                    <div class="d-flex justify-content-around" style="margin: 0% 25% 5% 25%">
-                         <button type="button" class="btn btn-primary btn-lg mx-2 px-4"
+                    <div class="d-flex justify-content-center" style="width: 100%;">
+                         <button id="calculateButton" type="button" class="btn btn-primary btn-lg mx-2 px-4"
                               onclick="calculateProjectCost();">Calculate</button>
                          <button type="reset" class="btn btn-outline-danger btn-lg mx-2 px-5">Clean</button>
-                         <button id="saveButton" type="submit" class="btn btn-success btn-lg mx-2 px-5"
+                         <button id="saveButton" type="button" class="btn btn-success btn-lg mx-2 px-5"
                               data-toggle="modal" data-target="#modal_save" disabled>Save</button>
                     </div>
                     <!-- Section: Calc Operations -->
@@ -181,11 +213,11 @@
                <!-- Section: Calc Form -->
 
                <!-- Section: Calc Results -->
-               <div class="d-flex flex-row flex-wrap justify-content-around calcResultsSection">
+               <div class="d-flex flex-row flex-wrap justify-content-around">
                     <table style="width: 100%" cellspacing="5" cellpadding="5">
                          <tr>
                               <td style="text-align: center; width: 25%">
-                                   <section class="card">
+                                   <section class="card calcResultsSection">
                                         <div class="card-body">
                                              <h6>
                                                   What the project will cost you
@@ -198,7 +230,7 @@
                                    </section>
                               </td>
                               <td style="text-align: center; width: 25%">
-                                   <section class="card">
+                                   <section class="card calcResultsSection">
                                         <div class="card-body">
                                              <h6>
                                                   Taxes IVA + IVA ret + ISR ret
@@ -211,7 +243,7 @@
                                    </section>
                               </td>
                               <td style="text-align: center; width: 25%">
-                                   <section class="card">
+                                   <section class="card calcResultsSection">
                                         <div class="card-body">
                                              <h6>
                                                   What you should charge
@@ -223,7 +255,7 @@
                                    </section>
                               </td>
                               <td style="text-align: center; width: 15%">
-                                   <section class="card">
+                                   <section class="card calcResultsSection">
                                         <div class="card-body">
                                              <h6>
                                                   Revenue
@@ -303,7 +335,9 @@
                                    in the history?</h6>
                          </div>
                          <div class="modal-footer">
-                              <button type="button" class="btn btn-primary btn-sm mx-2 px-4">OK</button>
+                              <button type="button" class="btn btn-secondary btn-sm mx-2 px-4"
+                                   data-dismiss="modal">Cancel</button>
+                              <button type="submit" form="calcForm" class="btn btn-primary btn-sm mx-2 px-4">OK</button>
                          </div>
                     </div>
                </div>

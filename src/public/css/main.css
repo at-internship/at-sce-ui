@@ -142,3 +142,8 @@ a.link-user:hover {
   max-height: 600px;
   width: auto;
 }
+.needs-validation input
+{ 
+  padding: 0;
+}
+
