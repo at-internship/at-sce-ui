@@ -142,3 +142,12 @@ a.link-user:hover {
   max-height: 600px;
   width: auto;
 }
+
+#principal {
+  height: 100%;
+  background-image: url(/img/at-sce-background.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center top;
+  background-attachment: fixed;
+}

@@ -23,7 +23,7 @@ atSCEController.renderSigninForm = async (req, res) => {
   console.log("--> atSCEController.renderSigninForm");
 
   // Render
-  res.render("signin");
+  res.render("signin", { layout: 'login-layout.hbs' });
 };
 
 // AT-SCE - Signin
