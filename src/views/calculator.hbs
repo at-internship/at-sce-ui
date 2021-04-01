@@ -200,11 +200,11 @@
                                         </div>
                                    </section>
                               </td>
-                              <td style="text-align: center; width: 20%">
+                              <td style="text-align: center; width: 25%">
                                    <section class="card calcResultsSection">
                                         <div class="card-body">
                                              <h6>
-                                                  Taxes IVA + IVA retention + ISR Retention
+                                                  Taxes IVA + IVA ret + ISR Ret
                                                   <img src="/img/icons/help-icon.png"
                                                        title="They are government charges on the income, activities, products or assets of companies and individuals."
                                                        data-toggle="tooltipTax" data-placement="right" class="icons">
@@ -268,6 +268,7 @@
                                         <th>Days</th>
                                         <th>Hrs</th>
                                         <th>Project Cost</th>
+                                        <th>Total Invoice</th>
                                         <th>Revenue</th>
                                    </tr>
                               </thead>
@@ -278,6 +279,7 @@
                                         <td>{{ typeProject type }}</td>
                                         <td>{{ totalDays }}</td>
                                         <td>{{ totalHours }}</td>
+                                        <td>{{ formatCurrency projectCost }}</td>
                                         <td>{{ formatCurrency total }}</td>
                                         <td>{{ formatCurrency revenue }}</td>
                                    </tr>
