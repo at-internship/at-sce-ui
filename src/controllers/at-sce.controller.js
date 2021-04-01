@@ -91,7 +91,7 @@ atSCEController.addHistory = async (req, res) => {
       taxIva,
       taxIsr_r,
       taxIva_r,
-      totalTaxes,
+      finalProjectCost,
       totalRevenue,
     } = req.body;
     const userErrors = [];
@@ -139,7 +139,7 @@ atSCEController.addHistory = async (req, res) => {
         taxIva,
         taxIsr_r,
         taxIva_r,
-        totalTaxes,
+        finalProjectCost,
         totalRevenue,
       });
     }
@@ -164,7 +164,7 @@ atSCEController.addHistory = async (req, res) => {
       taxIVA: parseFloat(taxIva).toFixed(2),
       taxISR_r: parseFloat(taxIsr_r).toFixed(2),
       taxIVA_r: parseFloat(taxIva_r).toFixed(2),
-      total: parseFloat(totalTaxes).toFixed(2),
+      total: parseFloat(finalProjectCost).toFixed(2),
       revenue: parseFloat(totalRevenue).toFixed(2),
       status: status,
     };

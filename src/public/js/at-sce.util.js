@@ -29,7 +29,7 @@ $(function () {
   $('[data-toggle="tooltipShowHistory"]').tooltip();
 });
 
-/* Constants percent's IVA and percent's ISR */
+/*Constants percent's IVA and percent's ISR*/
 const percentIva = 0.16;
 const percentIsrRetention = 0.1;
 const percentIvaRetention = 0.1067;
@@ -107,7 +107,9 @@ function transformToDecimals(number) {
 }
 
 function calculateProjectCost() {
-  /* Initialization */
+  $(".spinner-border").css("display", "block");
+
+  /*Initialization */
   const rent = getValueForDom("rent");
   const transport = getValueForDom("transport");
   const telephone = getValueForDom("telephone");
@@ -116,28 +118,42 @@ function calculateProjectCost() {
   const days = getValueForDom("days");
   const hours = getValueForDom("hours");
   const projectCost = getValueForDom("projectCost");
+  const projectType = getValueForDom("projectType");
 
-  /* Validation */
+  /*Validation*/
   if (
     rent == "" ||
     transport == "" ||
     telephone == "" ||
     feeding == "" ||
-    others == "" ||
     days == "" ||
     hours == "" ||
-    projectCost == ""
+    projectCost == "" ||
+    projectType == ""
   ) {
-    document.getElementById("sceMessages").innerHTML = "Please, enter value in all fields";
-    document.getElementById("sceMessages").className = "alert alert-warning align-self-center mt-2";
+    console.log(projectType);
+    (function () {
+      "use strict";
 
-    $("#sceMessages").fadeIn(1500);
-    setTimeout(function () {
-      $("#sceMessages").fadeOut();
-    }, 5000);
+      var forms = document.querySelectorAll(".needs-validation");
+
+      Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener(
+          "click",
+          function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+
+            form.classList.add("was-validated");
+          },
+          false
+        );
+      });
+    })();
   } else {
-
-    /* Call the functions */
+    /*Call the functions*/
     let totalFixedCost = calculateTotalFixedCost(
       rent,
       transport,
@@ -170,17 +186,24 @@ function calculateProjectCost() {
     document.getElementById("taxesIVAandISR").innerHTML = transformToDecimals(totalTaxesIVAandISR);
     document.getElementById("charge").innerHTML = transformToDecimals(charge);
     document.getElementById("revenue").innerHTML = transformToDecimals(revenue);
+
     document.getElementById("total").value = transformToDecimals(totalFixedCost);
     document.getElementById("costDay").value = transformToDecimals(costPerDay);
     document.getElementById("costHour").value = transformToDecimals(costPerHour);
     document.getElementById("taxIva").value = transformToDecimals(percentIva);
     document.getElementById("taxIsr_r").value = transformToDecimals(percentIsrRetention);
     document.getElementById("taxIva_r").value = transformToDecimals(percentIvaRetention);
-    document.getElementById("totalTaxes").value = transformToDecimals(totalTaxesIVAandISR);
+    document.getElementById("finalProjectCost").value = transformToDecimals(charge);
     document.getElementById("totalRevenue").value = transformToDecimals(revenue);
 
+    $(".spinner-border").css("display", "none");
+
     /* Highlight button */
-    $(".calcResultsSection").effect("highlight", {}, 3000);
+    if (revenue > 0) {
+      $(".calcResultsSection").effect("highlight", { color: "#2ECC40" }, 3000);
+    } else {
+      $(".calcResultsSection").effect("highlight", { color: "#DF0F00" }, 3000);
+    }
 
     /* Enable Save Button */
     $("#saveButton").prop("disabled", false);
