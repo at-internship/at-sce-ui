@@ -1,0 +1,12 @@
+# Nodejs
+node_modules
+
+# Code Coverage
+.nyc_output
+coverage
+
+# npm
+package-lock.json
+
+# environment variables
+.env

@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light visible-xs">
+    <div class="container">
+        <a class="navbar-brand" href="/"><img src="/img/at-logo.png" title="AT" width="150"></a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/calculator">
+                        <span class="d-none d-lg-block">
+                            <img src="/img/icons/menu-home-icon.png" title="Home" class="icons">
+                        </span>
+                        <span class="d-lg-none">Calculator</span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                {{#if user}}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Welcome: {{user.data.firstName}} {{user.data.lastName}}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/signout">
+                        <img src="/img/icons/menu-logout-icon.png" title="Logout" class="icons">
+                    </a>
+                </li>
+                {{else}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/signin"><b>Login</b></a>
+                </li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+</nav>
