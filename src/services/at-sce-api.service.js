@@ -116,9 +116,7 @@ AT_SCE_SERVICE.createHistory = (data) => {
     headers: {
       "content-type": "application/json",
     },
-  }).catch(function (error) {
-    console.log(`Error: ${error.message}`);
-  });
+  })
 };
 
 module.exports = AT_SCE_SERVICE;
