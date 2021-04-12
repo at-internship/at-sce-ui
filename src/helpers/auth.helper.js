@@ -60,7 +60,7 @@ helpers.encrypt = (text) => {
   }
 
   //10-20 characters long
-  function lengthArray(string){
+  function LengthArray(string){
     let long = 0;
     let array  = StringtoArray(string);
 
@@ -105,7 +105,7 @@ helpers.encrypt = (text) => {
   }
 
   //Special characters in password
-  function SpecialCharactersInString(string){
+  function SpecialCharacters(string){
     let specialCharacters = 0;
 
     for(let i = 0; i < string.length; i++){
@@ -133,20 +133,28 @@ helpers.encrypt = (text) => {
   //Console.log
   /*console.log(StringtoArray(text));
   console.log(FindSpacesInString(text));
-  console.log(lengthArray(text));
+  console.log(LengthArray(text));
   console.log(LetterAndNumber(text));
-  console.log(SpecialCharactersInString(text));*/
-
-  let helperhelper = 1;
+  console.log(SpecialCharacters(text));*/
 
   //Comparing validations
-  if (helperhelper === 1) {
+  function ComparingValidations(string){
+    if(FindSpacesInString(string) && LengthArray(string) && LetterAndNumber(string) && SpecialCharacters(string)){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  //console.log(ComparingValidations(text));
+  
+  if (ComparingValidations(text)) {
     return {
       iv: iv.toString("hex"),
       content: text, // TODO: Bypass password
     };
   } else{
-    console.log('La contraseña no tiene el formato correcto');
+    console.log('Incorrect password format');
   }
 }
 
