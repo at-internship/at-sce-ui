@@ -43,7 +43,7 @@ passport.use(
         } else {
           // Get User details
           const user = await sceServiceAPI.getUserById(userAuth.data.id); 
-          //console.debug(user);
+          console.debug(user);
           return done(null, user);
         }
       } catch (err) {
