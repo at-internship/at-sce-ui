@@ -118,6 +118,7 @@ adminCtrl.addUser = async (req, res) => {
     });
 
     // Redirect
+    req.flash("success_msg","User created successfully");
     res.redirect("/admin/user");
   } catch (err) {
     console.log(err.response);
@@ -125,6 +126,7 @@ adminCtrl.addUser = async (req, res) => {
       let errorMsg = err.response.data.message;
       req.flash("error_msg", errorMsg);
     }
+    res.redirect("/admin/user");
   }
 };
 
@@ -165,6 +167,7 @@ adminCtrl.updateUser = async (req, res) => {
       user_firstName,
       user_lastName,
       user_email,
+      user_password,
       user_status,
     } = req.body;
     const userErrors = [];
@@ -206,6 +209,7 @@ adminCtrl.updateUser = async (req, res) => {
       firstName: user_firstName,
       lastName: user_lastName,
       email: user_email,
+      password: user_password,
       status: parseInt(user_status),
     };
     console.debug("Request-->", request);
@@ -215,6 +219,7 @@ adminCtrl.updateUser = async (req, res) => {
       if (!result) {
         console.error("Service unavailable: sceServiceAPI.updateUser()");
         req.flash("error_msg", "Service unavailable");
+        res.redirect("/admin/user");
       }
       console.debug("Result-->", result);
     });
@@ -228,6 +233,7 @@ adminCtrl.updateUser = async (req, res) => {
       let errorMsg = err.response.data.message;
       req.flash("error_msg", errorMsg);
     }
+    res.redirect("/admin/user");
   }
 };
 
