@@ -9,11 +9,11 @@ exports.config = {
   /**
    * Array of application names.
    */
-  /*app_name: ['at-sce-ui'],*/
+  /*app_name: [''],*/
   /**
    * Your New Relic license key.
    */
-  license_key: 'f353eceae35d07350ce7c8584c17b721fe48NRAL',
+  /*license_key: '',*/
   /**
    * This setting controls distributed tracing.
    * Distributed tracing lets you see the path that a request takes through your
