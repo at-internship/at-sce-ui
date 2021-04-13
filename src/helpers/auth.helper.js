@@ -76,9 +76,9 @@ helpers.encrypt = (text) => {
       }
     };
 
-    console.log("Number -->",number);
+    /*console.log("Number -->",number);
     console.log("Letter -->",minus);
-    console.log("Mayus -->",mayus);
+    console.log("Mayus -->",mayus);*/
 
     if(number === 1 && minus === 1 && mayus === 1){
       return true;
@@ -114,10 +114,10 @@ helpers.encrypt = (text) => {
   }
 
   //Console.log
-  console.log("No spaces -->",FindSpacesInString(text));
+  /*console.log("No spaces -->",FindSpacesInString(text));
   console.log("Password lenght -->",LengthPassword(text));
   console.log("Letter and number -->",LetterAndNumber(text));
-  console.log("No special characters -->",SpecialCharacters(text));
+  console.log("No special characters -->",SpecialCharacters(text));*/
 
   //Comparing validations
   function ComparingValidations(string){
@@ -128,7 +128,7 @@ helpers.encrypt = (text) => {
     }
   }
 
-  console.log("Correct format -->",ComparingValidations(text));
+  //console.log("Correct format -->",ComparingValidations(text));
   
   if (ComparingValidations(text)) {
     return {
