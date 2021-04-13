@@ -60,15 +60,8 @@ helpers.encrypt = (text) => {
   }
 
   //10-20 characters long
-  function LengthArray(string){
-    let long = 0;
-    let array  = StringtoArray(string);
-
-    for(let i in array){
-      if (array.hasOwnProperty(i)){
-        long++;
-      }
-    }
+  function LengthPassword(string){
+    let long = string.length;
 
     if(long >= 10 && long <= 20){
       return true;
@@ -95,7 +88,9 @@ helpers.encrypt = (text) => {
       }
     };
 
-    //console.log(number, minus, mayus);
+    /*console.log("Number -->",number);
+    console.log("Letter -->",minus);
+    console.log("Mayus -->",mayus);*/
 
     if(number === 1 && minus === 1 && mayus === 1){
       return true;
@@ -132,14 +127,14 @@ helpers.encrypt = (text) => {
 
   //Console.log
   /*console.log(StringtoArray(text));
-  console.log(FindSpacesInString(text));
-  console.log(LengthArray(text));
-  console.log(LetterAndNumber(text));
-  console.log(SpecialCharacters(text));*/
+  console.log("No spaces -->",FindSpacesInString(text));
+  console.log("Password lenght -->",LengthPassword(text));
+  console.log("Letter and number -->",LetterAndNumber(text));
+  console.log("No special characters -->",SpecialCharacters(text));*/
 
   //Comparing validations
   function ComparingValidations(string){
-    if(FindSpacesInString(string) && LengthArray(string) && LetterAndNumber(string) && SpecialCharacters(string)){
+    if(FindSpacesInString(string) && LengthPassword(string) && LetterAndNumber(string) && SpecialCharacters(string)){
       return true;
     }else{
       return false;
