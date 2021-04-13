@@ -9,7 +9,7 @@
  *
  */
 
-// Constanst
+// Constants
 const sinon = require("sinon");
 const expect = require("chai").expect;
 
@@ -18,7 +18,7 @@ const adminController = require("../../controllers/admin.controller");
 
 describe("Admin Test Controller", function() {
 
-    // AT-SCE - Admin - Users - Add User - Success (Happy Path)
+    // AT-SCE - Admin - Users - Add User - FE Success (Happy Path)
     it("Should Add User on admin section - FE Success", function() {
     });
 
@@ -26,16 +26,16 @@ describe("Admin Test Controller", function() {
     it("Should Add User on admin section - FE Error - Validations", function() {
     });
 
-    // AT-SCE - Admin - Users - Add User - FE Error - Call Create USER - POST /api/v1/users endpoint
-    it("Should Add User on admin section - FE Error - Call Create USER - Service unavailable", function() {
+    // AT-SCE - Admin - Users - Add User - FE Error - 500 Service unavailable
+    it("Should Add User on admin section - FE Error - Call Create USER - 500 Service unavailable", function() {
     });
 
-    // AT-SCE - Admin - Users - Add User - BE Error - Bad Request - Type
-    it("Should Add User on admin section - BE Error - Bad Request - Type", function() {
+    // AT-SCE - Admin - Users - Add User - BE Error - 400 Bad Request - Type
+    it("Should Add User on admin section - BE Error - Call Create USER - 400 Bad Request - Type", function() {
     });
 
-    // AT-SCE - Admin - Users - Add User - BE Error - Bad Request - First Name
-    it("Should Add User on admin section - BE Error - Bad Request - First Name", function() {
+    // AT-SCE - Admin - Users - Add User - BE Error - 400 Bad Request - First Name
+    it("Should Add User on admin section - BE Error - Call Create USER - 400 Bad Request - First Name", function() {
     });
 
 });

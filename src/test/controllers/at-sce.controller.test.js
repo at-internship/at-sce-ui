@@ -1,5 +1,5 @@
 /**
- * AT SCE UI - AT SCE Test Controller.
+ * AT SCE UI - AT-SCE Test Controller.
  * Copyright 2021 AgileThought, Inc.
  *
  * General functions for at-sce-controller-test.
@@ -9,14 +9,14 @@
  *
  */
 
-// Constanst
+// Constants
 const sinon = require("sinon");
 const expect = require("chai").expect;
 
 // AT SCE Controller
 const atSceController = require("../../controllers/at-sce.controller");
 
-describe("at-sce Test Controller", function() {
+describe("AT-SCE Test Controller", function() {
 
     // AT-SCE - Index/Login - Success
     it("Should render Index/Login section - Success", function(done) {
