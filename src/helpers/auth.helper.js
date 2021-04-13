@@ -35,8 +35,8 @@ const helpers = {};
 
 helpers.encrypt = (text) => {
   const md5sum = crypto.createHash("md5");
-  //const encrypted = md5sum.update(text).digest("hex");
-  //console.debug(`helper.encrypt - hash: ${encrypted}`);
+  const encrypted = md5sum.update(text).digest("hex");
+  console.debug(`helper.encrypt - hash: ${encrypted}`);
 
   //No spaces in password
   function FindSpacesInString(string){
@@ -128,7 +128,7 @@ helpers.encrypt = (text) => {
     }
   }
 
-  //console.log(ComparingValidations(text));
+  console.log("Correct format -->",ComparingValidations(text));
   
   if (ComparingValidations(text)) {
     return {
