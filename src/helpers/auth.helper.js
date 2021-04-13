@@ -37,22 +37,10 @@ helpers.encrypt = (text) => {
   const md5sum = crypto.createHash("md5");
   //const encrypted = md5sum.update(text).digest("hex");
   //console.debug(`helper.encrypt - hash: ${encrypted}`);
-  
-  //Convert string to array
-  function StringtoArray(string){
-
-    const separador = "";
-    let array = string.split(separador);
-
-    return array;
-  }
 
   //No spaces in password
   function FindSpacesInString(string){
-
-    let array  = StringtoArray(string);
-
-    if(array.indexOf(' ') === -1){
+    if(string.indexOf(' ') === -1){
       return true;
     }else{
       return false;
@@ -88,9 +76,9 @@ helpers.encrypt = (text) => {
       }
     };
 
-    /*console.log("Number -->",number);
+    console.log("Number -->",number);
     console.log("Letter -->",minus);
-    console.log("Mayus -->",mayus);*/
+    console.log("Mayus -->",mayus);
 
     if(number === 1 && minus === 1 && mayus === 1){
       return true;
@@ -126,11 +114,10 @@ helpers.encrypt = (text) => {
   }
 
   //Console.log
-  /*console.log(StringtoArray(text));
   console.log("No spaces -->",FindSpacesInString(text));
   console.log("Password lenght -->",LengthPassword(text));
   console.log("Letter and number -->",LetterAndNumber(text));
-  console.log("No special characters -->",SpecialCharacters(text));*/
+  console.log("No special characters -->",SpecialCharacters(text));
 
   //Comparing validations
   function ComparingValidations(string){

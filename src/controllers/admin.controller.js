@@ -106,7 +106,7 @@ adminCtrl.addUser = async (req, res) => {
       password: (await encrypt(user_password)).content,
       status: parseInt(user_status),
     };
-    console.debug("Request-->", request);
+    //console.debug("Request-->", request);
 
     // Call Create USER - POST /api/v1/users endpoint
     await sceServiceAPI.createUser(request).then((result) => {

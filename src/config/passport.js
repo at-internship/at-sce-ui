@@ -31,19 +31,19 @@ passport.use(
         email: email,
         password: (await encrypt(password)).content,
       };
-      console.debug(request);
+      //console.debug(request);
       try {
         // Validate user
         const userAuth = await sceServiceAPI.login(request);
         
-        console.debug(userAuth);
+        //console.debug(userAuth);
         if (!userAuth && !userAuth.data.id) {
           console.error("Not User found: ", email);
           return done(null, false, { message: "Not User found." });
         } else {
           // Get User details
           const user = await sceServiceAPI.getUserById(userAuth.data.id); 
-          console.debug(user);
+          //console.debug(user);
           return done(null, user);
         }
       } catch (err) {
