@@ -38,50 +38,10 @@ helpers.encrypt = (text) => {
   const encrypted = md5sum.update(text).digest("hex");
   console.debug(`helper.encrypt - hash: ${encrypted}`);
 
-  if(passwordValidations(text)){
-    return {
-      iv: iv.toString("hex"),
-      content: text, // TODO: Bypass password
-    };
-  }else{
-    console.log('Incorrect password format');
-  }
-  
-}
-
-function passwordValidations(string){
-  console.log('Entraste --> ',string);
-  //10-20 characters long
-  if(string.length >= 10 && string.length <= 20){
-    console.log('Entraste --> ',string);
-    let letter = 0;
-    let number = 0;
-
-    let filterLetter = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ';
-    let filterNumber = '1234567890'; 
-      
-    for (let i=0; i<string.length; i++){
-      if (filterLetter.indexOf(string.charAt(i)) >= 0){
-        letter++;
-      }
-      if (filterNumber.indexOf(string.charAt(i)) >= 0){
-        number++
-      }
-      //No special characters and no spaces
-      if (filterLetter.indexOf(string.charAt(i)) != -1 && filterNumber.indexOf(string.charAt(i)) != -1){
-        console.log('Special characters not allowed')
-      }
-    } 
-    //Contain letters and at least one number
-    if(letter >= 1 && number >= 1){
-      console.log('Entraste --> ',string);
-      return true;
-    }else if(letter === 0){
-      console.log('Add a letter to the password');
-    }else if(number === 0){
-      console.log('Add a number to the password');
-    }
-  }
+  return {
+    iv: iv.toString("hex"),
+    content: text, // TODO: Bypass password
+  };
 }
 
 helpers.isAuthenticated = (req, res, next) => {
