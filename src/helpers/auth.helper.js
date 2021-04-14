@@ -38,105 +38,49 @@ helpers.encrypt = (text) => {
   const encrypted = md5sum.update(text).digest("hex");
   console.debug(`helper.encrypt - hash: ${encrypted}`);
 
-  //No spaces in password
-  function FindSpacesInString(string){
-    if(string.indexOf(' ') === -1){
-      return true;
-    }else{
-      return false;
-    }
-  }
-
-  //10-20 characters long
-  function LengthPassword(string){
-    let long = string.length;
-
-    if(long >= 10 && long <= 20){
-      return true;
-    }else{
-      return false;
-    }
-  }
-
-  //Password contain a letter and at least one number
-  function LetterAndNumber(string){
-    let number = 0;
-    let mayus = 0;
-    let minus = 0;
-
-    for(let i = 0; i < string.length; i++){
-      if(string.charCodeAt(i) >= 48 && string.charCodeAt(i) <= 57){
-        number = 1;
-      }
-      if(string.charCodeAt(i) >= 97 && string.charCodeAt(i) <= 122){
-        minus = 1;
-      }
-      if(string.charCodeAt(i) >= 65 && string.charCodeAt(i) <= 90){
-        mayus = 1;
-      }
-    };
-
-    /*console.log("Number -->",number);
-    console.log("Letter -->",minus);
-    console.log("Mayus -->",mayus);*/
-
-    if(number === 1 && minus === 1 && mayus === 1){
-      return true;
-    }else{
-      return false;
-    };
-  }
-
-  //Special characters in password
-  function SpecialCharacters(string){
-    let specialCharacters = 0;
-
-    for(let i = 0; i < string.length; i++){
-      if(string.charCodeAt(i) >= 32 && string.charCodeAt(i) <= 47){
-        specialCharacters= 1;
-      }
-      if(string.charCodeAt(i) >= 58 && string.charCodeAt(i) <= 64){
-        specialCharacters = 1;
-      }
-      if(string.charCodeAt(i) >= 91 && string.charCodeAt(i) <= 96){
-        specialCharacters = 1;
-      }
-      if(string.charCodeAt(i) >= 123 && string.charCodeAt(i) <= 255){
-        specialCharacters = 1;
-      }
-    }
-
-    if(specialCharacters === 0){
-      return true;
-    }else{
-      return false;
-    }
-  }
-
-  //Console.log
-  /*console.log("No spaces -->",FindSpacesInString(text));
-  console.log("Password lenght -->",LengthPassword(text));
-  console.log("Letter and number -->",LetterAndNumber(text));
-  console.log("No special characters -->",SpecialCharacters(text));*/
-
-  //Comparing validations
-  function ComparingValidations(string){
-    if(FindSpacesInString(string) && LengthPassword(string) && LetterAndNumber(string) && SpecialCharacters(string)){
-      return true;
-    }else{
-      return false;
-    }
-  }
-
-  //console.log("Correct format -->",ComparingValidations(text));
-  
-  if (ComparingValidations(text)) {
+  if(passwordValidations(text)){
     return {
       iv: iv.toString("hex"),
       content: text, // TODO: Bypass password
     };
-  } else{
+  }else{
     console.log('Incorrect password format');
+  }
+  
+}
+
+function passwordValidations(string){
+  console.log('Entraste --> ',string);
+  //10-20 characters long
+  if(string.length >= 10 && string.length <= 20){
+    console.log('Entraste --> ',string);
+    let letter = 0;
+    let number = 0;
+
+    let filterLetter = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ';
+    let filterNumber = '1234567890'; 
+      
+    for (let i=0; i<string.length; i++){
+      if (filterLetter.indexOf(string.charAt(i)) >= 0){
+        letter++;
+      }
+      if (filterNumber.indexOf(string.charAt(i)) >= 0){
+        number++
+      }
+      //No special characters and no spaces
+      if (filterLetter.indexOf(string.charAt(i)) != -1 && filterNumber.indexOf(string.charAt(i)) != -1){
+        console.log('Special characters not allowed')
+      }
+    } 
+    //Contain letters and at least one number
+    if(letter >= 1 && number >= 1){
+      console.log('Entraste --> ',string);
+      return true;
+    }else if(letter === 0){
+      console.log('Add a letter to the password');
+    }else if(number === 0){
+      console.log('Add a number to the password');
+    }
   }
 }
 
