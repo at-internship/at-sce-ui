@@ -11,6 +11,7 @@ const passport = require("passport");
 // Initializations
 const app = express();
 require("./config/passport");
+require('newrelic');
 
 // Settings
 app.set("port", process.env.PORT || 4000);
