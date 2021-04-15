@@ -62,9 +62,7 @@ AT_SCE_SERVICE.createUser = (data) => {
     headers: {
       "content-type": "application/json",
     },
-  }).catch(function (error) {
-    console.log(`Error: ${error.message}`);
-  });
+  })
 };
 
 // Operation: Update USER - PUT /api/v1/users
@@ -76,9 +74,7 @@ AT_SCE_SERVICE.updateUser = (data) => {
     headers: {
       "content-type": "application/json",
     },
-  }).catch(function (error) {
-    console.log(`Error:${error.message}`);
-  });
+  })
 };
 
 // Operation: Delete USER - DELETE /api/v1/users/{id}
@@ -89,9 +85,7 @@ AT_SCE_SERVICE.deleteUser = (id) => {
     headers: {
       "content-type": "application/json",
     },
-  }).catch(function (error) {
-    console.log(`Error: ${error.message}`);
-  });
+  })
 };
 
 // Operation: Get HISTORY by USER -  GET /api/v1/histories?userid={id}

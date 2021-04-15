@@ -7,7 +7,7 @@ router.get("/", async (_req, res, _next) => {
     uptime: process.uptime(),
     message: "OK",
     timestamp: Date.now(),
-    branch: "feature/AT-SCE_POC",
+    branch: "feature/AT-SCE-UI_POC",
     commit: "bd05d94",
   };
 
