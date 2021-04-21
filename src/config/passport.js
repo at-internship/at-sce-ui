@@ -13,6 +13,9 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
+// LOGIN_ENCRYPTION_ENABLED FLAG
+const LOGIN_ENCRYPTION_ENABLED = process.env.LOGIN_ENCRYPTION_ENABLED;
+
 // MICROSERVICE - HEROKU - AT SCE API
 const sceServiceAPI = require("../services/at-sce-api.service");
 
@@ -29,7 +32,7 @@ passport.use(
       // Match Email's User
       const request = {
         email: email,
-        password: (await encrypt(password)).content,
+        password: (LOGIN_ENCRYPTION_ENABLED == 'true') ? (await encrypt(password)).content : password,
       };
       console.debug(request);
       try {
