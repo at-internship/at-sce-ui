@@ -11,36 +11,27 @@
 
 // Constants
 const crypto = require("crypto");
-const algorithm = "aes-256-cbc";
-const secretKey = "vOVH6sdmpNWjRRIqCc7rdxs01lwHzfr3";
-const iv = crypto.randomBytes(16);
+
+const RSA_PUBLIC_ENCRYPTION_KEY = process.env.RSA_PUBLIC_ENCRYPTION_KEY.replace(/\\n/gm,"\n");
 const helpers = {};
 
-/*helpers.encrypt = (text) => {
-  const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
-
-  let encrypted_update = cipher.update(text);
-  console.debug(`helper.encrypt - encrypted_update: ${encrypted_update.toString("hex")}`);
-
-  let encrypted_final = cipher.final();
-  console.debug(`helper.encrypt - encrypted_final: ${encrypted_final.toString("hex")}`);
-
-  const encrypted = Buffer.concat([encrypted_update, encrypted_final]);
-  console.debug(`helper.encrypt - hash: ${encrypted.toString("hex")}`);
-  return {
-    iv: iv.toString("hex"),
-    content: encrypted.toString("hex"),
-  };
-};*/
-
 helpers.encrypt = (text) => {
-  const md5sum = crypto.createHash("md5");
-  //const encrypted = md5sum.update(text).digest("hex");
-  //console.debug(`helper.encrypt - hash: ${encrypted}`);
-  return {
-    iv: iv.toString("hex"),
-    content: text, // TODO: Bypass password
-  };
+  const encryptedData = crypto.publicEncrypt(
+    {
+      key: RSA_PUBLIC_ENCRYPTION_KEY,
+      padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+      oaepHash: "sha256",
+    },
+    // We convert the data string to a buffer using `Buffer.from`
+    Buffer.from(text)
+  );
+
+  // The encrypted data is in the form of bytes, so we print it in base64 format
+  // so that it's displayed in a more readable form
+  console.log("encypted data: ", encryptedData.toString("base64"));
+
+  return { content: encryptedData.toString() }; //Send the encrypted data (password)
+
 };
 
 helpers.isAuthenticated = (req, res, next) => {
