@@ -10,20 +10,18 @@
  */
 
 // Constants
-const crypto = require("crypto");
-const { text } = require("express");
+const helpers = {};
+const JSEncrypt = require("node-jsencrypt");
+
+// ENCRYPTION KEYS
 const RSA_PUBLIC_ENCRYPTION_KEY = process.env.RSA_PUBLIC_ENCRYPTION_KEY;
 const RSA_PRIVATE_ENCRYPTION_KEY = process.env.RSA_PRIVATE_ENCRYPTION_KEY;
-const helpers = {};
-const JSEncrypt = require('node-jsencrypt');
 
-
-helpers.encrypt =(text)=>{
-const crypt = new JSEncrypt();
-crypt.setKey(RSA_PUBLIC_ENCRYPTION_KEY); 
-
-return {content: crypt.encrypt(text)};
-}
+helpers.encrypt = (text) => {
+  const crypt = new JSEncrypt();
+  crypt.setKey(RSA_PUBLIC_ENCRYPTION_KEY);
+  return { content: crypt.encrypt(text) };
+};
 
 helpers.isAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
