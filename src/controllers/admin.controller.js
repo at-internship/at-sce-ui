@@ -22,7 +22,7 @@ const UPDATE_USER_ENCRYPTION_ENABLED = process.env.UPDATE_USER_ENCRYPTION_ENABLE
 const sceServiceAPI = require("../services/at-sce-api.service");
 
 // Helpers
-const { encrypt, decrypt } = require("../helpers/auth.helper");
+const { encrypt } = require("../helpers/auth.helper");
 
 // AT-SCE - Admin - Index
 adminCtrl.renderIndex = async (req, res) => {
@@ -103,13 +103,6 @@ adminCtrl.addUser = async (req, res) => {
       });
     }
 
-    // TODO: Remove after testing
-    const enc = (await encrypt(user_password)).content;
-    console.debug('enc', enc);
-
-    const dec = (await decrypt(enc)).content;
-    console.debug('dec', dec);
-
     // Request
     let request = {
       type: parseInt(user_type),
@@ -119,7 +112,6 @@ adminCtrl.addUser = async (req, res) => {
       password: (CREATE_USER_ENCRYPTION_ENABLED == 'true') ? (await encrypt(user_password)).content : user_password,
       status: parseInt(user_status),
     };
-    //console.debug("Request-->", request);
 
     // Call Create USER - POST /api/v1/users endpoint
     await sceServiceAPI.createUser(request).then((result) => {
