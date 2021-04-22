@@ -126,6 +126,7 @@ adminCtrl.addUser = async (req, res) => {
       if (!result) {
         console.error("Service unavailable: sceServiceAPI.createUser()");
         req.flash("error_msg", "Service unavailable");
+        res.redirect("/admin/user");
       }
       console.debug("Result-->", result);
     });
@@ -261,9 +262,14 @@ adminCtrl.deleteUser = async (req, res) => {
     if (!response) {
       console.error("Service unavailable: sceServiceAPI.deleteUser()");
       req.flash("error_msg", "Service unavailable");
+      es.redirect("/admin/user");
     }
   } catch (err) {
-    console.error(err.message);
+    if (err.response && err.response.data) {
+      let errorMsg = err.response.data.message;
+      req.flash("error_msg", errorMsg);
+    }
+    res.redirect("/admin/user");
   } finally {
     // Redirect
     req.flash("success_msg", "User Deleted Successfully");

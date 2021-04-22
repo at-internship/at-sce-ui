@@ -32,6 +32,7 @@ helpers.encrypt = (text) => {
   // The encrypted data is in the form of bytes, so we print it in base64 format
   // so that it's displayed in a more readable form
   console.debug("encypted data: ", encryptedData.toString("base64"));
+  helpers.decrypt(encryptedData.toString("base64"));
   return { content: encryptedData.toString("base64") };
 };
 

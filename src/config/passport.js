@@ -32,21 +32,22 @@ passport.use(
       // Match Email's User
       const request = {
         email: email,
-        password: (LOGIN_ENCRYPTION_ENABLED == 'true') ? (await encrypt(password)).content : password,
+        password: (LOGIN_ENCRYPTION_ENABLED == 'true') ? (await encrypt(password)).content : password
       };
-      console.debug(request);
+      console.debug("Request-->", request);
+
       try {
         // Validate user
         const userAuth = await sceServiceAPI.login(request);
-        
-        console.debug(userAuth);
+        console.debug("userAuth-->", userAuth);
+
         if (!userAuth && !userAuth.data.id) {
           console.error("Not User found: ", email);
           return done(null, false, { message: "Not User found." });
         } else {
           // Get User details
           const user = await sceServiceAPI.getUserById(userAuth.data.id); 
-          console.debug(user);
+          console.debug("user-->", user);
           return done(null, user);
         }
       } catch (err) {
