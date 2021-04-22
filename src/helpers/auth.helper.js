@@ -10,37 +10,17 @@
  */
 
 // Constants
-const crypto = require("crypto");
-const algorithm = "aes-256-cbc";
-const secretKey = "vOVH6sdmpNWjRRIqCc7rdxs01lwHzfr3";
-const iv = crypto.randomBytes(16);
 const helpers = {};
+const JSEncrypt = require("node-jsencrypt");
 
-/*helpers.encrypt = (text) => {
-  const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
-
-  let encrypted_update = cipher.update(text);
-  console.debug(`helper.encrypt - encrypted_update: ${encrypted_update.toString("hex")}`);
-
-  let encrypted_final = cipher.final();
-  console.debug(`helper.encrypt - encrypted_final: ${encrypted_final.toString("hex")}`);
-
-  const encrypted = Buffer.concat([encrypted_update, encrypted_final]);
-  console.debug(`helper.encrypt - hash: ${encrypted.toString("hex")}`);
-  return {
-    iv: iv.toString("hex"),
-    content: encrypted.toString("hex"),
-  };
-};*/
+// ENCRYPTION KEYS
+const RSA_PUBLIC_ENCRYPTION_KEY = process.env.RSA_PUBLIC_ENCRYPTION_KEY;
+const RSA_PRIVATE_ENCRYPTION_KEY = process.env.RSA_PRIVATE_ENCRYPTION_KEY;
 
 helpers.encrypt = (text) => {
-  const md5sum = crypto.createHash("md5");
-  //const encrypted = md5sum.update(text).digest("hex");
-  //console.debug(`helper.encrypt - hash: ${encrypted}`);
-  return {
-    iv: iv.toString("hex"),
-    content: text, // TODO: Bypass password
-  };
+  const crypt = new JSEncrypt();
+  crypt.setKey(RSA_PUBLIC_ENCRYPTION_KEY);
+  return { content: crypt.encrypt(text) };
 };
 
 helpers.isAuthenticated = (req, res, next) => {
