@@ -80,8 +80,8 @@ AT_SCE_SERVICE.getUserById = (id) => {
   });
 };
 
- //US 31 REFACTOR in branch feature/AT-SOO-UI_AdminUser_Refactor Get USER by ID - GET/api/v1/users/{id}
- //New direction https://at-sso-api.herokuapp.com/api save on .env file like varible AT_SCE_SERVICE_URI
+ // US 31 REFACTOR in branch feature/AT-SOO-UI_AdminUser_Refactor Get USER by ID - GET/api/v1/users/{id}
+ // New direction https://at-sso-api.herokuapp.com/api save on .env file like varible AT_SCE_SERVICE_URI
 /*AT_SCE_SERVICE.getUserById = (id) => {
   return axios({
     method: "GET",
@@ -106,8 +106,8 @@ AT_SCE_SERVICE.createUser = (data) => {
   })
 };
 
-//US 31 REFACTOR in branch feature/AT-SOO-UI_AdminUser_Refactor Create USER - POST /api/v1/users
-//New direction https://at-sso-api.herokuapp.com/api save on .env file like varible AT_SCE_SERVICE_URI
+// US 31 REFACTOR in branch feature/AT-SOO-UI_AdminUser_Refactor Create USER - POST /api/v1/users
+// New direction https://at-sso-api.herokuapp.com/api save on .env file like varible AT_SCE_SERVICE_URI
 /*AT_SCE_SERVICE.createUser = (data) => {
   return axios({
     method: "POST",
@@ -132,8 +132,8 @@ AT_SCE_SERVICE.updateUser = (data) => {
   })
 };
 
-//US 31 REFACTOR in branch feature/AT-SOO-UI_AdminUser_Refactor Update USER - PUT /api/v1/users
-//New direction https://at-sso-api.herokuapp.com/api save on .env file like varible AT_SCE_SERVICE_URI
+// US 31 REFACTOR in branch feature/AT-SOO-UI_AdminUser_Refactor Update USER - PUT /api/v1/users
+// New direction https://at-sso-api.herokuapp.com/api save on .env file like varible AT_SCE_SERVICE_URI
 /*AT_SCE_SERVICE.updateUser = (data) => {
   return axios({
     method: "PUT",
@@ -156,8 +156,8 @@ AT_SCE_SERVICE.deleteUser = (id) => {
   })
 };
 
-//US 31 REFACTOR in branch feature/AT-SOO-UI_AdminUser_Refactor Delete USER - DELETE /api/v1/users/{id}
-//New direction https://at-sso-api.herokuapp.com/api save on .env file like varible AT_SCE_SERVICE_URI
+// US 31 REFACTOR in branch feature/AT-SOO-UI_AdminUser_Refactor Delete USER - DELETE /api/v1/users/{id}
+// New direction https://at-sso-api.herokuapp.com/api save on .env file like varible AT_SCE_SERVICE_URI
 /*AT_SCE_SERVICE.deleteUser = (id) => {
   return axios({
     method: "DELETE",
