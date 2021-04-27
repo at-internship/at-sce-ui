@@ -21,6 +21,9 @@ const getHistory = atsceServiceAPI.getHistory;
 const getHistory_error = atsceServiceAPI.getHistory;
 const createHistory = atsceServiceAPI.createHistory;
 const createHistory_error = atsceServiceAPI.createHistory;
+const getAllUsers = atsceServiceAPI.getAllUsers;
+const getAllUsers_error = atsceServiceAPI.getAllUsers;
+const createUser = atsceServiceAPI.createUser;
 
 const data = {};
 
@@ -121,13 +124,54 @@ const historyData_add_BadRequest={
     status:400
   };
 
+  const response = {
+    body: {
+      id: "604fc4def21087344f67ea38",
+      firstName: "admin",
+      lastName: "AT",
+      email: "admin@agilethought.com",
+      status: 1,
+      type: 2,
+    },
+    status: 200,
+  };
+  
+  const response_error = {
+    body: {
+      timestamp: "2020-12-02T17:46:32.409+00:00",
+      status: 400,
+      error: "Bad Request",
+      message: "The priority field only accepts 3 values {High, Medium, Low}",
+      path: "/users",
+    },
+    status: 400,
+  };
+  
+  const data_add = {
+    firstName: "Guillermo",
+    lastName: "Ochoa",
+    email: "Ochoa@hotmail.com",
+    password: "jp23ba12b",
+    status: 1,
+    type: 2,
+  };
+  
+  const response_add= {
+    body: {
+      id: "604f8e2dac1a413c8aba77a5",
+    },
+    status: 200,
+  };
+  
 describe("TEST: at-sce.service", () => {
   beforeEach(() => {
     nock("https://at-sce-api-qa.herokuapp.com/api").get("/v1/histories?userid=604fc4def21087344f67ea38").reply(200, historyResponse);
     nock("https://at-sce-api-qa.herokuapp.com/api").get("/v1/histories?userid=604fc4def21087344f67ea39").reply(200, historyResponse_EmptyArray);
     nock("https://at-sce-api-qa.herokuapp.com/api").post("/v1/histories?userid=604fc4def21087344f67ea38").reply(201, historyResponse_add);
     nock("https://at-sce-api-qa.herokuapp.com/api").post("/v1/histories?userid=604fc4def21087344f67ea38").reply(400, historyResponse_add_BadRequest);
-
+    nock("https://at-sce-api-qa.herokuapp.com/api").get("/v1/users").reply(200, response);
+    nock("https://at-sce-api-qa.herokuapp.com/api").get("/v1/users").reply(400, response_error);
+    nock("https://at-sce-api-qa.herokuapp.com/api").post("/v1/users").reply(200, response_add);
   });
 
   it("Should Get All History", () => {
@@ -173,5 +217,35 @@ return createHistory_error(historyData_add_BadRequest).then((response) => {
 
   });
 });*/
-    
+  it("Should Get All Users", () => {
+  return getAllUsers().then((response) => {
+    // Response Status
+    expect(response.status).to.equal(200);
+
+    // Response
+    expect(response.data.body).to.have.property("id");
+  });
+});
+
+it("Should Get All Users - error", () => {
+  return getAllUsers_error().then((response_error) => {
+    //console.log(response_error);
+
+    // Response Status
+    expect(response_error).equals(undefined);
+
+    // Response
+  });
+});
+  it("Should Add User", () => {
+  return createUser(data_add).then((response_add) => {
+    //console.log(response_add);
+
+    // Response Status
+    expect(response_add.status).to.equal(200);
+
+    // Response
+    expect(response_add.data.body).to.have.property("id");
+  });
+});
 });
