@@ -73,6 +73,16 @@ describe("Admin Controller TEST", function () {
         });
     });
 
+    it("Should render admin user list view [catch]", function (done) {
+        var res = {render:sinon.spy()};
+        var req = {};
+        getAllUsersStub.returns(Promise.resolve());
+        var view = adminController.renderUserList(req, res).then(function (){
+            expect(res.render.calledOnce).to.be.true;
+            done();
+        });
+    });
+
     // AT-SCE - Admin - Render Add User Form 
     it("Should render add user form", function(done) {
         var res = { render: sinon.spy() };
@@ -82,7 +92,6 @@ describe("Admin Controller TEST", function () {
             done();
         });
     });
-
 
   // AT-SCE - Admin - Add User   
     it("Should Add User Operation - error", function(done) {
@@ -140,7 +149,10 @@ describe("Admin Controller TEST", function () {
             done();
         }).catch(done);
     });
-    
+
+    //AT-SCE - Call Create USER - POST /api/v1/users endpoint
+
+
      // AT-SCE - Admin - Render Edit User Form
     it("Should render edit user form", function(done) {
         this.timeout(5000);
@@ -198,14 +210,34 @@ describe("Admin Controller TEST", function () {
             done();
         }).catch(done);
     });
+
+    // AT-SCE - Call Update USER - PUT /api/v1/users endpoint
     
+
     // AT-SCE - Admin - Delete User  
-    it("Should DeleteUser", function() {
+    it("Should delete user operation", function() {
         var res = { render: sinon.spy() };
         var req = {};
         var view = adminController.deleteUser(req, res).then(function() {
             expect(res.render.calledOnce).to.be.true;
         });
+    });
+
+    it("Should delete user operation, user_id is null", function(done) {
+        var res = {
+            render: sinon.spy(),
+            redirect: sinon.spy()
+        };
+        var req = {
+        params: {
+            id: null
+        },
+        flash: sinon.spy()
+    };
+        var view = adminController.deleteUser(req, res).then(function() {
+            expect(res.render.calledOnce).to.be.false;
+            done();
+        }).catch(done);
     });
 });
 /*
