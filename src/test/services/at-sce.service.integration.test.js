@@ -14,15 +14,24 @@
  const expect = require('chai').expect;
  chai.use(chaiHttp);
 
+// MICROSERVICE - HEROKU - SCE
+const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
+// MICROSERVICE - HEROKU - SS0
+const AT_SSO_SERVICE_URI = process.env.AT_SS0_SERVICE_URI;
+// AT_SSO_SERVICE_URI_ENABLED FLAG
+const AT_SSO_SERVICE_URI_ENABLED = process.env.AT_SSO_SERVICE_URI_ENABLED;
+const AT_SERVICE_URI = (AT_SSO_SERVICE_URI_ENABLED == 'true') ? AT_SSO_SERVICE_URI : AT_SCE_SERVICE_URI;
+console.log(`at-sce.service.integration.test - AT_SERVICE_URI: ${AT_SERVICE_URI}`);
+
  // AT SCE Service API
-const sceServiceAPI = 'https://at-sce-api.herokuapp.com/api' + '/v1/users';
-const sceServiceAPI_400 = 'https://at-sce-api.herokuapp.com/api' + '/v1/usuarios';
+const SCE_SERVICE_API = AT_SERVICE_URI + '/v1/users';
+const SCE_SERVICE_API_400 = AT_SERVICE_URI + '/v1/usuarios';
 
 describe('INTEGRATION TEST: at-sce-service.js', () => {
 
     // Operation: Get ALL USERS - GET/api/v1/users - BE Success (Happy Path)
     it('INTEGRATION TEST: Should Get All Users - Call GET/api/v1/users - BE Success (Happy Path)', (done) => {
-        chai.request(sceServiceAPI)
+        chai.request(SCE_SERVICE_API)
             .get('/')
             .end(function (err, res) {
                 //console.debug(res.body);
@@ -35,7 +44,7 @@ describe('INTEGRATION TEST: at-sce-service.js', () => {
 
     // Operation: Get ALL USERS - GET/api/v1/users - BE Error - 400 Bad Request
     it('INTEGRATION TEST: Should Fail Get All Users - Call GET/api/v1/users - BE Error - 400 Bad Request', (done) => {
-        chai.request(sceServiceAPI_400)
+        chai.request(SCE_SERVICE_API_400)
             .get('/')
             .end(function(err, res) {
                 //console.debug(res.body)

@@ -15,6 +15,15 @@ const nock = require("nock");
 // MICROSERVICE - HEROKU - SCE
 const AT_SCE_SERVICE_API = require("../../services/at-sce-api.service");
 
+// MICROSERVICE - HEROKU - SCE
+const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
+// MICROSERVICE - HEROKU - SS0
+const AT_SSO_SERVICE_URI = process.env.AT_SS0_SERVICE_URI;
+// AT_SSO_SERVICE_URI_ENABLED FLAG
+const AT_SSO_SERVICE_URI_ENABLED = process.env.AT_SSO_SERVICE_URI_ENABLED;
+const AT_SERVICE_URI = (AT_SSO_SERVICE_URI_ENABLED == 'true') ? AT_SSO_SERVICE_URI : AT_SCE_SERVICE_URI;
+console.log(`at-sce.service.integration.test - AT_SERVICE_URI: ${AT_SERVICE_URI}`);
+
 // Operations
 const getAllUsers = AT_SCE_SERVICE_API.getAllUsers;
 const getAllUsers_error = AT_SCE_SERVICE_API.getAllUsers;
@@ -173,13 +182,13 @@ const historyResponse_add_BadRequest = {
 describe("TEST: at-sce-api.service.js", () => {
 
   beforeEach(() => {
-    nock("https://at-sce-api-qa.herokuapp.com/api").get("/v1/users").reply(200, users_response);
-    nock("https://at-sce-api-qa.herokuapp.com/api").get("/v1/users").reply(400, users_response_error);
-    nock("https://at-sce-api-qa.herokuapp.com/api").post("/v1/users").reply(200, users_response_add);
-    //nock("https://at-sce-api-qa.herokuapp.com/api").get("/v1/histories?userid=604fc4def21087344f67ea38").reply(200, historyResponse);
-    //nock("https://at-sce-api-qa.herokuapp.com/api").get("/v1/histories?userid=604fc4def21087344f67ea39").reply(200, historyResponse_EmptyArray);
-    //nock("https://at-sce-api-qa.herokuapp.com/api").post("/v1/histories?userid=604fc4def21087344f67ea38").reply(201, historyResponse_add);
-    //nock("https://at-sce-api-qa.herokuapp.com/api").post("/v1/histories?userid=604fc4def21087344f67ea38").reply(400, historyResponse_add_BadRequest);
+    nock(AT_SERVICE_URI).get("/v1/users").reply(200, users_response);
+    nock(AT_SERVICE_URI).get("/v1/users").reply(400, users_response_error);
+    nock(AT_SERVICE_URI).post("/v1/users").reply(200, users_response_add);
+    //nock(AT_SERVICE_URI).get("/v1/histories?userid=604fc4def21087344f67ea38").reply(200, historyResponse);
+    //nock(AT_SERVICE_URI).get("/v1/histories?userid=604fc4def21087344f67ea39").reply(200, historyResponse_EmptyArray);
+    //nock(AT_SERVICE_URI).post("/v1/histories?userid=604fc4def21087344f67ea38").reply(201, historyResponse_add);
+    //nock(AT_SERVICE_URI).post("/v1/histories?userid=604fc4def21087344f67ea38").reply(400, historyResponse_add_BadRequest);
   });
 
   // Operation: Get ALL USERS - GET/api/v1/users - BE Success (Happy Path)
