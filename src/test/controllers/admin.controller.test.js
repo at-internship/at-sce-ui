@@ -16,7 +16,7 @@ const expect = require("chai").expect;
 // Admin Controller
 const adminController = require("../../controllers/admin.controller");
 
-describe("Admin Test Controller", function() {
+describe("TEST: admin.controller.js", function() {
 
     // AT-SCE - Admin - Users - Add User - FE Success (Happy Path)
     it("Should Add User on admin section - FE Success", function() {
