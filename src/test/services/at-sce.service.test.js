@@ -185,7 +185,7 @@ describe("TEST: at-sce-api.service.js", () => {
   // Operation: Get ALL USERS - GET/api/v1/users - BE Success (Happy Path)
   it("Should Get All Users - Call GET/api/v1/users - BE Success (Happy Path)", () => {
     return getAllUsers().then((users_response) => {
-      console.debug("users_response", users_response);
+      //console.debug("users_response", users_response);
 
       // Response Status
       expect(users_response).to.have.status(200);
@@ -198,7 +198,7 @@ describe("TEST: at-sce-api.service.js", () => {
   // Operation: Get ALL USERS - GET/api/v1/users - BE Error - 400 Bad Request
   it("Should Get All Users - Call GET/api/v1/users - BE Error - 400 Bad Request", () => {
     return getAllUsers_error().then((users_response_error) => {
-      console.debug("users_response_error", users_response_error);
+      //console.debug("users_response_error", users_response_error);
 
       // Response Status
       expect(users_response_error).equals(undefined);

@@ -14,7 +14,7 @@ const axios = require("axios");
 const AT_SCE_SERVICE = {};
 
 // TODO: LOCAL
-require("dotenv").config();
+// require("dotenv").config();
 
 // MICROSERVICE - HEROKU - SCE
 const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
@@ -41,6 +41,7 @@ AT_SCE_SERVICE.login = (data) => {
 
 // Operation: Get ALL USERS - GET/api/v1/users
 AT_SCE_SERVICE.getAllUsers = () => {
+  console.log(`at-sce-api.service - Enter function`);
   return axios({
     method: "GET",
     url: `${AT_SERVICE_URI}/v1/users`,
@@ -48,7 +49,7 @@ AT_SCE_SERVICE.getAllUsers = () => {
       "content-type": "application/json",
     },
   }).catch(function (error) {
-    console.log(`Error: ${error.message}`);
+    console.error(`at-sce-api.service - Error: ${error.message}`);
   });
 };
 
@@ -61,7 +62,7 @@ AT_SCE_SERVICE.getUserById = (id) => {
       "content-type": "application/json",
     },
   }).catch(function (error) {
-    console.log(`Error: ${error.message}`);
+    console.error(`at-sce-api.service - Error: ${error.message}`);
   });
 };
 
@@ -109,7 +110,7 @@ AT_SCE_SERVICE.getHistory = (id) => {
       "content-type": "application/json",
     },
   }).catch(function (error) {
-    console.log(`Error: ${error.message}`);
+    console.error(`at-sce-api.service - Error: ${error.message}`);
   });
 };
 

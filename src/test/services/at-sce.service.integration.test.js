@@ -21,7 +21,7 @@ const sceServiceAPI_400 = 'https://at-sce-api.herokuapp.com/api' + '/v1/usuarios
 describe('INTEGRATION TEST: at-sce-service.js', () => {
 
     // Operation: Get ALL USERS - GET/api/v1/users - BE Success (Happy Path)
-    it('Should Get All Users - Call GET/api/v1/users - BE Success (Happy Path)', (done) => {
+    it('INTEGRATION TEST: Should Get All Users - Call GET/api/v1/users - BE Success (Happy Path)', (done) => {
         chai.request(sceServiceAPI)
             .get('/')
             .end(function (err, res) {
@@ -34,7 +34,7 @@ describe('INTEGRATION TEST: at-sce-service.js', () => {
     });
 
     // Operation: Get ALL USERS - GET/api/v1/users - BE Error - 400 Bad Request
-    it('Should Fail Get All Users - Call GET/api/v1/users - BE Error - 400 Bad Request', (done) => {
+    it('INTEGRATION TEST: Should Fail Get All Users - Call GET/api/v1/users - BE Error - 400 Bad Request', (done) => {
         chai.request(sceServiceAPI_400)
             .get('/')
             .end(function(err, res) {
