@@ -96,7 +96,7 @@ describe("AT-SCE Test Controller", function() {
 
     //AT-SCE - Logout - Success
     it("Should logout - Success", function(){
-        var req = {};
+        var req = { flash: sinon.spy() };
         var res = { render: sinon.spy() };
 
         var view = atSceController.signout(req, res).then(function(){
@@ -106,7 +106,14 @@ describe("AT-SCE Test Controller", function() {
 
     // AT-SCE - Calculator Form - Get History table
     it("Should render history table - success", function(done){
-        var req = { flash: sinon.spy() };
+        var req = { 
+            user: {
+                data: {
+                    id: '604fc4def21087344f67ea38'
+                }  
+            },
+            flash: sinon.spy() 
+        };
         var res = { render: sinon.spy() };
 
         var histories = [];
@@ -136,7 +143,10 @@ describe("AT-SCE Test Controller", function() {
         this.timeout(5000);
         var req = { 
             user: {
-                id: '604fc4def21087344f67ea38'
+                data: {
+                    id: '604fc4def21087344f67ea38',
+                    status: '1'
+                }  
             },
             flash: sinon.spy() 
         };
@@ -158,7 +168,10 @@ describe("AT-SCE Test Controller", function() {
         this.timeout(5000);
         var req = { 
             user: {
-                id: '604fc4def21087344f67ea38'
+                data: {
+                    id: '604fc4def21087344f67ea38',
+                    status: '1'
+                }  
             },
             flash: sinon.spy() 
         };
@@ -184,7 +197,10 @@ describe("AT-SCE Test Controller", function() {
         };
         var req = {
             user: {
-                id: '604fc4def21087344f67ea38'
+                data: {
+                    id: '604fc4def21087344f67ea38',
+                    status: '1'
+                }  
             },
             body: {
                 rent: null,
