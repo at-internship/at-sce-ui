@@ -41,16 +41,13 @@ AT_SCE_SERVICE.login = (data) => {
 
 // Operation: Get ALL USERS - GET/api/v1/users
 AT_SCE_SERVICE.getAllUsers = () => {
-  console.log(`at-sce-api.service - Enter function`);
   return axios({
     method: "GET",
     url: `${AT_SERVICE_URI}/v1/users`,
     headers: {
       "content-type": "application/json",
     },
-  }).catch(function (error) {
-    console.error(`at-sce-api.service - Error: ${error.message}`);
-  });
+  })
 };
 
 // Operation: Get USER by ID - GET/api/v1/users/{id}
@@ -61,9 +58,7 @@ AT_SCE_SERVICE.getUserById = (id) => {
     headers: {
       "content-type": "application/json",
     },
-  }).catch(function (error) {
-    console.error(`at-sce-api.service - Error: ${error.message}`);
-  });
+  })
 };
 
 // Operation; Create USER - POST /api/v1/users
@@ -109,9 +104,7 @@ AT_SCE_SERVICE.getHistory = (id) => {
     headers: {
       "content-type": "application/json",
     },
-  }).catch(function (error) {
-    console.error(`at-sce-api.service - Error: ${error.message}`);
-  });
+  })
 };
 
 // Operation: Save button POST /api/v1/histories?userid={id}
