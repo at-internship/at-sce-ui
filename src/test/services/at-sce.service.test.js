@@ -19,12 +19,12 @@ const AT_SCE_SERVICE_API = require("../../services/at-sce-api.service");
 const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
 
 // MICROSERVICE - HEROKU - SS0
-const AT_SSO_SERVICE_URI = process.env.AT_SS0_SERVICE_URI;
+const AT_SSO_SERVICE_URI = process.env.AT_SSO_SERVICE_URI;
 
 // AT_SSO_SERVICE_URI_ENABLED FLAG
 const AT_SSO_SERVICE_URI_ENABLED = process.env.AT_SSO_SERVICE_URI_ENABLED;
 const AT_SERVICE_URI = (AT_SSO_SERVICE_URI_ENABLED == 'true') ? AT_SSO_SERVICE_URI : AT_SCE_SERVICE_URI;
-console.log(`at-sce.service.integration.test - AT_SERVICE_URI: ${AT_SERVICE_URI}`);
+console.log(`at-sce.service.test - AT_SERVICE_URI: ${AT_SERVICE_URI}`);
 
 // Operations
 const login = AT_SCE_SERVICE_API.login
