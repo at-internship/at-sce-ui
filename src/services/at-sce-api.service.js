@@ -13,6 +13,9 @@
 const axios = require("axios");
 const AT_SCE_SERVICE = {};
 
+// TODO: LOCAL
+require("dotenv").config();
+
 // MICROSERVICE - HEROKU - SCE
 const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
 
@@ -22,7 +25,7 @@ const AT_SSO_SERVICE_URI = process.env.AT_SS0_SERVICE_URI;
 // AT_SSO_SERVICE_URI_ENABLED FLAG
 const AT_SSO_SERVICE_URI_ENABLED = process.env.AT_SSO_SERVICE_URI_ENABLED;
 const AT_SERVICE_URI = (AT_SSO_SERVICE_URI_ENABLED == 'true') ? AT_SSO_SERVICE_URI : AT_SCE_SERVICE_URI;
-console.log(`AT_SERVICE_URI: ${AT_SERVICE_URI}`);
+console.log(`at-sce-api.service - AT_SERVICE_URI: ${AT_SERVICE_URI}`);
 
 // Operation: Login - POST /api/v1/login
 AT_SCE_SERVICE.login = (data) => {
@@ -44,9 +47,7 @@ AT_SCE_SERVICE.getAllUsers = () => {
     headers: {
       "content-type": "application/json",
     },
-  }).catch(function (error) {
-    console.log(`Error: ${error.message}`);
-  });
+  })
 };
 
 // Operation: Get USER by ID - GET/api/v1/users/{id}
@@ -57,9 +58,7 @@ AT_SCE_SERVICE.getUserById = (id) => {
     headers: {
       "content-type": "application/json",
     },
-  }).catch(function (error) {
-    console.log(`Error: ${error.message}`);
-  });
+  })
 };
 
 // Operation; Create USER - POST /api/v1/users
@@ -105,9 +104,7 @@ AT_SCE_SERVICE.getHistory = (id) => {
     headers: {
       "content-type": "application/json",
     },
-  }).catch(function (error) {
-    console.log(`Error: ${error.message}`);
-  });
+  })
 };
 
 // Operation: Save button POST /api/v1/histories?userid={id}

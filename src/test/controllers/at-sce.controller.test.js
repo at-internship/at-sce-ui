@@ -16,7 +16,7 @@ const expect = require("chai").expect;
 // AT SCE Controller
 const atSceController = require("../../controllers/at-sce.controller");
 
-describe("AT-SCE Test Controller", function() {
+describe("TEST: at-sce.controller.js", function() {
 
     // AT-SCE - Index/Login - Success
     it("Should render Index/Login section - Success", function(done) {
