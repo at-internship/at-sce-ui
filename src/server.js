@@ -12,6 +12,10 @@ const passport = require("passport");
 const app = express();
 require("./config/passport");
 
+if (process.env.NODE_ENV == "production" || process.env.NODE_ENV == "test") {
+  require('newrelic');
+}
+
 // Settings
 app.set("port", process.env.PORT || 4000);
 app.set("views", path.join(__dirname, "views"));
@@ -89,7 +93,7 @@ app.use("/", require("./routes/at-sce.routes"));
 app.use("/admin", require("./routes/admin.routes"));
 
 // AT-SCE Healthcheck
-app.use("/healthcheck", require("./routes/healthcheck.routes"));
+app.use("/health-check", require("./routes/health-check.routes"));
 
 // Static files
 app.use(express.static(path.join(__dirname, "public")));

@@ -12,6 +12,12 @@
 // AT Admin Controller
 const adminCtrl = {};
 
+// CREATE_USER_ENCRYPTION_ENABLED FLAG
+const CREATE_USER_ENCRYPTION_ENABLED = process.env.CREATE_USER_ENCRYPTION_ENABLED;
+
+// UPDATE_USER_ENCRYPTION_ENABLED FLAG
+const UPDATE_USER_ENCRYPTION_ENABLED = process.env.UPDATE_USER_ENCRYPTION_ENABLED;
+
 // MICROSERVICE - HEROKU - AT SCE API
 const sceServiceAPI = require("../services/at-sce-api.service");
 
@@ -103,21 +109,23 @@ adminCtrl.addUser = async (req, res) => {
       firstName: user_firstName,
       lastName: user_lastName,
       email: user_email,
-      password: (await encrypt(user_password)).content,
+      password: (CREATE_USER_ENCRYPTION_ENABLED == 'true') ? (await encrypt(user_password)).content : user_password,
       status: parseInt(user_status),
     };
-    console.debug("Request-->", request);
+    //console.debug("request-->", request);
 
     // Call Create USER - POST /api/v1/users endpoint
     await sceServiceAPI.createUser(request).then((result) => {
       if (!result) {
         console.error("Service unavailable: sceServiceAPI.createUser()");
         req.flash("error_msg", "Service unavailable");
+        res.redirect("/admin/user");
       }
       console.debug("Result-->", result);
     });
 
     // Redirect
+    req.flash("success_msg","User created successfully");
     res.redirect("/admin/user");
   } catch (err) {
     console.log(err.response);
@@ -125,6 +133,7 @@ adminCtrl.addUser = async (req, res) => {
       let errorMsg = err.response.data.message;
       req.flash("error_msg", errorMsg);
     }
+    res.redirect("/admin/user");
   }
 };
 
@@ -165,6 +174,7 @@ adminCtrl.updateUser = async (req, res) => {
       user_firstName,
       user_lastName,
       user_email,
+      user_password,
       user_status,
     } = req.body;
     const userErrors = [];
@@ -206,15 +216,17 @@ adminCtrl.updateUser = async (req, res) => {
       firstName: user_firstName,
       lastName: user_lastName,
       email: user_email,
+      password: (UPDATE_USER_ENCRYPTION_ENABLED == 'true') ? (await encrypt(user_password)).content : user_password,
       status: parseInt(user_status),
     };
-    console.debug("Request-->", request);
+    //console.debug("Request-->", request);
 
     // Call Update USER - PUT /api/v1/users endpoint
     await sceServiceAPI.updateUser(request).then((result) => {
       if (!result) {
         console.error("Service unavailable: sceServiceAPI.updateUser()");
         req.flash("error_msg", "Service unavailable");
+        res.redirect("/admin/user");
       }
       console.debug("Result-->", result);
     });
@@ -228,6 +240,7 @@ adminCtrl.updateUser = async (req, res) => {
       let errorMsg = err.response.data.message;
       req.flash("error_msg", errorMsg);
     }
+    res.redirect("/admin/user");
   }
 };
 
@@ -242,9 +255,14 @@ adminCtrl.deleteUser = async (req, res) => {
     if (!response) {
       console.error("Service unavailable: sceServiceAPI.deleteUser()");
       req.flash("error_msg", "Service unavailable");
+      es.redirect("/admin/user");
     }
   } catch (err) {
-    console.error(err.message);
+    if (err.response && err.response.data) {
+      let errorMsg = err.response.data.message;
+      req.flash("error_msg", errorMsg);
+    }
+    res.redirect("/admin/user");
   } finally {
     // Redirect
     req.flash("success_msg", "User Deleted Successfully");

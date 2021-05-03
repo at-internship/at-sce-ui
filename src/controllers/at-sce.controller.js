@@ -50,9 +50,9 @@ atSCEController.calculator = async (req, res) => {
 
   try {
     const user = req.user.data.id;
-    console.debug("User-->", user);
+    //console.debug("User-->", user);
     const responseHistory = await sceServiceAPI.getHistory(user);
-    console.debug("Response-->", responseHistory);
+    //console.debug("Response --->", responseHistory);
 
     if (responseHistory === null || responseHistory === undefined) {
       console.error("Service unavailable: sceServiceAPI.getHistory()");
@@ -176,20 +176,21 @@ atSCEController.addHistory = async (req, res) => {
         console.log("error");
         console.error("Service unavailable: sceServiceAPI.createHistory()");
         req.flash("error_msg", "Service unavailable");
-      } else {
-        req.flash("success_msg", "Calculation was saved successfully");
       }
       console.debug("Result-->", result);
     });
 
     // Redirect
+    req.flash("success_msg", "Calculation was saved successfully");
     res.redirect("/calculator");
+
   } catch (err) {
     console.log(err.response);
     if (err.response && err.response.data) {
-      let errorMsg = err.response.data.message;
+      const errorMsg = err.response.data.message;
       req.flash("error_msg", errorMsg);
     }
+    res.redirect("/calculator");
   }
 };
 
