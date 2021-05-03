@@ -12,21 +12,19 @@
 const expect = require("chai").expect;
 const nock = require("nock");
 
-// TODO: LOCAL
-require("dotenv").config();
-
 // MICROSERVICE - HEROKU - SCE
 const AT_SCE_SERVICE_API = require("../../services/at-sce-api.service");
 
 // MICROSERVICE - HEROKU - SCE
-const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
+//const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
 
 // MICROSERVICE - HEROKU - SS0
-const AT_SSO_SERVICE_URI = process.env.AT_SSO_SERVICE_URI;
+//const AT_SSO_SERVICE_URI = process.env.AT_SSO_SERVICE_URI;
 
 // AT_SSO_SERVICE_URI_ENABLED FLAG
-const AT_SSO_SERVICE_URI_ENABLED = process.env.AT_SSO_SERVICE_URI_ENABLED;
-const AT_SERVICE_URI = (AT_SSO_SERVICE_URI_ENABLED == 'true') ? AT_SSO_SERVICE_URI : AT_SCE_SERVICE_URI;
+//const AT_SSO_SERVICE_URI_ENABLED = process.env.AT_SSO_SERVICE_URI_ENABLED;
+//const AT_SERVICE_URI = (AT_SSO_SERVICE_URI_ENABLED == 'true') ? AT_SSO_SERVICE_URI : AT_SCE_SERVICE_URI;
+const AT_SERVICE_URI = "https://at-sce-api-qa.herokuapp.com/api";
 console.log(`at-sce.service.test - AT_SERVICE_URI: ${AT_SERVICE_URI}`);
 
 // Operations
