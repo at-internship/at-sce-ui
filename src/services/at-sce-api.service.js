@@ -18,9 +18,11 @@ const AT_SCE_SERVICE = {};
 
 // MICROSERVICE - HEROKU - SCE
 const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
+console.debug(`at-sce-api.service - AT_SCE_SERVICE_URI: ${AT_SCE_SERVICE_URI}`);
 
 // MICROSERVICE - HEROKU - SS0
-const AT_SSO_SERVICE_URI = process.env.AT_SS0_SERVICE_URI;
+const AT_SSO_SERVICE_URI = process.env.AT_SSO_SERVICE_URI;
+console.debug(`at-sce-api.service - AT_SSO_SERVICE_URI: ${AT_SSO_SERVICE_URI}`);
 
 // AT_SSO_SERVICE_URI_ENABLED FLAG
 const AT_SSO_SERVICE_URI_ENABLED = process.env.AT_SSO_SERVICE_URI_ENABLED;

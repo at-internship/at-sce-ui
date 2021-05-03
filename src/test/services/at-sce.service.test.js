@@ -12,6 +12,9 @@
 const expect = require("chai").expect;
 const nock = require("nock");
 
+// TODO: LOCAL
+require("dotenv").config();
+
 // MICROSERVICE - HEROKU - SCE
 const AT_SCE_SERVICE_API = require("../../services/at-sce-api.service");
 
