@@ -11,6 +11,8 @@
 // Constants
 const expect = require("chai").expect;
 const nock = require("nock");
+const mockedEnv = require('mocked-env');
+let restore;
 
 // MICROSERVICE - HEROKU - SCE
 const AT_SCE_SERVICE_API = require("../../services/at-sce-api.service");
@@ -312,6 +314,11 @@ const historyResponse_add_BadRequest = {
 describe("TEST: at-sce-api.service.js", () => {
 
   beforeEach(() => {
+    restore = mockedEnv({
+      AT_SCE_SERVICE_URI: 'https://at-sce-api-qa.herokuapp.com/api',
+      AT_SSO_SERVICE_URI: 'https://at-sso-api-qa.herokuapp.com/api'
+    });
+
     nock(AT_SERVICE_URI).get("/v1/users").reply(200, users_response);
     nock(AT_SERVICE_URI).get("/v1/users").reply(400, users_response_BadRequest);  
     nock(AT_SERVICE_URI).post("/v1/users").reply(200, users_response_add);
@@ -481,4 +488,10 @@ describe("TEST: at-sce-api.service.js", () => {
         expect(error.response.data.body.error).to.equal("Not Found");
     });
   });
+
+  afterEach(() => {
+    // don't forget to restore the old process.env
+    restore();
+  });
+
 });
