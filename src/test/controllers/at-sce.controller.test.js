@@ -19,7 +19,7 @@ const atSceController = require("../../controllers/at-sce.controller");
 // AT SCE Service API
 const sceServiceAPI = require("../../services/at-sce-api.service");
 
-describe("TEST: at-sce.controller.js", function() {
+describe("TEST: at-sce.controller.test.js", function() {
     let getallhistoriesstub;
     let addhistorystub;
 
@@ -30,6 +30,7 @@ describe("TEST: at-sce.controller.js", function() {
     afterEach(function(){
         getallhistoriesstub.restore();
         addhistorystub.restore();
+    });
 
     // AT-SCE - Index/Login - Success
     it("Should render Index/Login section - Success", function(done) {
