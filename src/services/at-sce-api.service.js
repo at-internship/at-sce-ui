@@ -13,9 +13,8 @@
 const axios = require("axios");
 const AT_SCE_SERVICE = {};
 
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-}
+// TODO: Just For Testibng
+require("dotenv").config();
 
 // MICROSERVICE - HEROKU - SCE
 const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;

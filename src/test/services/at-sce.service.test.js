@@ -11,34 +11,33 @@
 // Constants
 const expect = require("chai").expect;
 const nock = require("nock");
-const mockedEnv = require('mocked-env');
-let restore;
-const assert = require('assert');
 
 // MICROSERVICE - HEROKU - SCE
 const AT_SCE_SERVICE_API = require("../../services/at-sce-api.service");
 
 // MICROSERVICE - HEROKU - SCE
-//const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
+const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
 
 // MICROSERVICE - HEROKU - SS0
-//const AT_SSO_SERVICE_URI = process.env.AT_SSO_SERVICE_URI;
+const AT_SSO_SERVICE_URI = process.env.AT_SSO_SERVICE_URI;
 
 // AT_SSO_SERVICE_URI_ENABLED FLAG
-//const AT_SSO_SERVICE_URI_ENABLED = process.env.AT_SSO_SERVICE_URI_ENABLED;
-//const AT_SERVICE_URI = (AT_SSO_SERVICE_URI_ENABLED == 'true') ? AT_SSO_SERVICE_URI : AT_SCE_SERVICE_URI;
-const AT_SERVICE_URI = "https://at-sce-api-qa.herokuapp.com/api";
+const AT_SSO_SERVICE_URI_ENABLED = process.env.AT_SSO_SERVICE_URI_ENABLED;
+const AT_SERVICE_URI = (AT_SSO_SERVICE_URI_ENABLED == 'true') ? AT_SSO_SERVICE_URI : AT_SCE_SERVICE_URI;
 console.log(`at-sce.service.test - AT_SERVICE_URI: ${AT_SERVICE_URI}`);
 
 // Operations
 const login = AT_SCE_SERVICE_API.login
 const login_error = AT_SCE_SERVICE_API.login
+
 const getAllUsers = AT_SCE_SERVICE_API.getAllUsers;
 const getAllUsers_error = AT_SCE_SERVICE_API.getAllUsers;
+
 const createUser = AT_SCE_SERVICE_API.createUser;
 const createUser_error = AT_SCE_SERVICE_API.createUser;
 
 const updateUser = AT_SCE_SERVICE_API.updateUser;
+
 const deleteUser = AT_SCE_SERVICE_API.deleteUser;
 const deleteUser_error = AT_SCE_SERVICE_API.deleteUser;
 
@@ -47,6 +46,7 @@ const getUserById_error = AT_SCE_SERVICE_API.getUserById;
 
 const getHistory = AT_SCE_SERVICE_API.getHistory;
 const getHistory_error = AT_SCE_SERVICE_API.getHistory;
+
 const createHistory = AT_SCE_SERVICE_API.createHistory;
 const createHistory_error = AT_SCE_SERVICE_API.createHistory;
 
@@ -315,38 +315,34 @@ const historyResponse_add_BadRequest = {
 describe("TEST: at-sce-api.service.js", () => {
 
   beforeEach(() => {
-    restore = mockedEnv({
-      AT_SCE_SERVICE_URI: 'https://at-sce-api-qa.herokuapp.com/api',
-      AT_SSO_SERVICE_URI: 'https://at-sso-api-qa.herokuapp.com/api'
-    });
-
     nock(AT_SERVICE_URI).get("/v1/users").reply(200, users_response);
-    nock(AT_SERVICE_URI).get("/v1/users").reply(400, users_response_BadRequest);  
+    nock(AT_SERVICE_URI).get("/v1/users").reply(400, users_response_BadRequest);
+
     nock(AT_SERVICE_URI).post("/v1/users").reply(200, users_response_add);
     nock(AT_SERVICE_URI).post("/v1/users").reply(400, users_response_add_BadRequest);
-    nock(AT_SERVICE_URI).get("/v1/histories?userid=604fc4def21087344f67ea38").reply(200, historyResponse);
-    nock(AT_SERVICE_URI).get("/v1/histories?userid=604fc4def21087344f67ea39").reply(200, historyResponse_EmptyArray);
-    nock(AT_SERVICE_URI).post("/v1/histories?userid=604fc4def21087344f67ea38").reply(201, historyResponse_add);
-    nock(AT_SERVICE_URI).post("/v1/histories?userid=604fc4def21087344f67ea38").reply(400, historyResponse_add_BadRequest);
+
     nock(AT_SERVICE_URI).get("/v1/users/604fc4def21087344f67ea38").reply(200, userResponse_GetUserById);
     nock(AT_SERVICE_URI).get("/v1/users/604fc4def21087344f67ea39").reply(404, userResponse_GetUserById_NotFound);
+
     nock(AT_SERVICE_URI).post("/v1/login").reply(200, userResponse_Login);
     nock(AT_SERVICE_URI).post("/v1/login").reply(401, userResponse_Login_Unauthorized);
+
     nock(AT_SERVICE_URI).put("/v1/users/123456").reply(200, userResponse_Update);
     //nock(AT_SERVICE_URI).put("/v1/users/123456").reply(400, userResponse_Update_error);
+
     nock(AT_SERVICE_URI).delete("/v1/users/604fc4def21087344f67ea38").reply(204, userResponse_Delete);  
     nock(AT_SERVICE_URI).delete("/v1/users/604fc4def21087344f67ea38").reply(404, userResponse_Delete_NotFound);
-  });
 
-  it('works', () => {
-    assert(process.env.AT_SCE_SERVICE_URI === 'https://at-sce-api-qa.herokuapp.com/api', '');
-  })
+    nock(AT_SERVICE_URI).get("/v1/histories?userid=604fc4def21087344f67ea38").reply(200, historyResponse);
+    nock(AT_SERVICE_URI).get("/v1/histories?userid=604fc4def21087344f67ea39").reply(200, historyResponse_EmptyArray);
+    
+    nock(AT_SERVICE_URI).post("/v1/histories?userid=604fc4def21087344f67ea38").reply(201, historyResponse_add);
+    nock(AT_SERVICE_URI).post("/v1/histories?userid=604fc4def21087344f67ea38").reply(400, historyResponse_add_BadRequest);
+  });
 
   // Operation: Get ALL USERS - GET/api/v1/users - BE Success (Happy Path)
   it("Should Get All Users - Call GET/api/v1/users - BE Success (Happy Path)", () => {
-    return getAllUsers().then((users_response) => {
-      assert(process.env.AT_SCE_SERVICE_URI === 'https://at-sce-api-qa.herokuapp.com/api', '');
-      
+    return getAllUsers().then((users_response) => {      
       // Response Status
       expect(users_response).to.have.status(200);
 
@@ -494,11 +490,6 @@ describe("TEST: at-sce-api.service.js", () => {
         expect(error.response.status).to.equal(404);
         expect(error.response.data.body.error).to.equal("Not Found");
     });
-  });
-
-  afterEach(() => {
-    // don't forget to restore the old process.env
-    restore();
   });
 
 });
