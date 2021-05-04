@@ -19,7 +19,7 @@ const adminController = require("../../controllers/admin.controller");
 // AT SCE Service API
 const sceServiceAPI = require("../../services/at-sce-api.service");
 
-describe("Admin Controller TEST", function () {
+describe("TEST: admin.controller.js", function () {
     let getAllUsersStub;
     let addUserStub;
     let updateUserStub;

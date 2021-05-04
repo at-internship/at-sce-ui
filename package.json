@@ -7,7 +7,8 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "test": "mocha src/test/**/*.test.js",
-    "coverage": "nyc --reporter=lcov --reporter=text npm run test"
+    "test-with-coverage": "nyc --reporter=lcov --reporter=text npm run test",
+    "test-validate-coverage-build": "nyc --check-coverage --lines 90 --per-file npm run test"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "morgan": "^1.10.0",
     "newrelic": "^7.3.0",
     "nock": "^13.0.5",
+    "node-jsencrypt": "^1.0.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "sinon": "^9.2.1"
