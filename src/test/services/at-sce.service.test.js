@@ -345,6 +345,8 @@ describe("TEST: at-sce-api.service.js", () => {
   // Operation: Get ALL USERS - GET/api/v1/users - BE Success (Happy Path)
   it("Should Get All Users - Call GET/api/v1/users - BE Success (Happy Path)", () => {
     return getAllUsers().then((users_response) => {
+      assert(process.env.AT_SCE_SERVICE_URI === 'https://at-sce-api-qa.herokuapp.com/api', '');
+      
       // Response Status
       expect(users_response).to.have.status(200);
 
