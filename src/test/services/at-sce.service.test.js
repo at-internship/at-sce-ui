@@ -13,6 +13,7 @@ const expect = require("chai").expect;
 const nock = require("nock");
 const mockedEnv = require('mocked-env');
 let restore;
+const assert = require('assert');
 
 // MICROSERVICE - HEROKU - SCE
 const AT_SCE_SERVICE_API = require("../../services/at-sce-api.service");
@@ -336,6 +337,10 @@ describe("TEST: at-sce-api.service.js", () => {
     nock(AT_SERVICE_URI).delete("/v1/users/604fc4def21087344f67ea38").reply(204, userResponse_Delete);  
     nock(AT_SERVICE_URI).delete("/v1/users/604fc4def21087344f67ea38").reply(404, userResponse_Delete_NotFound);
   });
+
+  it('works', () => {
+    assert(process.env.AT_SCE_SERVICE_URI === 'https://at-sce-api-qa.herokuapp.com/api', '');
+  })
 
   // Operation: Get ALL USERS - GET/api/v1/users - BE Success (Happy Path)
   it("Should Get All Users - Call GET/api/v1/users - BE Success (Happy Path)", () => {
