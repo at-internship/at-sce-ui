@@ -51,18 +51,17 @@ Heroku App - https://at-sce-ui.herokuapp.com/
 | Handlebars | JavaScript Templates |
 | Mocha & Chai | Unit Testing |
 | MongoDB | NoSQL Database |
-| MongoCompass | MongoDB GUI |
+| MongoDBCompass | MongoDB GUI |
 | Heroku | Platform as a Service |
 | Axios | Services Manage |
 
 ## Contributor Team
 
-_Irving - Ghostbusters Team_
+_KakashiTeam7_
 
-| Mentors | Email |
+| Mentor | Email |
 | --- | --- |
 | Irving Mariano Espiritu Oliva | irving.espiritu@agilethought.com |
-| Ivan Israel Villamil Covian | ivan.villamil@agilethought.com |
 
 | Interns | Email |
 | --- | --- |
@@ -70,6 +69,15 @@ _Irving - Ghostbusters Team_
 | Emiliano Plascencia Hernandez | emiliano.plascencia@agilethought.com |
 | Juan Felipe Galvez Suarez | juan.galvez@agilethought.com |
 | Jose Guadalupe Deniz Mancilla | jose.deniz@agilethought.com |
+
+_Game of front team_
+
+| Mentor | Email |
+| --- | --- |
+| Ivan Israel Villamil Covian | ivan.villamil@agilethought.com |
+
+| Interns | Email |
+| --- | --- |
 | Flavio Alejandro Gonzalez Torres | flavio.gonzalez@agilethought.com |
 | Diana Isabel Arceo Suarez | diana.arceo@agilethought.com |
 | Jaime Yair Ixba Belly | jaime.ixba@agilethought.com |
