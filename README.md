@@ -2,7 +2,11 @@
 
 # Node JS Project for AT Software Cost Estimation UI (Internal app)
 
-at-sce-ui app, is one of the 3 projects of this internship program, which is in charge of sce auth.
+at-sce-ui app is the result of the AT Internship 2021-1 program.
+
+The purpose of this project is to help Interns to develop skills about how to estimate Pricing and Cost-Effort for a software development project.
+
+The software development cost calculator is based on the technology stack used in the previous AT Internship 2020 program.
 
 GitHub - https://github.com/at-internship/at-sce-ui
 Heroku App PROD - https://at-sce-ui.herokuapp.com/
