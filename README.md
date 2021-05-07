@@ -5,7 +5,8 @@
 at-sce-ui app, is one of the 3 projects of this internship program, which is in charge of sce auth.
 
 GitHub - https://github.com/at-internship/at-sce-ui
-Heroku App - https://at-sce-ui.herokuapp.com/
+Heroku App PROD - https://at-sce-ui.herokuapp.com/
+Heroku App QA - https://at-sce-ui-qa.herokuapp.com/
 
 ## Getting Started 
 
