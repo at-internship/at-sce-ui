@@ -1,16 +1,9 @@
 const express = require("express");
 const router = express.Router();
-var packageJ = require("../../package.json");
+const packageJ = require("../../package.json");
 const { execSync } = require("child_process");
 
-function getGitCommitHash() {
-  return execSync("git rev-parse HEAD").toString().trim();
-}
-function getGitNameBranch() {
-  return execSync("git name-rev --name-only HEAD").toString().trim();
-}
 router.get("/", async (_req, res, _next) => {
-  // optional: add further things to check (e.g. connecting to dababase)
   const healthcheck = {
     version: packageJ.version,
     uptime: process.uptime(),
@@ -38,5 +31,13 @@ router.get("/", async (_req, res, _next) => {
     res.status(503).send();
   }
 });
+
+function getGitCommitHash() {
+  return execSync("git rev-parse HEAD").toString().trim();
+}
+
+function getGitNameBranch() {
+  return execSync("git name-rev --name-only HEAD").toString().trim();
+}
 
 module.exports = router;
