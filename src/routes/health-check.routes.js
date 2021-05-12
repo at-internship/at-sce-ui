@@ -3,40 +3,44 @@ const router = express.Router();
 const packageJ = require("../../package.json");
 //const { execSync } = require("child_process");
 const { getLastCommit } = require('git-last-commit');
-const healthcheck = {};
 
  function getGitCommit() {
   return new Promise((res, rej) => {
     getLastCommit((err, commit) => {
-      if (err) return rej(err);
+      if (err) {
+        console.error("Error: ", err);
+        return rej(err);
+      }
+      console.log("getLastCommit: ", commit);
       return res(commit);
     });
   });
 }
 
 router.get("/", async (_req, res, _next) => {
-  
+
+  const healthcheck = {
+    version: packageJ.version,
+    uptime: process.uptime(),
+    message: "LIVE",
+    timestamp: Date.now(),
+    //branch: getGitNameBranch(),
+    //commit: getGitCommitHash(),
+    commit: await getGitCommit(),
+    flags: {
+      AT_SSO_SERVICE_URI_ENABLED: process.env.AT_SSO_SERVICE_URI_ENABLED,
+      AT_SSO_WEB_TOKEN_ENABLED: process.env.AT_SSO_WEB_TOKEN_ENABLED,
+      LOGIN_ENCRYPTION_ENABLED: process.env.LOGIN_ENCRYPTION_ENABLED,
+      CREATE_USER_ENCRYPTION_ENABLED: process.env.CREATE_USER_ENCRYPTION_ENABLED,
+      UPDATE_USER_ENCRYPTION_ENABLED: process.env.UPDATE_USER_ENCRYPTION_ENABLED,
+    },
+    services: {
+      AT_SCE_SERVICE_URI: process.env.AT_SCE_SERVICE_URI,
+      AT_SSO_SERVICE_URI: process.env.AT_SSO_SERVICE_URI,
+    },
+  };
+
   try {
-    healthcheck = {
-      version: packageJ.version,
-      uptime: process.uptime(),
-      message: "LIVE",
-      timestamp: Date.now(),
-      //branch: getGitNameBranch(),
-      //commit: getGitCommitHash(),
-      commit: await getGitCommit(),
-      flags: {
-        AT_SSO_SERVICE_URI_ENABLED: process.env.AT_SSO_SERVICE_URI_ENABLED,
-        AT_SSO_WEB_TOKEN_ENABLED: process.env.AT_SSO_WEB_TOKEN_ENABLED,
-        LOGIN_ENCRYPTION_ENABLED: process.env.LOGIN_ENCRYPTION_ENABLED,
-        CREATE_USER_ENCRYPTION_ENABLED: process.env.CREATE_USER_ENCRYPTION_ENABLED,
-        UPDATE_USER_ENCRYPTION_ENABLED: process.env.UPDATE_USER_ENCRYPTION_ENABLED,
-      },
-      services: {
-        AT_SCE_SERVICE_URI: process.env.AT_SCE_SERVICE_URI,
-        AT_SSO_SERVICE_URI: process.env.AT_SSO_SERVICE_URI,
-      },
-    };
     res.send(healthcheck);
   } catch (e) {
     healthcheck.message = e;
