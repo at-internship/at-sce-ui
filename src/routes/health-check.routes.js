@@ -3,6 +3,7 @@ const router = express.Router();
 const packageJ = require("../../package.json");
 //const { execSync } = require("child_process");
 const { getLastCommit } = require('git-last-commit');
+const healthcheck = {};
 
  function getGitCommit() {
   return new Promise((res, rej) => {
@@ -14,8 +15,9 @@ const { getLastCommit } = require('git-last-commit');
 }
 
 router.get("/", async (_req, res, _next) => {
+  
   try {
-    const healthcheck = {
+    healthcheck = {
       version: packageJ.version,
       uptime: process.uptime(),
       message: "LIVE",
