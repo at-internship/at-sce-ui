@@ -8,10 +8,10 @@ const { getLastCommit } = require('git-last-commit');
   return new Promise((res, rej) => {
     getLastCommit((err, commit) => {
       if (err) {
-        console.error("health-check.routes,js - Error: ", err);
+        console.error("health-check.routes.js - Error: ", err);
         return rej(err);
       }
-      console.log("health-check.routes,js - getLastCommit: ", commit);
+      console.debug("health-check.routes.js - getLastCommit: ", commit);
       return res(commit);
     });
   });
@@ -26,7 +26,9 @@ router.get("/", async (_req, res, _next) => {
     timestamp: Date.now(),
     //branch: getGitNameBranch(),
     //commit: getGitCommitHash(),
-    commit: await getGitCommit(),
+
+    //commit: await getGitCommit(),
+    
     flags: {
       AT_SSO_SERVICE_URI_ENABLED: process.env.AT_SSO_SERVICE_URI_ENABLED,
       AT_SSO_WEB_TOKEN_ENABLED: process.env.AT_SSO_WEB_TOKEN_ENABLED,
