@@ -8,10 +8,10 @@ const { getLastCommit } = require('git-last-commit');
   return new Promise((res, rej) => {
     getLastCommit((err, commit) => {
       if (err) {
-        console.error("Error: ", err);
+        console.error("health-check.routes,js - Error: ", err);
         return rej(err);
       }
-      console.log("getLastCommit: ", commit);
+      console.log("health-check.routes,js - getLastCommit: ", commit);
       return res(commit);
     });
   });
