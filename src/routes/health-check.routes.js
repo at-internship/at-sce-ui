@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const packageJ = require("../../package.json");
-//const { execSync } = require("child_process");
 const { getLastCommit } = require('git-last-commit');
 
  function getGitCommit() {
@@ -24,11 +23,7 @@ router.get("/", async (_req, res, _next) => {
     uptime: process.uptime(),
     message: "LIVE",
     timestamp: Date.now(),
-    //branch: getGitNameBranch(),
-    //commit: getGitCommitHash(),
-
-    //commit: await getGitCommit(),
-    
+    commit: await getGitCommit(),
     flags: {
       AT_SSO_SERVICE_URI_ENABLED: process.env.AT_SSO_SERVICE_URI_ENABLED,
       AT_SSO_WEB_TOKEN_ENABLED: process.env.AT_SSO_WEB_TOKEN_ENABLED,
@@ -49,13 +44,5 @@ router.get("/", async (_req, res, _next) => {
     res.status(503).send();
   }
 });
-
-/*function getGitCommitHash() {
-  return execSync("git rev-parse HEAD").toString().trim();
-}
-
-function getGitNameBranch() {
-  return execSync("git name-rev --name-only HEAD").toString().trim();
-}*/
 
 module.exports = router;
