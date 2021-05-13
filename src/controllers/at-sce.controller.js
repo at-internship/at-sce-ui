@@ -13,29 +13,29 @@
 const passport = require("passport");
 
 // AT SCE Controller
-const atSCEController = {};
+const AT_SCE_CONTROLLER = {};
 
-// MICROSERVICE - HEROKU - AT SCE API
-const sceServiceAPI = require("../services/at-sce-api.service");
+// AT SCE API Service
+const AT_SCE_API_SERVICE = require("../services/at-sce-api.service");
 
 // AT-SCE - Index/Login
-atSCEController.renderSigninForm = async (req, res) => {
-  console.log("--> atSCEController.renderSigninForm");
+AT_SCE_CONTROLLER.renderSigninForm = async (req, res) => {
+  console.log("--> AT_SCE_CONTROLLER.renderSigninForm");
 
   // Render
   res.render("signin", { layout: 'login-layout.hbs' });
 };
 
 // AT-SCE - Signin
-atSCEController.signin = passport.authenticate("local", {
+AT_SCE_CONTROLLER.signin = passport.authenticate("local", {
   successRedirect: "/calculator",
   failureRedirect: "/signin",
   failureFlash: true,
 });
 
 // AT-SCE - Logout
-atSCEController.signout = async (req, res) => {
-  console.log("--> atSCEController.signout");
+AT_SCE_CONTROLLER.signout = async (req, res) => {
+  console.log("--> AT_SCE_CONTROLLER.signout");
   req.logout();
 
   // Redirect
@@ -44,18 +44,18 @@ atSCEController.signout = async (req, res) => {
 };
 
 // AT-SCE - Calculator Form
-atSCEController.calculator = async (req, res) => {
-  console.log("--> atSCEController.calculator");
+AT_SCE_CONTROLLER.calculator = async (req, res) => {
+  console.log("--> AT_SCE_CONTROLLER.calculator");
   let histories = [];
 
   try {
     const user = req.user.data.id;
     //console.debug("User-->", user);
-    const responseHistory = await sceServiceAPI.getHistory(user);
+    const responseHistory = await AT_SCE_API_SERVICE.getHistory(user);
     //console.debug("Response --->", responseHistory);
 
     if (responseHistory === null || responseHistory === undefined) {
-      console.error("Service unavailable: sceServiceAPI.getHistory()");
+      console.error("Service unavailable: AT_SCE_API_SERVICE.getHistory()");
       req.flash("error_msg", "Service unavailable");
     } else {
       histories = responseHistory.data;
@@ -68,8 +68,8 @@ atSCEController.calculator = async (req, res) => {
 };
 
 // AT-SCE - Add History
-atSCEController.addHistory = async (req, res) => {
-  console.log("--> atSCEController.addHistory");
+AT_SCE_CONTROLLER.addHistory = async (req, res) => {
+  console.log("--> AT_SCE_CONTROLLER.addHistory");
   const user_id = req.user.data.id;
   const status = req.user.data.status;
   console.debug("--> user id:" + user_id);
@@ -171,10 +171,10 @@ atSCEController.addHistory = async (req, res) => {
     console.debug("Request-->", request);
 
     // Call Create History - POST /api/v1/histories?userid={id}
-    await sceServiceAPI.createHistory(request).then((result) => {
+    await AT_SCE_API_SERVICE.createHistory(request).then((result) => {
       if (!result) {
         console.log("error");
-        console.error("Service unavailable: sceServiceAPI.createHistory()");
+        console.error("Service unavailable: AT_SCE_API_SERVICE.createHistory()");
         req.flash("error_msg", "Service unavailable");
       }
       console.debug("Result-->", result);
@@ -194,4 +194,4 @@ atSCEController.addHistory = async (req, res) => {
   }
 };
 
-module.exports = atSCEController;
+module.exports = AT_SCE_CONTROLLER;

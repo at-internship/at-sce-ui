@@ -14,18 +14,18 @@ const sinon = require("sinon");
 const expect = require("chai").expect;
 
 // AT SCE Controller
-const atSceController = require("../../controllers/at-sce.controller");
+const AT_SCE_CONTROLLER = require("../../controllers/at-sce.controller");
 
-// AT SCE Service API
-const sceServiceAPI = require("../../services/at-sce-api.service");
+// AT SCE API Service
+const AT_SCE_API_SERVICE = require("../../services/at-sce-api.service");
 
 describe("TEST: at-sce.controller.test.js", function() {
     let getallhistoriesstub;
     let addhistorystub;
 
     beforeEach(function(){
-        getallhistoriesstub = sinon.stub(sceServiceAPI, "getHistory");
-        addhistorystub = sinon.stub(sceServiceAPI, "createHistory");
+        getallhistoriesstub = sinon.stub(AT_SCE_API_SERVICE, "getHistory");
+        addhistorystub = sinon.stub(AT_SCE_API_SERVICE, "createHistory");
     });
     afterEach(function(){
         getallhistoriesstub.restore();
@@ -37,7 +37,7 @@ describe("TEST: at-sce.controller.test.js", function() {
         var req = { flash: sinon.spy() };
         var res = { render: sinon.spy() };
 
-        var view = atSceController.renderSigninForm(req, res).then(function() {
+        var view = AT_SCE_CONTROLLER.renderSigninForm(req, res).then(function() {
             expect(res.render.calledOnce).to.be.true;
             done();
         });
@@ -99,7 +99,7 @@ describe("TEST: at-sce.controller.test.js", function() {
         var req = { flash: sinon.spy() };
         var res = { render: sinon.spy() };
 
-        var view = atSceController.signout(req, res).then(function(){
+        var view = AT_SCE_CONTROLLER.signout(req, res).then(function(){
             expect(res.render.calledOnce).to.be.true;
         });
     });
@@ -119,7 +119,7 @@ describe("TEST: at-sce.controller.test.js", function() {
         var histories = [];
         getallhistoriesstub.returns(Promise.resolve(histories));
 
-        var view = atSceController.calculator(req, res).then(function(){
+        var view = AT_SCE_CONTROLLER.calculator(req, res).then(function(){
             expect(res.render.calledOnce).to.be.true;
             done();
         });
@@ -132,7 +132,7 @@ describe("TEST: at-sce.controller.test.js", function() {
         var histories = [];
         getallhistoriesstub.returns(Promise.resolve(histories));
 
-        var view = atSceController.calculator(req, res).then(function(){
+        var view = AT_SCE_CONTROLLER.calculator(req, res).then(function(){
             expect(res.render.calledOnce).to.be.true;
             done();
         });
@@ -158,7 +158,7 @@ describe("TEST: at-sce.controller.test.js", function() {
         var histories = [];
         addhistorystub.returns(Promise.resolve(histories));
 
-        var view = atSceController.addHistory(req, res).then(function(){
+        var view = AT_SCE_CONTROLLER.addHistory(req, res).then(function(){
             expect(res.render.calledOnce).to.be.false;
             done();
         }).catch(done);
@@ -183,7 +183,7 @@ describe("TEST: at-sce.controller.test.js", function() {
         var histories = [];
         addhistorystub.returns(Promise.resolve(histories));
         
-        var view = atSceController.addHistory(req, res).then(function() {
+        var view = AT_SCE_CONTROLLER.addHistory(req, res).then(function() {
             expect(res.render.calledOnce).to.be.false;
             done();
         }).catch(done);
@@ -228,7 +228,7 @@ describe("TEST: at-sce.controller.test.js", function() {
         var histories = [];
         addhistorystub.returns(Promise.resolve(err));
 
-        var view = atSceController.addHistory(req, res).then(function() {
+        var view = AT_SCE_CONTROLLER.addHistory(req, res).then(function() {
             expect(res.redirect.calledOnce).to.be.true;
             done();
         }).catch(done);

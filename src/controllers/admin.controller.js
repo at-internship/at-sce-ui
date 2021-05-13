@@ -2,15 +2,15 @@
  * AT SCE UI - AT Admin Controller.
  * Copyright 2021 AgileThought, Inc.
  *
- * General functions for admin-controller.
+ * General functions for admin.controller.
  *
  * @author @at-internship
  * @version 1.0
  *
  */
 
-// AT Admin Controller
-const adminCtrl = {};
+// AT SCE Admin Controller
+const ADMIN_CONTROLLER = {};
 
 // CREATE_USER_ENCRYPTION_ENABLED FLAG
 const CREATE_USER_ENCRYPTION_ENABLED = process.env.CREATE_USER_ENCRYPTION_ENABLED;
@@ -18,27 +18,27 @@ const CREATE_USER_ENCRYPTION_ENABLED = process.env.CREATE_USER_ENCRYPTION_ENABLE
 // UPDATE_USER_ENCRYPTION_ENABLED FLAG
 const UPDATE_USER_ENCRYPTION_ENABLED = process.env.UPDATE_USER_ENCRYPTION_ENABLED;
 
-// MICROSERVICE - HEROKU - AT SCE API
-const sceServiceAPI = require("../services/at-sce-api.service");
+// AT SCE API Servcie
+const AT_SCE_API_SERVICE = require("../services/at-sce-api.service");
 
-// Helpers
+// AT SCE Auth Helper
 const { encrypt } = require("../helpers/auth.helper");
 
 // AT-SCE - Admin - Index
-adminCtrl.renderIndex = async (req, res) => {
-  console.log("--> adminCtrl.renderIndex");
+ADMIN_CONTROLLER.renderIndex = async (req, res) => {
+  console.log("--> ADMIN_CONTROLLER.renderIndex");
   res.render("admin/index");
 };
 
 // AT-SCE - Admin - Users - Render User List
-adminCtrl.renderUserList = async (req, res) => {
-  console.log("--> adminCtrl.renderUserList");
+ADMIN_CONTROLLER.renderUserList = async (req, res) => {
+  console.log("--> ADMIN_CONTROLLER.renderUserList");
   let users = [];
 
   try {
-    const responseUserList = await sceServiceAPI.getAllUsers();
+    const responseUserList = await AT_SCE_API_SERVICE.getAllUsers();
     if (responseUserList === null || responseUserList === undefined) {
-      console.error("Service unavailable: sceServiceAPI.getAllUsers()");
+      console.error("Service unavailable: AT_SCE_API_SERVICE.getAllUsers()");
       req.flash("error_msg", "Service unavailable");
     } else {
       users = responseUserList.data;
@@ -51,14 +51,14 @@ adminCtrl.renderUserList = async (req, res) => {
 };
 
 // AT-SCE - Admin - Users - Render Add User Form
-adminCtrl.renderAddUserForm = async (req, res) => {
-  console.log("--> adminCtrl.renderAddUserForm");
+ADMIN_CONTROLLER.renderAddUserForm = async (req, res) => {
+  console.log("--> ADMIN_CONTROLLER.renderAddUserForm");
   res.render("admin/user/add-user");
 };
 
 // AT-SCE - Admin - Users - Add User
-adminCtrl.addUser = async (req, res) => {
-  console.log("--> adminCtrl.addUser");
+ADMIN_CONTROLLER.addUser = async (req, res) => {
+  console.log("--> ADMIN_CONTROLLER.addUser");
 
   try {
     const {
@@ -92,7 +92,7 @@ adminCtrl.addUser = async (req, res) => {
     }
 
     if (userErrors.length > 0) {
-      console.debug("--> adminCtrl.addUser - Validations error");
+      console.debug("--> ADMIN_CONTROLLER.addUser - Validations error");
       res.render("admin/user/add-user", {
         userErrors,
         user_firstName,
@@ -115,9 +115,9 @@ adminCtrl.addUser = async (req, res) => {
     //console.debug("request-->", request);
 
     // Call Create USER - POST /api/v1/users endpoint
-    await sceServiceAPI.createUser(request).then((result) => {
+    await AT_SCE_API_SERVICE.createUser(request).then((result) => {
       if (!result) {
-        console.error("Service unavailable: sceServiceAPI.createUser()");
+        console.error("Service unavailable: AT_SCE_API_SERVICE.createUser()");
         req.flash("error_msg", "Service unavailable");
         res.redirect("/admin/user");
       }
@@ -138,14 +138,14 @@ adminCtrl.addUser = async (req, res) => {
 };
 
 // AT-SCE - Admin - Users - Render Edit User Form
-adminCtrl.renderEditUserForm = async (req, res) => {
-  console.log("--> adminCtrl.renderEditUserForm", req.params.id);
+ADMIN_CONTROLLER.renderEditUserForm = async (req, res) => {
+  console.log("--> ADMIN_CONTROLLER.renderEditUserForm", req.params.id);
   let user = [];
 
   try {
-    const responseUserbyId = await sceServiceAPI.getUserById(req.params.id);
+    const responseUserbyId = await AT_SCE_API_SERVICE.getUserById(req.params.id);
     if (!responseUserbyId) {
-      console.error("Service unavailable: sceServiceAPI.getUserById()");
+      console.error("Service unavailable: AT_SCE_API_SERVICE.getUserById()");
       req.flash("error_msg", "Service unavaible");
     } else {
       user = responseUserbyId.data;
@@ -159,8 +159,8 @@ adminCtrl.renderEditUserForm = async (req, res) => {
 };
 
 // AT-SCE - Admin - Users - Edit User
-adminCtrl.updateUser = async (req, res) => {
-  console.log("--> adminCtrl.updateUser");
+ADMIN_CONTROLLER.updateUser = async (req, res) => {
+  console.log("--> ADMIN_CONTROLLER.updateUser");
 
   const user_id = req.params.id;
   console.log("--> user id:" + user_id);
@@ -197,7 +197,7 @@ adminCtrl.updateUser = async (req, res) => {
     }
 
     if (userErrors.length > 0) {
-      console.debug("--> adminCtrl.updateUser - Validations error");
+      console.debug("--> ADMIN_CONTROLLER.updateUser - Validations error");
       res.render("admin/user/edit-user", {
         userErrors,
         user_id,
@@ -222,9 +222,9 @@ adminCtrl.updateUser = async (req, res) => {
     //console.debug("Request-->", request);
 
     // Call Update USER - PUT /api/v1/users endpoint
-    await sceServiceAPI.updateUser(request).then((result) => {
+    await AT_SCE_API_SERVICE.updateUser(request).then((result) => {
       if (!result) {
-        console.error("Service unavailable: sceServiceAPI.updateUser()");
+        console.error("Service unavailable: AT_SCE_API_SERVICE.updateUser()");
         req.flash("error_msg", "Service unavailable");
         res.redirect("/admin/user");
       }
@@ -245,15 +245,15 @@ adminCtrl.updateUser = async (req, res) => {
 };
 
 // AT-SCE - Admin - Users - Delete User
-adminCtrl.deleteUser = async (req, res) => {
-  console.log("--> adminCtrl.deleteUser");
+ADMIN_CONTROLLER.deleteUser = async (req, res) => {
+  console.log("--> ADMIN_CONTROLLER.deleteUser");
   const user_id = req.params.id;
   console.debug(user_id);
 
   try {
-    const response = await sceServiceAPI.deleteUser(user_id);
+    const response = await AT_SCE_API_SERVICE.deleteUser(user_id);
     if (!response) {
-      console.error("Service unavailable: sceServiceAPI.deleteUser()");
+      console.error("Service unavailable: AT_SCE_API_SERVICE.deleteUser()");
       req.flash("error_msg", "Service unavailable");
       es.redirect("/admin/user");
     }
@@ -270,4 +270,4 @@ adminCtrl.deleteUser = async (req, res) => {
   }
 };
 
-module.exports = adminCtrl;
+module.exports = ADMIN_CONTROLLER;

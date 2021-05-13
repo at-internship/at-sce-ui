@@ -13,11 +13,11 @@
 const sinon = require("sinon");
 const expect = require("chai").expect;
 
-// Admin Controller
-const adminController = require("../../controllers/admin.controller");
+// AT SCE Admin Controller
+const ADMIN_CONTROLLER = require("../../controllers/admin.controller");
 
-// AT SCE Service API
-const sceServiceAPI = require("../../services/at-sce-api.service");
+// AT SCE API Service
+const AT_SCE_API_SERVICE = require("../../services/at-sce-api.service");
 
 describe("TEST: admin.controller.js", function () {
     let getAllUsersStub;
@@ -26,11 +26,11 @@ describe("TEST: admin.controller.js", function () {
     let deleteUserStub;
 
     beforeEach(function () {
-        getAllUsersStub = sinon.stub(sceServiceAPI, "getAllUsers");
-        addUserStub = sinon.stub(sceServiceAPI, "createUser");
-        getUserByIdStub = sinon.stub(sceServiceAPI, "getUserById");
-        updateUserStub = sinon.stub(sceServiceAPI, "updateUser");
-        deleteUserStub = sinon.stub(sceServiceAPI, "deleteUser");
+        getAllUsersStub = sinon.stub(AT_SCE_API_SERVICE, "getAllUsers");
+        addUserStub = sinon.stub(AT_SCE_API_SERVICE, "createUser");
+        getUserByIdStub = sinon.stub(AT_SCE_API_SERVICE, "getUserById");
+        updateUserStub = sinon.stub(AT_SCE_API_SERVICE, "updateUser");
+        deleteUserStub = sinon.stub(AT_SCE_API_SERVICE, "deleteUser");
     });
     afterEach(function () {
         getAllUsersStub.restore();
@@ -44,7 +44,7 @@ describe("TEST: admin.controller.js", function () {
     it("Should render admin Index", function (done) {
         var res = { render: sinon.spy() };
         var req = {};
-        var view = adminController.renderIndex(req, res).then(function () {
+        var view = ADMIN_CONTROLLER.renderIndex(req, res).then(function () {
             expect(res.render.calledOnce).to.be.true;
             done();
         });
@@ -56,7 +56,7 @@ describe("TEST: admin.controller.js", function () {
         var req = { flash: sinon.spy() };
         var users = [];
         getAllUsersStub.returns(Promise.resolve(users));
-        var view = adminController.renderUserList(req, res).then(function() {
+        var view = ADMIN_CONTROLLER.renderUserList(req, res).then(function() {
             expect(res.render.calledOnce).to.be.true;
             done();
         });
@@ -67,7 +67,7 @@ describe("TEST: admin.controller.js", function () {
         var req = { flash: sinon.spy() };
         var users = {};
         getAllUsersStub.returns(Promise.resolve());
-        var view = adminController.renderUserList(req, res).then(function() {
+        var view = ADMIN_CONTROLLER.renderUserList(req, res).then(function() {
             expect(res.render.calledOnce).to.be.true;
             done();
         });
@@ -77,7 +77,7 @@ describe("TEST: admin.controller.js", function () {
         var res = {render:sinon.spy()};
         var req = {};
         getAllUsersStub.returns(Promise.resolve());
-        var view = adminController.renderUserList(req, res).then(function (){
+        var view = ADMIN_CONTROLLER.renderUserList(req, res).then(function (){
             expect(res.render.calledOnce).to.be.true;
             done();
         });
@@ -87,7 +87,7 @@ describe("TEST: admin.controller.js", function () {
     it("Should render add user form", function(done) {
         var res = { render: sinon.spy() };
         var req = { flash: sinon.spy() };
-        var view = adminController.renderAddUserForm(req, res).then(function() {
+        var view = ADMIN_CONTROLLER.renderAddUserForm(req, res).then(function() {
             expect(res.render.calledOnce).to.be.true;
             done();
         });
@@ -114,7 +114,7 @@ describe("TEST: admin.controller.js", function () {
         var err = { response: sinon.spy() };
         var users = [];
         addUserStub.returns(Promise.resolve(err));
-        var view = adminController.addUser(req, res).then(function() {
+        var view = ADMIN_CONTROLLER.addUser(req, res).then(function() {
             expect(res.redirect.calledOnce).to.be.true;
             done();
         }).catch(done);
@@ -129,7 +129,7 @@ describe("TEST: admin.controller.js", function () {
         var req = { flash: sinon.spy() };
         var users = [];
         addUserStub.returns(Promise.resolve(users));
-        var view = adminController.addUser(req, res).then(function() {
+        var view = ADMIN_CONTROLLER.addUser(req, res).then(function() {
             expect(res.render.calledOnce).to.be.false;
             done();
         }).catch(done);
@@ -144,7 +144,7 @@ describe("TEST: admin.controller.js", function () {
         var req = { flash: sinon.spy() };
         var users = [];
         addUserStub.returns(Promise.resolve(users));
-        var view = adminController.addUser(req, res).then(function() {
+        var view = ADMIN_CONTROLLER.addUser(req, res).then(function() {
             expect(res.render.calledOnce).to.be.false;
             done();
         }).catch(done);
@@ -162,7 +162,7 @@ describe("TEST: admin.controller.js", function () {
         var req = { params: { id: 0 }, flash: sinon.spy() };
         var users = { data: [] };
         getAllUsersStub.returns(Promise.resolve(users));
-        var view = adminController.renderEditUserForm(req, res).then(function() {
+        var view = ADMIN_CONTROLLER.renderEditUserForm(req, res).then(function() {
             expect(res.render.calledOnce).to.be.true;
             done();
         }).catch(done);
@@ -180,7 +180,7 @@ describe("TEST: admin.controller.js", function () {
         },
         flash: sinon.spy()
     };
-        var view = adminController.updateUser(req, res).then(function() {
+        var view = ADMIN_CONTROLLER.updateUser(req, res).then(function() {
             expect(res.render.calledOnce).to.be.false;
             done();
         }).catch(done);
@@ -205,7 +205,7 @@ describe("TEST: admin.controller.js", function () {
             },
             flash: sinon.spy()
         };
-        var view = adminController.updateUser(req, res).then(function() {
+        var view = ADMIN_CONTROLLER.updateUser(req, res).then(function() {
             expect(res.render.calledOnce).to.be.true;
             done();
         }).catch(done);
@@ -218,7 +218,7 @@ describe("TEST: admin.controller.js", function () {
     it("Should delete user operation", function() {
         var res = { render: sinon.spy() };
         var req = {};
-        var view = adminController.deleteUser(req, res).then(function() {
+        var view = ADMIN_CONTROLLER.deleteUser(req, res).then(function() {
             expect(res.render.calledOnce).to.be.true;
         });
     });
@@ -234,7 +234,7 @@ describe("TEST: admin.controller.js", function () {
         },
         flash: sinon.spy()
     };
-        var view = adminController.deleteUser(req, res).then(function() {
+        var view = ADMIN_CONTROLLER.deleteUser(req, res).then(function() {
             expect(res.render.calledOnce).to.be.false;
             done();
         }).catch(done);
