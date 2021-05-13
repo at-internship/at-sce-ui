@@ -7,22 +7,26 @@ const git = simpleGit();
 let getLastCommit = async () => {
   try {
     git.init().addRemote("origin", "https://github.com/at-internship/at-sce-ui.git").fetch().log();
+    console.debug("health-check.routes.js - branch: ", getBranchCurrent().toString().trim());
+  
     const results = await Promise.all([
-      git.raw("rev-parse", "origin/" + getBranchCurrent()),
+      git.raw("rev-parse", "origin/" + getBranchCurrent().toString().trim()),
     ]);
+    console.debug("health-check.routes.js - commit: ", results.toString().trim());
     return results.toString().trim();
   } catch (error) {
     console.log(error);
   }
 };
 
-function getBranchCurrent() {
-  if (process.env.NODE_ENV == "test") {
-    return "develop";
-  } else if (process.env.NODE_ENV == "production") {
+let getBranchCurrent = () => {
+  if (process.env.NODE_ENV == "production") {
     return "master";
+  } else {
+    return "develop";
   }
-}
+};
+
 router.get("/", async (_req, res, _next) => {
   const healthcheck = {
     version: packageJ.version,
