@@ -1,29 +1,36 @@
 const express = require("express");
 const router = express.Router();
 const packageJ = require("../../package.json");
-const { getLastCommit } = require('git-last-commit');
+const simpleGit = require("simple-git");
+const git = simpleGit();
 
- function getGitCommit() {
-  return new Promise((res, rej) => {
-    getLastCommit((err, commit) => {
-      if (err) {
-        console.error("health-check.routes.js - Error: ", err);
-        return rej(err);
-      }
-      console.debug("health-check.routes.js - getLastCommit: ", commit);
-      return res(commit);
-    });
-  });
+let getLastCommit = async () => {
+  try {
+    git.init().addRemote("origin", "https://github.com/at-internship/at-sce-ui.git").fetch().log();
+    const results = await Promise.all([
+      git.raw("rev-parse", "origin/" + getBranchCurrent()),
+    ]);
+    return results.toString().trim();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+function getBranchCurrent() {
+  if (process.env.NODE_ENV == "test") {
+    return "develop";
+  } else if (process.env.NODE_ENV == "production") {
+    return "master";
+  }
 }
-
 router.get("/", async (_req, res, _next) => {
-
   const healthcheck = {
     version: packageJ.version,
     uptime: process.uptime(),
     message: "LIVE",
     timestamp: Date.now(),
-    commit: await getGitCommit(),
+    branch: await getBranchCurrent(),
+    commit: getLastCommit(),
     flags: {
       AT_SSO_SERVICE_URI_ENABLED: process.env.AT_SSO_SERVICE_URI_ENABLED,
       AT_SSO_WEB_TOKEN_ENABLED: process.env.AT_SSO_WEB_TOKEN_ENABLED,

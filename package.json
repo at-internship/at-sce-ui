@@ -38,6 +38,7 @@
     "node-jsencrypt": "^1.0.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "simple-git": "^2.39.0",
     "sinon": "^9.2.1"
   },
   "devDependencies": {
