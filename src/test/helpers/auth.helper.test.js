@@ -4,7 +4,7 @@ const sinon = require("sinon");
 const expect = require("chai").expect;
 
 // AT SCE Auth Helper
-const authHelper = require("../../helpers/auth.helper");
+const AUTH_HELPER = require("../../helpers/auth.helper");
 
 describe("TEST: auth.helper.js", function() {
     

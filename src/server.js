@@ -12,10 +12,6 @@ const passport = require("passport");
 const app = express();
 require("./config/passport");
 
-if (process.env.NODE_ENV == "production" || process.env.NODE_ENV == "test") {
-  require('newrelic');
-}
-
 // Settings
 app.set("port", process.env.PORT || 4000);
 app.set("views", path.join(__dirname, "views"));

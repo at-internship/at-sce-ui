@@ -1,3 +1,14 @@
+/**
+ * AT SCE UI - AT HEALTH CHECK Routes.
+ * Copyright 2021 AgileThought, Inc.
+ *
+ * General functions for health-check.routes.
+ *
+ * @author @at-internship
+ * @version 1.0
+ *
+ */
+
 const express = require("express");
 const router = express.Router();
 const packageJ = require("../../package.json");

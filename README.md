@@ -32,7 +32,7 @@ Heroku App QA - https://at-sce-ui-qa.herokuapp.com/
 ## Built & Run
 
 * $ npm install
-* $ npm-check-updates -D
+* $ npm npm-check-updates -D
 * $ npm run dev
 
 ### Unit Test

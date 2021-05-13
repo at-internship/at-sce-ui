@@ -1,5 +1,5 @@
 /**
- * AT SCE UI - AT SCE Service API.
+ * AT SCE UI - AT SCE API Service.
  * Copyright 2021 AgileThought, Inc.
  *
  * Functions for at-sce-api.service endpoint.
@@ -13,8 +13,8 @@
 const axios = require("axios");
 const AT_SCE_SERVICE = {};
 
-// TODO: Just For Testibng
-//require("dotenv").config();
+// TODO: Just For Testing
+// require("dotenv").config();
 
 // MICROSERVICE - HEROKU - SCE
 const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;

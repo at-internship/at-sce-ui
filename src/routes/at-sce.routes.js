@@ -2,7 +2,7 @@
  * AT SCE UI - AT SCE Routes.
  * Copyright 2021 AgileThought, Inc.
  *
- * General functions for at-sce-routes.
+ * General functions for at-sce.routes.
  *
  * @author @at-internship
  * @version 1.0
@@ -14,10 +14,10 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 
-// Helpers
+// AT SCE Auth Helper
 const { isAuthenticated } = require("../helpers/auth.helper");
 
-// SCE Controller
+// AT SCE Controller
 const {
   renderSigninForm,
   signin,

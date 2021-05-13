@@ -8,6 +8,7 @@
  * @version 1.0
  *
  */
+
 // Constants
 const expect = require("chai").expect;
 const nock = require("nock");

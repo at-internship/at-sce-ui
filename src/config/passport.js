@@ -16,10 +16,10 @@ const LocalStrategy = require("passport-local").Strategy;
 // LOGIN_ENCRYPTION_ENABLED FLAG
 const LOGIN_ENCRYPTION_ENABLED = process.env.LOGIN_ENCRYPTION_ENABLED;
 
-// MICROSERVICE - HEROKU - AT SCE API
-const sceServiceAPI = require("../services/at-sce-api.service");
+// AT SCE API Service
+const AT_SCE_API_SERVICE = require("../services/at-sce-api.service");
 
-// Helpers
+// AT SCE Auth Helper
 const { encrypt } = require("../helpers/auth.helper");
 
 passport.use(
@@ -38,7 +38,7 @@ passport.use(
 
       try {
         // Validate user
-        const userAuth = await sceServiceAPI.login(request);
+        const userAuth = await AT_SCE_API_SERVICE.login(request);
         console.debug("userAuth-->", userAuth);
 
         if (!userAuth && !userAuth.data.id) {
@@ -46,7 +46,7 @@ passport.use(
           return done(null, false, { message: "Not User found." });
         } else {
           // Get User details
-          const user = await sceServiceAPI.getUserById(userAuth.data.id); 
+          const user = await AT_SCE_API_SERVICE.getUserById(userAuth.data.id); 
           console.debug("user-->", user);
           return done(null, user);
         }
@@ -63,6 +63,6 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser(async (id, done) => {
-  const user = await sceServiceAPI.getUserById(id);
+  const user = await AT_SCE_API_SERVICE.getUserById(id);
   done(null, user);
 });

@@ -1,5 +1,5 @@
 /**
- * AT SCE UI - AT SCE Service API Test.
+ * AT SCE UI - AT SCE API Service Test.
  * Copyright 2021 AgileThought, Inc.
  *
  * Integration Test for at-sce-api endpoint.
@@ -8,6 +8,7 @@
  * @version 1.0
  *
  */
+
  // Constants
  const chai = require('chai');
  const chaiHttp = require('chai-http');
@@ -25,7 +26,7 @@ const AT_SSO_SERVICE_URI_ENABLED = process.env.AT_SSO_SERVICE_URI_ENABLED;
 const AT_SERVICE_URI = (AT_SSO_SERVICE_URI_ENABLED == 'true') ? AT_SSO_SERVICE_URI : AT_SCE_SERVICE_URI;
 console.log(`at-sce.service.integration.test - AT_SERVICE_URI: ${AT_SERVICE_URI}`);
 
- // AT SCE Service API
+ // AT SCE API Service
 const SCE_SERVICE_API = AT_SERVICE_URI + '/v1/users';
 const SCE_SERVICE_API_400 = AT_SERVICE_URI + '/v1/usuarios';
 
