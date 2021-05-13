@@ -34,7 +34,7 @@ router.get("/", async (_req, res, _next) => {
     message: "LIVE",
     timestamp: Date.now(),
     branch: await getBranchCurrent(),
-    commit: getLastCommit(),
+    commit: String(await getLastCommit()),
     flags: {
       AT_SSO_SERVICE_URI_ENABLED: process.env.AT_SSO_SERVICE_URI_ENABLED,
       AT_SSO_WEB_TOKEN_ENABLED: process.env.AT_SSO_WEB_TOKEN_ENABLED,
