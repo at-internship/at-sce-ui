@@ -7,7 +7,9 @@ The purpose of this project is to help Interns to develop skills about how to es
 The software development cost calculator is based on the technology stack used in the previous AT Internship 2020 program.
 
 GitHub - https://github.com/at-internship/at-sce-ui
+
 Heroku App PROD - https://at-sce-ui.herokuapp.com/
+
 Heroku App QA - https://at-sce-ui-qa.herokuapp.com/
 
 ## Getting Started 
@@ -54,9 +56,9 @@ Heroku App QA - https://at-sce-ui-qa.herokuapp.com/
 | Handlebars | JavaScript Templates |
 | Mocha & Chai | Unit Testing |
 | MongoDB | NoSQL Database |
-| MongoDBCompass | MongoDB GUI |
+| MongoDB Compass | MongoDB GUI |
 | Heroku | Platform as a Service |
-| Axios | Services Manage |
+| Axios | JavaScript library to perform HTTP requests |
 
 ## Contributor Team
 
@@ -73,7 +75,7 @@ _KakashiTeam7_
 | Juan Felipe Galvez Suarez | juan.galvez@agilethought.com |
 | Jose Guadalupe Deniz Mancilla | jose.deniz@agilethought.com |
 
-_Game of front team_
+_Game of Front Team_
 
 | Mentor | Email |
 | --- | --- |
