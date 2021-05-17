@@ -49,9 +49,14 @@ AT_SCE_CONTROLLER.calculator = async (req, res) => {
   let histories = [];
 
   try {
-    const user = req.user.data.id;
-    //console.debug("User-->", user);
-    const responseHistory = await AT_SCE_API_SERVICE.getHistory(user);
+    const user = req.user.data;
+    console.debug("at-sce.controller.js - User-->", user);
+    console.debug("at-sce.controller.js - User-->", user.id);
+
+    const token = user.userAuth.access_token;
+    console.debug("at-sce.controller.js - token-->", token);
+
+    const responseHistory = await AT_SCE_API_SERVICE.getHistory(user.id, token);
     //console.debug("Response --->", responseHistory);
 
     if (responseHistory === null || responseHistory === undefined) {
@@ -61,7 +66,7 @@ AT_SCE_CONTROLLER.calculator = async (req, res) => {
       histories = responseHistory.data;
     }
   } catch (error) {
-    console.error(error.message);
+    console.error("at-sce-api.controller.js - ", error.message);
   } finally {
     res.render("calculator", { histories });
   }

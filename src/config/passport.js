@@ -12,6 +12,7 @@
 // Constants
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+let userAuthToken = {};
 
 // LOGIN_ENCRYPTION_ENABLED FLAG
 const LOGIN_ENCRYPTION_ENABLED = process.env.LOGIN_ENCRYPTION_ENABLED;
@@ -37,18 +38,19 @@ passport.use(
       console.debug("Request-->", request);
 
       try {
-        // Validate user
+        // Validate User
         const userAuth = await AT_SCE_API_SERVICE.login(request);
-        console.debug("userAuth-->", userAuth);
+        //console.debug("userAuth-->", userAuth);
 
         if (!userAuth && !userAuth.data._id) {
           console.error("Not User found: ", email);
           return done(null, false, { message: "Not User found." });
         } else {
           // Get User details
-          const user = await AT_SCE_API_SERVICE.getUserById(userAuth.data._id);
-          user.data.userAuth = userAuth.data;
-          console.debug("User-->", user);
+          let user = await AT_SCE_API_SERVICE.getUserById(userAuth.data._id);
+          user.data["userAuth"] = userAuth.data;
+          //console.debug("User-->", user);
+          userAuthToken = userAuth.data;
           return done(null, user);
         }
       } catch (err) {
@@ -65,5 +67,6 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   const user = await AT_SCE_API_SERVICE.getUserById(id);
+  user.data["userAuth"] = userAuthToken;
   done(null, user);
 });

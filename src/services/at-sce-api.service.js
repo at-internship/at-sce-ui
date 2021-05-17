@@ -55,7 +55,7 @@ AT_SCE_SERVICE.getAllUsers = () => {
     method: "GET",
     url: `${AT_SERVICE_URI}/v1/users`,
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
     },
   })
 };
@@ -66,7 +66,7 @@ AT_SCE_SERVICE.getUserById = (id) => {
     method: "GET",
     url: `${AT_SERVICE_URI}/v1/users/${id}`,
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
     },
   })
 };
@@ -78,7 +78,7 @@ AT_SCE_SERVICE.createUser = (data) => {
     url: `${AT_SERVICE_URI}/v1/users`,
     data: data,
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
     },
   })
 };
@@ -90,7 +90,7 @@ AT_SCE_SERVICE.updateUser = (data) => {
     url: `${AT_SERVICE_URI}/v1/users/${data.id}`,
     data: data,
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
     },
   })
 };
@@ -101,18 +101,19 @@ AT_SCE_SERVICE.deleteUser = (id) => {
     method: "DELETE",
     url: `${AT_SERVICE_URI}/v1/users/${id}`,
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
     },
   })
 };
 
 // Operation: Get HISTORY by USER -  GET /api/v1/histories?userid={id}
-AT_SCE_SERVICE.getHistory = (id) => {
+AT_SCE_SERVICE.getHistory = (id, token) => {
   return axios({
     method: "GET",
     url: `${AT_SCE_SERVICE_URI}/v1/histories?userid=${id}`,
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
+      //'Authorization': `Bearer ${token}`
     },
   })
 };
@@ -124,7 +125,7 @@ AT_SCE_SERVICE.createHistory = (data) => {
     url: `${AT_SCE_SERVICE_URI}/v1/histories?userid=${data.id} `,
     data: data,
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
     },
   })
 };
