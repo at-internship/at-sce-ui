@@ -29,11 +29,13 @@ const AT_SSO_SERVICE_URI_ENABLED = process.env.AT_SSO_SERVICE_URI_ENABLED;
 const AT_SERVICE_URI = (AT_SSO_SERVICE_URI_ENABLED == 'true') ? AT_SSO_SERVICE_URI : AT_SCE_SERVICE_URI;
 console.log(`at-sce-api.service - AT_SERVICE_URI: ${AT_SERVICE_URI}`);
 
+// AT_SSO_WEB_TOKEN_CLIENT & SECRET
+const AT_SSO_WEB_TOKEN_CLIENT = process.env.AT_SSO_WEB_TOKEN_CLIENT;
+const AT_SSO_WEB_TOKEN_SECRET = process.env.AT_SSO_WEB_TOKEN_SECRET;
+
 // Operation: Login - POST /api/v1/login
 AT_SCE_SERVICE.login = (data) => {
-  const username = 'at-sce';
-  const password = 'secret';
-  const token = `${username}:${password}`;
+  const token = `${AT_SSO_WEB_TOKEN_CLIENT}:${AT_SSO_WEB_TOKEN_SECRET}`;
   const encodedToken = Buffer.from(token).toString('base64');
   console.debug("encodedToken-->", encodedToken);
   var qs = require('qs');
@@ -42,8 +44,8 @@ AT_SCE_SERVICE.login = (data) => {
     method: "POST",
     url: `${AT_SERVICE_URI}/v1/login`,
     headers: {
-      'Authorization': `Basic ${encodedToken}`, 
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': `Basic ${encodedToken}`
     },
     data: qs.stringify(data)
   });
@@ -113,19 +115,20 @@ AT_SCE_SERVICE.getHistory = (id, token) => {
     url: `${AT_SCE_SERVICE_URI}/v1/histories?userid=${id}`,
     headers: {
       "Content-Type": "application/json",
-      //'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`
     },
   })
 };
 
 // Operation: Save button POST /api/v1/histories?userid={id}
-AT_SCE_SERVICE.createHistory = (data) => {
+AT_SCE_SERVICE.createHistory = (data, token) => {
   return axios({
     method: "POST",
     url: `${AT_SCE_SERVICE_URI}/v1/histories?userid=${data.id} `,
     data: data,
     headers: {
       "Content-Type": "application/json",
+      'Authorization': `Bearer ${token}`
     },
   })
 };

@@ -50,14 +50,13 @@ AT_SCE_CONTROLLER.calculator = async (req, res) => {
 
   try {
     const user = req.user.data;
-    console.debug("at-sce.controller.js - User-->", user);
-    console.debug("at-sce.controller.js - User-->", user.id);
+    console.debug("at-sce.controller.js - calculator - User-->", user);
 
     const token = user.userAuth.access_token;
-    console.debug("at-sce.controller.js - token-->", token);
+    console.debug("at-sce.controller.js - calculator - token-->", token);
 
     const responseHistory = await AT_SCE_API_SERVICE.getHistory(user.id, token);
-    //console.debug("Response --->", responseHistory);
+    console.debug("at-sce-api.controller.js - calculator - Response-->", responseHistory);
 
     if (responseHistory === null || responseHistory === undefined) {
       console.error("Service unavailable: AT_SCE_API_SERVICE.getHistory()");
@@ -65,8 +64,12 @@ AT_SCE_CONTROLLER.calculator = async (req, res) => {
     } else {
       histories = responseHistory.data;
     }
-  } catch (error) {
-    console.error("at-sce-api.controller.js - ", error.message);
+  } catch (err) {
+    console.error("at-sce.controller.js - calculator - ", err.response);
+    if (err.response && err.response.data) {
+      const errorMsg = err.response.data.message;
+      req.flash("error_msg", errorMsg);
+    }
   } finally {
     res.render("calculator", { histories });
   }
@@ -77,7 +80,7 @@ AT_SCE_CONTROLLER.addHistory = async (req, res) => {
   console.log("--> AT_SCE_CONTROLLER.addHistory");
   const user_id = req.user.data.id;
   const status = req.user.data.status;
-  console.debug("--> user id:" + user_id);
+  console.debug("at-sce.controller.js - addHistory - user_id-->" + user_id);
 
   try {
     const {
@@ -100,7 +103,7 @@ AT_SCE_CONTROLLER.addHistory = async (req, res) => {
       totalRevenue,
     } = req.body;
     const userErrors = [];
-    console.debug(req.body);
+    //console.debug(req.body);
 
     // Validations
     if (!rent) {
@@ -173,16 +176,18 @@ AT_SCE_CONTROLLER.addHistory = async (req, res) => {
       revenue: parseFloat(totalRevenue).toFixed(2),
       status: status,
     };
-    console.debug("Request-->", request);
+    console.debug("at-sce.controller.js - addHistory - Request-->", request);
+
+    const token = user.userAuth.access_token;
+    console.debug("at-sce.controller.js - addHistory - token-->", token);
 
     // Call Create History - POST /api/v1/histories?userid={id}
-    await AT_SCE_API_SERVICE.createHistory(request).then((result) => {
+    await AT_SCE_API_SERVICE.createHistory(request, token).then((result) => {
       if (!result) {
-        console.log("error");
         console.error("Service unavailable: AT_SCE_API_SERVICE.createHistory()");
         req.flash("error_msg", "Service unavailable");
       }
-      console.debug("Result-->", result);
+      console.debug("at-sce.controller.js - addHistory - Result-->", result);
     });
 
     // Redirect
@@ -190,7 +195,7 @@ AT_SCE_CONTROLLER.addHistory = async (req, res) => {
     res.redirect("/calculator");
 
   } catch (err) {
-    console.log(err.response);
+    console.error("at-sce.controller.js - addHistory - ", err.response);
     if (err.response && err.response.data) {
       const errorMsg = err.response.data.message;
       req.flash("error_msg", errorMsg);
