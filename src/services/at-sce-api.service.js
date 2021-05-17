@@ -36,7 +36,8 @@ AT_SCE_SERVICE.login = (data) => {
   const token = `${username}:${password}`;
   const encodedToken = Buffer.from(token).toString('base64');
   console.debug("encodedToken-->", encodedToken);
-
+  var qs = require('qs');
+  
   return axios({
     method: "POST",
     url: `${AT_SERVICE_URI}/v1/login`,
@@ -44,7 +45,7 @@ AT_SCE_SERVICE.login = (data) => {
       'Authorization': `Basic ${encodedToken}`, 
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-    data: data
+    data: qs.stringify(data)
   }).catch(function (error) {
     console.log(error);
   });
