@@ -31,13 +31,22 @@ console.log(`at-sce-api.service - AT_SERVICE_URI: ${AT_SERVICE_URI}`);
 
 // Operation: Login - POST /api/v1/login
 AT_SCE_SERVICE.login = (data) => {
+  const username = 'at-sce';
+  const password = 'secret';
+  const token = `${username}:${password}`;
+  const encodedToken = Buffer.from(token).toString('base64');
+  console.debug("encodedToken-->", encodedToken);
+
   return axios({
     method: "POST",
     url: `${AT_SERVICE_URI}/v1/login`,
-    data: data,
     headers: {
-      "content-type": "application/json",
+      'Authorization': `Basic ${encodedToken}`, 
+      'Content-Type': 'application/x-www-form-urlencoded'
     },
+    data: data
+  }).catch(function (error) {
+    console.log(error);
   });
 };
 

@@ -31,7 +31,8 @@ passport.use(
     async (email, password, done) => {
       // Match Email's User
       const request = {
-        email: email,
+        grant_type: 'password',
+        username: email,
         password: (LOGIN_ENCRYPTION_ENABLED == 'true') ? (await encrypt(password)).content : password
       };
       console.debug("Request-->", request);
@@ -47,7 +48,7 @@ passport.use(
         } else {
           // Get User details
           const user = await AT_SCE_API_SERVICE.getUserById(userAuth.data.id); 
-          console.debug("user-->", user);
+          console.debug("User-->", user);
           return done(null, user);
         }
       } catch (err) {
