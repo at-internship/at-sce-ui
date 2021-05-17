@@ -21,7 +21,6 @@ const AT_SCE_API_SERVICE = require("../services/at-sce-api.service");
 
 // AT SCE Auth Helper
 const { encrypt } = require("../helpers/auth.helper");
-
 passport.use(
   new LocalStrategy(
     {
@@ -42,12 +41,13 @@ passport.use(
         const userAuth = await AT_SCE_API_SERVICE.login(request);
         console.debug("userAuth-->", userAuth);
 
-        if (!userAuth && !userAuth.data.id) {
+        if (!userAuth && !userAuth.data._id) {
           console.error("Not User found: ", email);
           return done(null, false, { message: "Not User found." });
         } else {
           // Get User details
-          const user = await AT_SCE_API_SERVICE.getUserById(userAuth.data.id); 
+          const user = await AT_SCE_API_SERVICE.getUserById(userAuth.data._id);
+          user.data.userAuth = userAuth.data;
           console.debug("User-->", user);
           return done(null, user);
         }

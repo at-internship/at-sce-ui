@@ -46,8 +46,6 @@ AT_SCE_SERVICE.login = (data) => {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
     data: qs.stringify(data)
-  }).catch(function (error) {
-    console.log(error);
   });
 };
 
