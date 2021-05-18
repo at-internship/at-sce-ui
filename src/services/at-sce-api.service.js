@@ -2,7 +2,7 @@
  * AT SCE UI - AT SCE API Service.
  * Copyright 2021 AgileThought, Inc.
  *
- * Functions for at-sce-api.service endpoint.
+ * Functions for at-sce-api endpoint.
  *
  * @author @at-internship
  * @version 1.0

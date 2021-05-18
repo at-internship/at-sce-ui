@@ -2,7 +2,7 @@
  * AT SCE UI - AT Admin Routes.
  * Copyright 2021 AgileThought, Inc.
  *
- * General functions for admin.routes.
+ * General functions for admin.routes.js
  *
  * @author @at-internship
  * @version 1.0

@@ -35,12 +35,12 @@ passport.use(
         username: email,
         password: (LOGIN_ENCRYPTION_ENABLED == 'true') ? (await encrypt(password)).content : password
       };
-      console.debug("Request-->", request);
+      console.debug("passport.js - Request-->", request);
 
       try {
         // Validate User
         const userAuth = await AT_SCE_API_SERVICE.login(request);
-        //console.debug("userAuth-->", userAuth);
+        console.debug("passport.js - AT_SCE_API_SERVICE.login - userAuth-->", userAuth);
 
         if (!userAuth && !userAuth.data._id) {
           console.error("Not User found: ", email);
@@ -49,12 +49,12 @@ passport.use(
           // Get User details
           let user = await AT_SCE_API_SERVICE.getUserById(userAuth.data._id);
           user.data["userAuth"] = userAuth.data;
-          //console.debug("User-->", user);
+          console.debug("passport.js - AT_SCE_API_SERVICE.getUserById - User-->", user);
           userAuthToken = userAuth.data;
           return done(null, user);
         }
       } catch (err) {
-        console.error(err.message);
+        console.error("passport.js - ", err.message);
         return done(null, false, { message: "Not User found." });
       }
     }

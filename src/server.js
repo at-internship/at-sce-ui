@@ -88,7 +88,7 @@ app.use("/", require("./routes/at-sce.routes"));
 // AT-SCE Routes - Admin
 app.use("/admin", require("./routes/admin.routes"));
 
-// AT-SCE Healthcheck
+// AT-SCE Health Check
 app.use("/health-check", require("./routes/health-check.routes"));
 
 // Static files

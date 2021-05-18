@@ -2,7 +2,7 @@
  * AT SCE UI - AT HEALTH CHECK Routes.
  * Copyright 2021 AgileThought, Inc.
  *
- * General functions for health-check.routes.
+ * General functions for health-check.routes.js
  *
  * @author @at-internship
  * @version 1.0

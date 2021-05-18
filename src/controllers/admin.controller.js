@@ -2,7 +2,7 @@
  * AT SCE UI - AT Admin Controller.
  * Copyright 2021 AgileThought, Inc.
  *
- * General functions for admin.controller.
+ * General functions for admin.controller.js
  *
  * @author @at-internship
  * @version 1.0
@@ -112,7 +112,7 @@ ADMIN_CONTROLLER.addUser = async (req, res) => {
       password: (CREATE_USER_ENCRYPTION_ENABLED == 'true') ? (await encrypt(user_password)).content : user_password,
       status: parseInt(user_status),
     };
-    //console.debug("request-->", request);
+    console.debug("admin.controller.js - addUser - request-->", request);
 
     // Call Create USER - POST /api/v1/users endpoint
     await AT_SCE_API_SERVICE.createUser(request).then((result) => {
@@ -121,7 +121,7 @@ ADMIN_CONTROLLER.addUser = async (req, res) => {
         req.flash("error_msg", "Service unavailable");
         res.redirect("/admin/user");
       }
-      console.debug("Result-->", result);
+      console.debug("admin.controller.js - addUser - Result-->", result);
     });
 
     // Redirect
@@ -149,10 +149,10 @@ ADMIN_CONTROLLER.renderEditUserForm = async (req, res) => {
       req.flash("error_msg", "Service unavaible");
     } else {
       user = responseUserbyId.data;
-      console.debug(JSON.stringify(responseUserbyId.data));
+      console.debug("admin.controller.js - renderEditUserForm -", JSON.stringify(responseUserbyId.data));
     }
   } catch (err) {
-    console.err(err.message);
+    console.err("admin.controller.js - renderEditUserForm -", err.message);
   } finally {
     res.render("admin/user/edit-user", { user });
   }
@@ -163,11 +163,13 @@ ADMIN_CONTROLLER.updateUser = async (req, res) => {
   console.log("--> ADMIN_CONTROLLER.updateUser");
 
   const user_id = req.params.id;
-  console.log("--> user id:" + user_id);
+  console.debug("admin.controller.js - updateUser - user id-->" + user_id);
+
   if (!user_id) {
     req.flash("error_msg", "User Not Authorized");
     return res.redirect("/admin/user");
   }
+
   try {
     const {
       user_type,
@@ -219,7 +221,7 @@ ADMIN_CONTROLLER.updateUser = async (req, res) => {
       password: (UPDATE_USER_ENCRYPTION_ENABLED == 'true') ? (await encrypt(user_password)).content : user_password,
       status: parseInt(user_status),
     };
-    //console.debug("Request-->", request);
+    console.debug("admin.controller.js - updateUser - Request-->", request);
 
     // Call Update USER - PUT /api/v1/users endpoint
     await AT_SCE_API_SERVICE.updateUser(request).then((result) => {
@@ -247,8 +249,9 @@ ADMIN_CONTROLLER.updateUser = async (req, res) => {
 // AT-SCE - Admin - Users - Delete User
 ADMIN_CONTROLLER.deleteUser = async (req, res) => {
   console.log("--> ADMIN_CONTROLLER.deleteUser");
+
   const user_id = req.params.id;
-  console.debug(user_id);
+  console.debug("admin.controller.js - deleteUser - user_id-->", user_id);
 
   try {
     const response = await AT_SCE_API_SERVICE.deleteUser(user_id);

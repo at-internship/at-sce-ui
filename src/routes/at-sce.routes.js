@@ -2,7 +2,7 @@
  * AT SCE UI - AT SCE Routes.
  * Copyright 2021 AgileThought, Inc.
  *
- * General functions for at-sce.routes.
+ * General functions for at-sce.routes.js
  *
  * @author @at-internship
  * @version 1.0
