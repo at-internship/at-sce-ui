@@ -2,7 +2,7 @@
  * AT SCE UI - AT SCE API Service.
  * Copyright 2021 AgileThought, Inc.
  *
- * Functions for at-sce-api.service endpoint.
+ * Functions for at-sce-api endpoint.
  *
  * @author @at-internship
  * @version 1.0
@@ -29,15 +29,26 @@ const AT_SSO_SERVICE_URI_ENABLED = process.env.AT_SSO_SERVICE_URI_ENABLED;
 const AT_SERVICE_URI = (AT_SSO_SERVICE_URI_ENABLED == 'true') ? AT_SSO_SERVICE_URI : AT_SCE_SERVICE_URI;
 console.log(`at-sce-api.service - AT_SERVICE_URI: ${AT_SERVICE_URI}`);
 
+// AT_SSO_WEB_TOKEN_CLIENT & SECRET
+const AT_SSO_WEB_TOKEN_CLIENT = process.env.AT_SSO_WEB_TOKEN_CLIENT;
+const AT_SSO_WEB_TOKEN_SECRET = process.env.AT_SSO_WEB_TOKEN_SECRET;
+
+const token = `${AT_SSO_WEB_TOKEN_CLIENT}:${AT_SSO_WEB_TOKEN_SECRET}`;
+const authorization_token = Buffer.from(token).toString('base64'); 
+console.debug("authorization_token-->", authorization_token );
+
 // Operation: Login - POST /api/v1/login
 AT_SCE_SERVICE.login = (data) => {
+  var qs = require('qs');
+  
   return axios({
     method: "POST",
     url: `${AT_SERVICE_URI}/v1/login`,
-    data: data,
     headers: {
-      "content-type": "application/json",
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': `Basic ${authorization_token}`
     },
+    data: qs.stringify(data)
   });
 };
 
@@ -47,7 +58,8 @@ AT_SCE_SERVICE.getAllUsers = () => {
     method: "GET",
     url: `${AT_SERVICE_URI}/v1/users`,
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
+      'Authorization': `Basic ${authorization_token}`
     },
   })
 };
@@ -58,7 +70,8 @@ AT_SCE_SERVICE.getUserById = (id) => {
     method: "GET",
     url: `${AT_SERVICE_URI}/v1/users/${id}`,
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
+      'Authorization': `Basic ${authorization_token}`
     },
   })
 };
@@ -70,7 +83,8 @@ AT_SCE_SERVICE.createUser = (data) => {
     url: `${AT_SERVICE_URI}/v1/users`,
     data: data,
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
+      'Authorization': `Basic ${authorization_token}`
     },
   })
 };
@@ -82,7 +96,8 @@ AT_SCE_SERVICE.updateUser = (data) => {
     url: `${AT_SERVICE_URI}/v1/users/${data.id}`,
     data: data,
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
+      'Authorization': `Basic ${authorization_token}`
     },
   })
 };
@@ -93,30 +108,37 @@ AT_SCE_SERVICE.deleteUser = (id) => {
     method: "DELETE",
     url: `${AT_SERVICE_URI}/v1/users/${id}`,
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
+      'Authorization': `Basic ${authorization_token}`
     },
   })
 };
 
+
+/*********************************HISTORIES Endpoints****************************************/
+
+
 // Operation: Get HISTORY by USER -  GET /api/v1/histories?userid={id}
-AT_SCE_SERVICE.getHistory = (id) => {
+AT_SCE_SERVICE.getHistory = (id, access_token) => {
   return axios({
     method: "GET",
     url: `${AT_SCE_SERVICE_URI}/v1/histories?userid=${id}`,
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
+      'Authorization': `Bearer ${access_token}`
     },
   })
 };
 
 // Operation: Save button POST /api/v1/histories?userid={id}
-AT_SCE_SERVICE.createHistory = (data) => {
+AT_SCE_SERVICE.createHistory = (data, access_token) => {
   return axios({
     method: "POST",
     url: `${AT_SCE_SERVICE_URI}/v1/histories?userid=${data.id} `,
     data: data,
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
+      'Authorization': `Bearer ${access_token}`
     },
   })
 };

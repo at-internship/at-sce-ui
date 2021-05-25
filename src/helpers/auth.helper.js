@@ -2,7 +2,7 @@
  * AT SCE UI - AT SCE HELPER.
  * Copyright 2021 AgileThought, Inc.
  *
- * Functions for auth.helper.
+ * Functions for auth.helper.js
  *
  * @author @at-internship
  * @version 1.0

@@ -12,6 +12,7 @@
 // Constants
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+let userAuthToken = {};
 
 // LOGIN_ENCRYPTION_ENABLED FLAG
 const LOGIN_ENCRYPTION_ENABLED = process.env.LOGIN_ENCRYPTION_ENABLED;
@@ -21,7 +22,6 @@ const AT_SCE_API_SERVICE = require("../services/at-sce-api.service");
 
 // AT SCE Auth Helper
 const { encrypt } = require("../helpers/auth.helper");
-
 passport.use(
   new LocalStrategy(
     {
@@ -31,27 +31,30 @@ passport.use(
     async (email, password, done) => {
       // Match Email's User
       const request = {
-        email: email,
+        grant_type: 'password',
+        username: email,
         password: (LOGIN_ENCRYPTION_ENABLED == 'true') ? (await encrypt(password)).content : password
       };
-      console.debug("Request-->", request);
+      console.debug("passport.js - Request-->", request);
 
       try {
-        // Validate user
+        // Validate User
         const userAuth = await AT_SCE_API_SERVICE.login(request);
-        console.debug("userAuth-->", userAuth);
+        console.debug("passport.js - AT_SCE_API_SERVICE.login - userAuth-->", userAuth);
 
-        if (!userAuth && !userAuth.data.id) {
+        if (!userAuth && !userAuth.data._id) {
           console.error("Not User found: ", email);
           return done(null, false, { message: "Not User found." });
         } else {
           // Get User details
-          const user = await AT_SCE_API_SERVICE.getUserById(userAuth.data.id); 
-          console.debug("user-->", user);
+          let user = await AT_SCE_API_SERVICE.getUserById(userAuth.data._id);
+          user.data["userAuth"] = userAuth.data;
+          console.debug("passport.js - AT_SCE_API_SERVICE.getUserById - User-->", user);
+          userAuthToken = userAuth.data;
           return done(null, user);
         }
       } catch (err) {
-        console.error(err.message);
+        console.error("passport.js - ", err.message);
         return done(null, false, { message: "Not User found." });
       }
     }
@@ -64,5 +67,6 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   const user = await AT_SCE_API_SERVICE.getUserById(id);
+  user.data["userAuth"] = userAuthToken;
   done(null, user);
 });
