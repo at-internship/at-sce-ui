@@ -53,7 +53,7 @@ AT_SCE_CONTROLLER.calculator = async (req, res) => {
     console.debug("at-sce.controller.js - calculator - User-->", user);
 
     const token = user.userAuth.access_token;
-    console.debug("at-sce.controller.js - calculator - token-->", token);
+    console.debug("at-sce.controller.js - calculator - token-->", token); // access_token
 
     const responseHistory = await AT_SCE_API_SERVICE.getHistory(user.id, token);
     console.debug("at-sce-api.controller.js - calculator - Response-->", responseHistory);
@@ -78,8 +78,9 @@ AT_SCE_CONTROLLER.calculator = async (req, res) => {
 // AT-SCE - Add History
 AT_SCE_CONTROLLER.addHistory = async (req, res) => {
   console.log("--> AT_SCE_CONTROLLER.addHistory");
-  const user_id = req.user.data.id;
-  const status = req.user.data.status;
+  const user = req.user.data;
+  const user_id = user.id;
+  const status = user.status;
   console.debug("at-sce.controller.js - addHistory - user_id-->" + user_id);
 
   try {
@@ -179,7 +180,7 @@ AT_SCE_CONTROLLER.addHistory = async (req, res) => {
     console.debug("at-sce.controller.js - addHistory - Request-->", request);
 
     const token = user.userAuth.access_token;
-    console.debug("at-sce.controller.js - addHistory - token-->", token);
+    console.debug("at-sce.controller.js - addHistory - token-->", token); // access_token
 
     // Call Create History - POST /api/v1/histories?userid={id}
     await AT_SCE_API_SERVICE.createHistory(request, token).then((result) => {
