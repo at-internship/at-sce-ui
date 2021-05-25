@@ -34,8 +34,8 @@ const AT_SSO_WEB_TOKEN_CLIENT = process.env.AT_SSO_WEB_TOKEN_CLIENT;
 const AT_SSO_WEB_TOKEN_SECRET = process.env.AT_SSO_WEB_TOKEN_SECRET;
 
 const token = `${AT_SSO_WEB_TOKEN_CLIENT}:${AT_SSO_WEB_TOKEN_SECRET}`;
-const access_token = Buffer.from(token).toString('base64'); 
-console.debug("encodedToken-->", access_token);
+const authorization_token = Buffer.from(token).toString('base64'); 
+console.debug("authorization_token-->", authorization_token );
 
 // Operation: Login - POST /api/v1/login
 AT_SCE_SERVICE.login = (data) => {
@@ -46,7 +46,7 @@ AT_SCE_SERVICE.login = (data) => {
     url: `${AT_SERVICE_URI}/v1/login`,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': `Basic ${access_token}`
+      'Authorization': `Basic ${authorization_token}`
     },
     data: qs.stringify(data)
   });
@@ -59,7 +59,7 @@ AT_SCE_SERVICE.getAllUsers = () => {
     url: `${AT_SERVICE_URI}/v1/users`,
     headers: {
       "Content-Type": "application/json",
-      'Authorization': `Basic ${access_token}`
+      'Authorization': `Basic ${authorization_token}`
     },
   })
 };
@@ -71,7 +71,7 @@ AT_SCE_SERVICE.getUserById = (id) => {
     url: `${AT_SERVICE_URI}/v1/users/${id}`,
     headers: {
       "Content-Type": "application/json",
-      'Authorization': `Basic ${access_token}`
+      'Authorization': `Basic ${authorization_token}`
     },
   })
 };
@@ -84,7 +84,7 @@ AT_SCE_SERVICE.createUser = (data) => {
     data: data,
     headers: {
       "Content-Type": "application/json",
-      'Authorization': `Basic ${access_token}`
+      'Authorization': `Basic ${authorization_token}`
     },
   })
 };
@@ -97,7 +97,7 @@ AT_SCE_SERVICE.updateUser = (data) => {
     data: data,
     headers: {
       "Content-Type": "application/json",
-      'Authorization': `Basic ${access_token}`
+      'Authorization': `Basic ${authorization_token}`
     },
   })
 };
@@ -109,7 +109,7 @@ AT_SCE_SERVICE.deleteUser = (id) => {
     url: `${AT_SERVICE_URI}/v1/users/${id}`,
     headers: {
       "Content-Type": "application/json",
-      'Authorization': `Basic ${access_token}`
+      'Authorization': `Basic ${authorization_token}`
     },
   })
 };
