@@ -52,10 +52,10 @@ AT_SCE_CONTROLLER.calculator = async (req, res) => {
     const user = req.user.data;
     console.debug("at-sce.controller.js - calculator - User-->", user);
 
-    const token = user.userAuth.access_token;
-    console.debug("at-sce.controller.js - calculator - token-->", token); // access_token
+    const access_token = user.userAuth.access_token;
+    console.debug("at-sce.controller.js - calculator - token-->", access_token);
 
-    const responseHistory = await AT_SCE_API_SERVICE.getHistory(user.id, token);
+    const responseHistory = await AT_SCE_API_SERVICE.getHistory(user.id, access_token);
     console.debug("at-sce-api.controller.js - calculator - Response-->", responseHistory);
 
     if (responseHistory === null || responseHistory === undefined) {
@@ -179,11 +179,11 @@ AT_SCE_CONTROLLER.addHistory = async (req, res) => {
     };
     console.debug("at-sce.controller.js - addHistory - Request-->", request);
 
-    const token = user.userAuth.access_token;
-    console.debug("at-sce.controller.js - addHistory - token-->", token); // access_token
+    const access_token = user.userAuth.access_token;
+    console.debug("at-sce.controller.js - addHistory - token-->", access_token);
 
     // Call Create History - POST /api/v1/histories?userid={id}
-    await AT_SCE_API_SERVICE.createHistory(request, token).then((result) => {
+    await AT_SCE_API_SERVICE.createHistory(request, access_token).then((result) => {
       if (!result) {
         console.error("Service unavailable: AT_SCE_API_SERVICE.createHistory()");
         req.flash("error_msg", "Service unavailable");
