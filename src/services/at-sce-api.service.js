@@ -20,7 +20,7 @@ const AT_SCE_SERVICE = {};
 const AT_SCE_SERVICE_URI = process.env.AT_SCE_SERVICE_URI;
 console.debug(`at-sce-api.service - AT_SCE_SERVICE_URI: ${AT_SCE_SERVICE_URI}`);
 
-// MICROSERVICE - HEROKU - SS0
+// MICROSERVICE - HEROKU - SSO
 const AT_SSO_SERVICE_URI = process.env.AT_SSO_SERVICE_URI;
 console.debug(`at-sce-api.service - AT_SSO_SERVICE_URI: ${AT_SSO_SERVICE_URI}`);
 
@@ -36,6 +36,8 @@ const AT_SSO_WEB_TOKEN_SECRET = process.env.AT_SSO_WEB_TOKEN_SECRET;
 const token = `${AT_SSO_WEB_TOKEN_CLIENT}:${AT_SSO_WEB_TOKEN_SECRET}`;
 const authorization_token = Buffer.from(token).toString('base64'); 
 console.debug("authorization_token-->", authorization_token );
+
+/**************************** USERS Endpoints ****************************/
 
 // Operation: Login - POST /api/v1/login
 AT_SCE_SERVICE.login = (data) => {
@@ -114,9 +116,7 @@ AT_SCE_SERVICE.deleteUser = (id) => {
   })
 };
 
-
-/*********************************HISTORIES Endpoints****************************************/
-
+/**************************** HISTORIES Endpoints ****************************/
 
 // Operation: Get HISTORY by USER -  GET /api/v1/histories?userid={id}
 AT_SCE_SERVICE.getHistory = (id, access_token) => {

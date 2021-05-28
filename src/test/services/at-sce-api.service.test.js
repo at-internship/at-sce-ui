@@ -1,5 +1,5 @@
 /**
- * AT SCE UI - AT SCE Service API Test.
+ * AT SCE UI - AT SCE API Service Test.
  * Copyright 2021 AgileThought, Inc.
  *
  * Test for at-sce-api.service endpoint.
@@ -25,7 +25,7 @@ const AT_SSO_SERVICE_URI = process.env.AT_SSO_SERVICE_URI;
 // AT_SSO_SERVICE_URI_ENABLED FLAG
 const AT_SSO_SERVICE_URI_ENABLED = process.env.AT_SSO_SERVICE_URI_ENABLED;
 const AT_SERVICE_URI = (AT_SSO_SERVICE_URI_ENABLED == 'true') ? AT_SSO_SERVICE_URI : AT_SCE_SERVICE_URI;
-console.log(`at-sce.service.test - AT_SERVICE_URI: ${AT_SERVICE_URI}`);
+console.log(`at-sce-api.service.test - AT_SERVICE_URI: ${AT_SERVICE_URI}`);
 
 // Operations
 const login = AT_SCE_SERVICE_API.login
@@ -341,6 +341,8 @@ describe("TEST: at-sce-api.service.js", () => {
     nock(AT_SERVICE_URI).post("/v1/histories?userid=604fc4def21087344f67ea38").reply(400, historyResponse_add_BadRequest);
   });
 
+  /**************************** USERS Test ****************************/
+
   // Operation: Get ALL USERS - GET/api/v1/users - BE Success (Happy Path)
   it("Should Get All Users - Call GET/api/v1/users - BE Success (Happy Path)", () => {
     return getAllUsers().then((users_response) => {      
@@ -377,47 +379,6 @@ describe("TEST: at-sce-api.service.js", () => {
   it("Should Create User - Call POST /api/v1/users - BE Error - 400 Bad Request", () => {
     return createUser_error(users_data_add_error).then((response) => {
      
-    }).catch((error)=>{
-        expect(error.response.status).to.equal(400);
-        expect(error.response.data.body.error).to.equal("Bad Request");
-    });
-  });
-
-  it("Should Get All History - Call GET /api/v1/histories?userid={id} - BE Success (Happy Path)", () => {
-    return getHistory("604fc4def21087344f67ea38").then((response) => {
-      // Response Status
-      expect(response.status).to.equal(200);
-
-      // Response
-      expect(response.data.body).to.have.property("id");
-      expect(response.data.body).to.have.property("id").equals("6064f7c9691a1d135326a029");
-    });
-  });
-
-  it("Should Get All History - Call GET /api/v1/histories?userid={id} - BE Success (Happy Path)-Empty Array", () => {
-    return getHistory_error("604fc4def21087344f67ea39").then((response) => {
-      // Response Status
-      expect(response.status).to.equal(200);
-
-      // Response
-      expect(response.data.body).to.be.an("array").that.is.empty;
-    });
-  });
-
-  it("Should Create Histor - Call POST /api/v1/histories?userid={id} - BE Success (Happy Path)", () => {
-    return createHistory(historyData_add).then((response) => {
-      // Response Status
-      expect(response.status).to.equal(201);
-
-      // Response
-      expect(response.data.body).to.have.property("id");
-      expect(response.data.body.id).to.equal("12345678910");
-    });
-  });
-
-  it("Should Create History - Call POST /api/v1/histories?userid={id} - BE Error - 400 Bad Request", () => {
-    return createHistory_error(historyData_add_BadRequest).then((response) => {
-
     }).catch((error)=>{
         expect(error.response.status).to.equal(400);
         expect(error.response.data.body.error).to.equal("Bad Request");
@@ -490,6 +451,49 @@ describe("TEST: at-sce-api.service.js", () => {
     }).catch((error)=>{
         expect(error.response.status).to.equal(404);
         expect(error.response.data.body.error).to.equal("Not Found");
+    });
+  });
+
+  /**************************** HISTORIES Test ****************************/
+
+  it("Should Get All History - Call GET /api/v1/histories?userid={id} - BE Success (Happy Path)", () => {
+    return getHistory("604fc4def21087344f67ea38").then((response) => {
+      // Response Status
+      expect(response.status).to.equal(200);
+
+      // Response
+      expect(response.data.body).to.have.property("id");
+      expect(response.data.body).to.have.property("id").equals("6064f7c9691a1d135326a029");
+    });
+  });
+
+  it("Should Get All History - Call GET /api/v1/histories?userid={id} - BE Success (Happy Path)-Empty Array", () => {
+    return getHistory_error("604fc4def21087344f67ea39").then((response) => {
+      // Response Status
+      expect(response.status).to.equal(200);
+
+      // Response
+      expect(response.data.body).to.be.an("array").that.is.empty;
+    });
+  });
+
+  it("Should Create Histor - Call POST /api/v1/histories?userid={id} - BE Success (Happy Path)", () => {
+    return createHistory(historyData_add).then((response) => {
+      // Response Status
+      expect(response.status).to.equal(201);
+
+      // Response
+      expect(response.data.body).to.have.property("id");
+      expect(response.data.body.id).to.equal("12345678910");
+    });
+  });
+
+  it("Should Create History - Call POST /api/v1/histories?userid={id} - BE Error - 400 Bad Request", () => {
+    return createHistory_error(historyData_add_BadRequest).then((response) => {
+
+    }).catch((error)=>{
+        expect(error.response.status).to.equal(400);
+        expect(error.response.data.body.error).to.equal("Bad Request");
     });
   });
 

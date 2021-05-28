@@ -1,8 +1,8 @@
 /**
- * AT SCE UI - AT-SCE Test Controller.
+ * AT SCE UI - AT-SCE Controller Test.
  * Copyright 2021 AgileThought, Inc.
  *
- * General functions for at-sce-controller-test.
+ * General functions for at-sce-controller.test.js
  *
  * @author @at-internship
  * @version 1.0
