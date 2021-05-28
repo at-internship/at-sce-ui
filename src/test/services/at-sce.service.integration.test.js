@@ -26,29 +26,33 @@ const AT_SSO_SERVICE_URI_ENABLED = process.env.AT_SSO_SERVICE_URI_ENABLED;
 const AT_SERVICE_URI = (AT_SSO_SERVICE_URI_ENABLED == 'true') ? AT_SSO_SERVICE_URI : AT_SCE_SERVICE_URI;
 console.log(`at-sce.service.integration.test - AT_SERVICE_URI: ${AT_SERVICE_URI}`);
 
- // AT SCE API Service
-const SCE_SERVICE_API = AT_SERVICE_URI + '/v1/users';
-const SCE_SERVICE_API_400 = AT_SERVICE_URI + '/v1/usuarios';
+const userId="60affe6c498aa02e209bdff2";
+const tokenGen="7c86a270-dfc1-49b2-921b-bea6d6443669";
+
 
 describe('INTEGRATION TEST: at-sce-service.js', () => {
-
     // Operation: Get ALL USERS - GET/api/v1/users - BE Success (Happy Path)
-    it('INTEGRATION TEST: Should Get All Users - Call GET/api/v1/users - BE Success (Happy Path)', (done) => {
-        chai.request(SCE_SERVICE_API)
-            .get('/')
-            .end(function (err, res) {
-                //console.debug(res.body);
+    it('INTEGRATION TEST: Should Get All History - Call GET /api/v1/histories?userid={id} - BE Success (Happy Path)', (done) => {
+        chai.request(AT_SCE_SERVICE_URI)
+            .get('/v1/histories?userid='+ userId)
+            .set('Authorization', 'Bearer '+tokenGen)
+            .end(function ( err, res ) {
+                //console.debug(res);
 
                 // Response Status
                 expect(res).to.have.status(200);
+                expect(res.body).to.be.an("array");  
+                expect(res).to.have.header('content-type', 'application/json');
+
                 done();
             });
     });
 
     // Operation: Get ALL USERS - GET/api/v1/users - BE Error - 400 Bad Request
-    it('INTEGRATION TEST: Should Fail Get All Users - Call GET/api/v1/users - BE Error - 400 Bad Request', (done) => {
-        chai.request(SCE_SERVICE_API_400)
-            .get('/')
+    it('INTEGRATION TEST: Should Get All History - Call GET /api/v1/histories?userid={id} - BE Error - 400 Bad Request', (done) => {
+        chai.request(AT_SCE_SERVICE_URI)
+            .get('/v1/historial?userid='+userId)
+            .set('Authorization', 'Bearer '+tokenGen)
             .end(function(err, res) {
                 //console.debug(res.body)
 
@@ -68,7 +72,7 @@ describe('INTEGRATION TEST: at-sce-service.js', () => {
                 expect(res.body).to.have.property('message').equals('No message available');
 
                 expect(res.body).to.have.property('path');
-                expect(res.body).to.have.property('path').equals('/api/v1/usuarios/');
+                expect(res.body).to.have.property('path').equals('/api/v1/historial');
 
                 done();
             });
